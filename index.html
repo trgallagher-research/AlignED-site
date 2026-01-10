@@ -5,462 +5,671 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AlignED - Transparent benchmarks for AI in education</title>
   <meta name="description" content="AlignED tests whether AI responses align with evidence-based educational research. Educational Alignment Index rankings for 23 AI models.">
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
-    .hero-compact {
-      padding: 3rem 0 2rem;
-      text-align: center;
-      border-bottom: 1px solid var(--border);
+    :root {
+      --primary: #3B6B9A;
+      --secondary: #7096B8;
+      --accent: #4A7DB3;
+      --background: #FAFAF8;
+      --surface: #FFFFFF;
+      --text: #2D3748;
+      --text-muted: #718096;
+      --border: #E2E6EA;
+      --dark-header: #1A2B3C;
+
+      /* Provider colors */
+      --anthropic: #D97706;
+      --openai: #10B981;
+      --google: #3B82F6;
+      --meta: #8B5CF6;
+      --deepseek: #EF4444;
+      --mistral: #06B6D4;
     }
-    .hero-compact h1 {
-      font-size: 2.5rem;
-      margin-bottom: 0.25rem;
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
-    .hero-compact .tagline {
-      font-size: 1.25rem;
-      color: var(--secondary);
-      margin-bottom: 0.5rem;
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--background);
+      color: var(--text);
+      line-height: 1.6;
     }
-    .hero-compact .context {
-      color: var(--text-muted);
-      font-size: 0.95rem;
-    }
-    .hero-compact .context a {
+
+    a {
       color: var(--accent);
+      text-decoration: none;
     }
-    .leaderboard-section {
-      padding: 2rem 0 3rem;
+
+    a:hover {
+      text-decoration: underline;
     }
-    .leaderboard-header {
+
+    /* Top Bar */
+    .top-bar {
+      background: var(--dark-header);
+      color: white;
+      padding: 0.5rem 0;
+      font-size: 0.85rem;
+    }
+
+    .top-bar .container {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .top-bar a {
+      color: rgba(255,255,255,0.8);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .top-bar a:hover {
+      color: white;
+      text-decoration: none;
+    }
+
+    .top-bar svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    /* Container */
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* Navigation */
+    .navbar {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .navbar .container {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 1.5rem;
-      flex-wrap: wrap;
-      gap: 1rem;
     }
-    .leaderboard-header h2 {
-      margin-bottom: 0;
-    }
-    .leaderboard-table {
-      font-size: 0.9rem;
-    }
-    .leaderboard-table th {
-      position: sticky;
-      top: 60px;
-      background: var(--background);
-      z-index: 10;
-    }
-    .leaderboard-table td {
-      vertical-align: middle;
-    }
-    .model-name {
-      font-weight: 600;
-      white-space: nowrap;
-    }
-    .model-name a {
-      color: var(--text);
-    }
-    .model-name a:hover {
-      color: var(--primary);
-    }
-    .provider-anthropic { border-left: 3px solid #D97706; }
-    .provider-openai { border-left: 3px solid #10B981; }
-    .provider-google { border-left: 3px solid #3B82F6; }
-    .eai-score {
-      font-size: 1.1rem;
+
+    .logo {
+      font-size: 1.5rem;
       font-weight: 700;
       color: var(--primary);
     }
-    .score {
-      font-variant-numeric: tabular-nums;
-    }
-    .legend {
+
+    .nav-links {
       display: flex;
-      gap: 1.5rem;
-      flex-wrap: wrap;
+      align-items: center;
+      gap: 2rem;
     }
+
+    .nav-links a {
+      color: var(--text);
+      font-weight: 500;
+      font-size: 0.95rem;
+    }
+
+    .nav-links a:hover {
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.6rem 1.25rem;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+      border: none;
+    }
+
+    .btn-primary:hover {
+      background: #2d5577;
+      text-decoration: none;
+    }
+
+    /* Hero */
+    .hero {
+      padding: 4rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .hero .container {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .hero-content h1 {
+      font-size: 2.75rem;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+
+    .hero-content h1 .highlight {
+      color: var(--primary);
+      text-decoration: underline;
+      text-decoration-color: var(--secondary);
+      text-underline-offset: 4px;
+    }
+
+    .hero-content p {
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      max-width: 500px;
+    }
+
+    .hero-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .promo-card {
+      background: var(--dark-header);
+      color: white;
+      padding: 1.5rem;
+      border-radius: 8px;
+    }
+
+    .promo-card h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .promo-card p {
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.7);
+      margin-bottom: 1rem;
+    }
+
+    .promo-card .btn {
+      background: rgba(255,255,255,0.15);
+      color: white;
+      font-size: 0.85rem;
+      padding: 0.5rem 1rem;
+    }
+
+    .promo-card .btn:hover {
+      background: rgba(255,255,255,0.25);
+    }
+
+    /* Section */
+    section {
+      padding: 3rem 0;
+    }
+
+    .section-label {
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+    }
+
+    /* Highlights Grid */
+    .highlights-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .chart-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.5rem;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+
+    .chart-card h3 {
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text);
+      margin-bottom: 0.25rem;
+    }
+
+    .chart-card .subtitle {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+    }
+
+    .chart-container {
+      height: 300px;
+      position: relative;
+    }
+
+    /* Quick Links */
+    .quick-links {
+      padding: 2rem 0 3rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .quick-links-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+    }
+
+    .quick-link-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.25rem;
+      transition: all 0.2s;
+    }
+
+    .quick-link-card:hover {
+      border-color: var(--primary);
+      box-shadow: 0 2px 8px rgba(59,107,154,0.1);
+    }
+
+    .quick-link-card h4 {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 0.75rem;
+      line-height: 1.4;
+    }
+
+    .quick-link-card a {
+      font-size: 0.85rem;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    /* Footer */
+    footer {
+      background: var(--dark-header);
+      color: white;
+      padding: 3rem 0 2rem;
+    }
+
+    .footer-content {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 3rem;
+      margin-bottom: 2rem;
+    }
+
+    .footer-brand p {
+      color: rgba(255,255,255,0.6);
+      font-size: 0.9rem;
+      margin-top: 0.5rem;
+    }
+
+    .footer-links h4 {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 1rem;
+      color: rgba(255,255,255,0.5);
+    }
+
+    .footer-links ul {
+      list-style: none;
+    }
+
+    .footer-links li {
+      margin-bottom: 0.5rem;
+    }
+
+    .footer-links a {
+      color: rgba(255,255,255,0.8);
+      font-size: 0.9rem;
+    }
+
+    .footer-links a:hover {
+      color: white;
+    }
+
+    .footer-bottom {
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.5);
+    }
+
+    /* Legend */
+    .chart-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-top: 1rem;
+      font-size: 0.75rem;
+    }
+
     .legend-item {
       display: flex;
       align-items: center;
-      gap: 0.5rem;
-      font-size: 0.8rem;
+      gap: 0.35rem;
       color: var(--text-muted);
     }
-    .legend-color {
-      width: 12px;
-      height: 12px;
+
+    .legend-dot {
+      width: 10px;
+      height: 10px;
       border-radius: 2px;
     }
-    .legend-color.anthropic { background: #D97706; }
-    .legend-color.openai { background: #10B981; }
-    .legend-color.google { background: #3B82F6; }
-    .rank {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 24px;
-      height: 24px;
-      border-radius: 50%;
-      font-weight: 700;
-      font-size: 0.75rem;
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .highlights-grid {
+        grid-template-columns: 1fr;
+      }
+      .quick-links-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .footer-content {
+        grid-template-columns: 1fr 1fr;
+      }
     }
-    .rank-1 { background: #FFD700; color: #1a1a1a; }
-    .rank-2 { background: #C0C0C0; color: #1a1a1a; }
-    .rank-3 { background: #CD7F32; color: white; }
-    .table-footer {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-top: 1rem;
-      padding-top: 1rem;
-      border-top: 1px solid var(--border);
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      flex-wrap: wrap;
-      gap: 1rem;
-    }
-    .filters {
-      display: flex;
-      gap: 0.5rem;
-      flex-wrap: wrap;
-    }
-    .filter-btn {
-      padding: 0.4rem 0.75rem;
-      border: 1px solid var(--border);
-      background: var(--surface);
-      border-radius: 4px;
-      cursor: pointer;
-      font-size: 0.8rem;
-      transition: all 0.2s;
-    }
-    .filter-btn:hover, .filter-btn.active {
-      background: var(--primary);
-      color: white;
-      border-color: var(--primary);
+
+    @media (max-width: 768px) {
+      .hero .container {
+        grid-template-columns: 1fr;
+      }
+      .hero-content h1 {
+        font-size: 2rem;
+      }
+      .quick-links-grid {
+        grid-template-columns: 1fr;
+      }
+      .nav-links {
+        display: none;
+      }
+      .footer-content {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
 <body>
-  <header>
+  <!-- Top Bar -->
+  <div class="top-bar">
+    <div class="container">
+      <span style="color: rgba(255,255,255,0.6);">Follow for updates:</span>
+      <a href="#" target="_blank">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+      </a>
+      <a href="#" target="_blank">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+      </a>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <nav class="navbar">
     <div class="container">
       <a href="index.html" class="logo">AlignED</a>
-      <button class="nav-toggle" aria-label="Toggle navigation">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-      <nav>
-        <a href="about.html">About</a>
+      <div class="nav-links">
         <a href="methodology/">Methodology</a>
+        <a href="about.html">About</a>
         <a href="models/">Models</a>
         <a href="data-access.html">Data</a>
-        <a href="contact.html">Contact</a>
-      </nav>
-    </div>
-  </header>
-
-  <main>
-    <section class="hero-compact">
-      <div class="container">
-        <h1>AlignED</h1>
-        <p class="tagline">Transparent benchmarks for AI in education</p>
-        <p class="context">Evaluating AI alignment with educational research evidence. <a href="about.html">Why this matters &rarr;</a></p>
+        <a href="#highlights" class="btn btn-primary">View Results</a>
       </div>
-    </section>
+    </div>
+  </nav>
 
-    <section class="leaderboard-section">
-      <div class="container">
-        <div class="leaderboard-header">
-          <h2>Educational Alignment Index</h2>
-          <div class="legend">
-            <div class="legend-item"><div class="legend-color anthropic"></div> Anthropic</div>
-            <div class="legend-item"><div class="legend-color openai"></div> OpenAI</div>
-            <div class="legend-item"><div class="legend-color google"></div> Google</div>
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <h1><span class="highlight">Transparent</span> benchmarks for AI in education</h1>
+        <p>Evaluating AI alignment with educational research evidence. Testing what teachers need to know, not what students should learn.</p>
+      </div>
+      <div class="hero-cards">
+        <div class="promo-card">
+          <h3>Latest Results: January 2026</h3>
+          <p>23 models evaluated across 5 benchmarks and 6 evaluation dimensions.</p>
+          <a href="#highlights" class="btn">View Rankings</a>
+        </div>
+        <div class="promo-card">
+          <h3>Methodology Overview</h3>
+          <p>How we test AI alignment with evidence-based educational research.</p>
+          <a href="methodology/" class="btn">Learn More</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Highlights -->
+  <section id="highlights">
+    <div class="container">
+      <div class="section-label">Highlights</div>
+      <div class="highlights-grid">
+        <!-- EAI Chart -->
+        <div class="chart-card">
+          <h3>Educational Alignment Index</h3>
+          <p class="subtitle">Composite score across all benchmarks; Higher is better</p>
+          <div class="chart-container">
+            <canvas id="eaiChart"></canvas>
           </div>
         </div>
 
-        <div class="filters">
-          <button class="filter-btn active" data-filter="all">All</button>
-          <button class="filter-btn" data-filter="anthropic">Anthropic</button>
-          <button class="filter-btn" data-filter="openai">OpenAI</button>
-          <button class="filter-btn" data-filter="google">Google</button>
+        <!-- Neuromyths Chart -->
+        <div class="chart-card">
+          <h3>Neuromyth Rejection</h3>
+          <p class="subtitle">Accuracy on 32-item survey; Human baseline ~50%</p>
+          <div class="chart-container">
+            <canvas id="neuromythsChart"></canvas>
+          </div>
         </div>
 
-        <table class="leaderboard-table" style="margin-top: 1rem;">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Model</th>
-              <th>EAI</th>
-              <th>Neuromyths</th>
-              <th>Scenarios</th>
-              <th>CDPK</th>
-              <th>SEND</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr class="provider-openai" data-provider="openai">
-              <td><span class="rank rank-1">1</span></td>
-              <td class="model-name"><a href="models/gpt-5-2.html">GPT-5.2</a></td>
-              <td class="eai-score">90.6</td>
-              <td class="score">93.8%</td>
-              <td class="score">100%</td>
-              <td class="score">85.1%</td>
-              <td class="score">81.2%</td>
-            </tr>
-            <tr class="provider-openai" data-provider="openai">
-              <td><span class="rank rank-2">2</span></td>
-              <td class="model-name">GPT-5</td>
-              <td class="eai-score">90.1</td>
-              <td class="score">87.5%</td>
-              <td class="score">100%</td>
-              <td class="score">87.7%</td>
-              <td class="score">81.2%</td>
-            </tr>
-            <tr class="provider-anthropic" data-provider="anthropic">
-              <td><span class="rank rank-3">3</span></td>
-              <td class="model-name">Claude 4.5 Opus (Thinking)</td>
-              <td class="eai-score">89.7</td>
-              <td class="score">87.5%</td>
-              <td class="score">97.2%</td>
-              <td class="score">88.2%</td>
-              <td class="score">82.5%</td>
-            </tr>
-            <tr class="provider-openai" data-provider="openai">
-              <td>4</td>
-              <td class="model-name">o3</td>
-              <td class="eai-score">88.3</td>
-              <td class="score">87.5%</td>
-              <td class="score">94.4%</td>
-              <td class="score">86.2%</td>
-              <td class="score">83.4%</td>
-            </tr>
-            <tr class="provider-anthropic" data-provider="anthropic">
-              <td>5</td>
-              <td class="model-name">Claude 4.5 Opus</td>
-              <td class="eai-score">87.8</td>
-              <td class="score">81.3%</td>
-              <td class="score">94.4%</td>
-              <td class="score">88.4%</td>
-              <td class="score">84.8%</td>
-            </tr>
-            <tr class="provider-anthropic" data-provider="anthropic">
-              <td>6</td>
-              <td class="model-name">Claude 4.5 Sonnet (Thinking)</td>
-              <td class="eai-score">87.5</td>
-              <td class="score">78.1%</td>
-              <td class="score">100%</td>
-              <td class="score">86.3%</td>
-              <td class="score">84.8%</td>
-            </tr>
-            <tr class="provider-openai" data-provider="openai">
-              <td>7</td>
-              <td class="model-name">GPT-5 Mini</td>
-              <td class="eai-score">87.3</td>
-              <td class="score">87.5%</td>
-              <td class="score">97.2%</td>
-              <td class="score">82.9%</td>
-              <td class="score">79.8%</td>
-            </tr>
-            <tr class="provider-anthropic" data-provider="anthropic">
-              <td>8</td>
-              <td class="model-name">Claude 4 Opus</td>
-              <td class="eai-score">87.3</td>
-              <td class="score">81.3%</td>
-              <td class="score">97.2%</td>
-              <td class="score">85.9%</td>
-              <td class="score">83.4%</td>
-            </tr>
-            <tr class="provider-anthropic" data-provider="anthropic">
-              <td>9</td>
-              <td class="model-name">Claude 4.1 Opus</td>
-              <td class="eai-score">87.2</td>
-              <td class="score">84.4%</td>
-              <td class="score">97.2%</td>
-              <td class="score">83.5%</td>
-              <td class="score">83.9%</td>
-            </tr>
-            <tr class="provider-google" data-provider="google">
-              <td>10</td>
-              <td class="model-name">Gemini 2.5 Pro</td>
-              <td class="eai-score">86.5</td>
-              <td class="score">78.1%</td>
-              <td class="score">91.7%</td>
-              <td class="score">89.0%</td>
-              <td class="score">84.3%</td>
-            </tr>
-            <tr class="provider-openai" data-provider="openai">
-              <td>11</td>
-              <td class="model-name">o4-mini</td>
-              <td class="eai-score">85.3</td>
-              <td class="score">81.3%</td>
-              <td class="score">94.4%</td>
-              <td class="score">83.4%</td>
-              <td class="score">80.3%</td>
-            </tr>
-            <tr class="provider-anthropic" data-provider="anthropic">
-              <td>12</td>
-              <td class="model-name">Claude 4.5 Sonnet</td>
-              <td class="eai-score">84.7</td>
-              <td class="score">75.0%</td>
-              <td class="score">97.2%</td>
-              <td class="score">84.2%</td>
-              <td class="score">79.4%</td>
-            </tr>
-            <tr class="provider-anthropic" data-provider="anthropic">
-              <td>13</td>
-              <td class="model-name">Claude 3.7 Sonnet</td>
-              <td class="eai-score">82.7</td>
-              <td class="score">84.4%</td>
-              <td class="score">88.9%</td>
-              <td class="score">79.3%</td>
-              <td class="score">76.7%</td>
-            </tr>
-            <tr class="provider-anthropic" data-provider="anthropic">
-              <td>14</td>
-              <td class="model-name">Claude 4 Sonnet</td>
-              <td class="eai-score">80.9</td>
-              <td class="score">75.0%</td>
-              <td class="score">91.7%</td>
-              <td class="score">78.4%</td>
-              <td class="score">78.5%</td>
-            </tr>
-            <tr class="provider-google" data-provider="google">
-              <td>15</td>
-              <td class="model-name">Gemini 2.5 Flash</td>
-              <td class="eai-score">80.7</td>
-              <td class="score">84.4%</td>
-              <td class="score">75.0%</td>
-              <td class="score">83.0%</td>
-              <td class="score">75.8%</td>
-            </tr>
-            <tr class="provider-openai" data-provider="openai">
-              <td>16</td>
-              <td class="model-name">o3-mini</td>
-              <td class="eai-score">77.4</td>
-              <td class="score">78.1%</td>
-              <td class="score">75.0%</td>
-              <td class="score">79.2%</td>
-              <td class="score">74.0%</td>
-            </tr>
-            <tr class="provider-openai" data-provider="openai">
-              <td>17</td>
-              <td class="model-name">GPT-4 Turbo</td>
-              <td class="eai-score">77.2</td>
-              <td class="score">84.4%</td>
-              <td class="score">77.8%</td>
-              <td class="score">75.2%</td>
-              <td class="score">65.5%</td>
-            </tr>
-            <tr class="provider-anthropic" data-provider="anthropic">
-              <td>18</td>
-              <td class="model-name">Claude 4.5 Haiku</td>
-              <td class="eai-score">76.7</td>
-              <td class="score">68.8%</td>
-              <td class="score">86.1%</td>
-              <td class="score">76.5%</td>
-              <td class="score">73.1%</td>
-            </tr>
-            <tr class="provider-anthropic" data-provider="anthropic">
-              <td>19</td>
-              <td class="model-name">Claude 3 Opus</td>
-              <td class="eai-score">75.6</td>
-              <td class="score">78.1%</td>
-              <td class="score">72.2%</td>
-              <td class="score">77.1%</td>
-              <td class="score">72.2%</td>
-            </tr>
-            <tr class="provider-openai" data-provider="openai">
-              <td>20</td>
-              <td class="model-name">GPT-4o</td>
-              <td class="eai-score">75.0</td>
-              <td class="score">71.9%</td>
-              <td class="score">72.2%</td>
-              <td class="score">78.7%</td>
-              <td class="score">74.4%</td>
-            </tr>
-            <tr class="provider-anthropic" data-provider="anthropic">
-              <td>21</td>
-              <td class="model-name">Claude 3.5 Haiku</td>
-              <td class="eai-score">70.8</td>
-              <td class="score">65.6%</td>
-              <td class="score">83.3%</td>
-              <td class="score">66.8%</td>
-              <td class="score">68.6%</td>
-            </tr>
-            <tr class="provider-openai" data-provider="openai">
-              <td>22</td>
-              <td class="model-name">GPT-4o Mini</td>
-              <td class="eai-score">69.2</td>
-              <td class="score">78.1%</td>
-              <td class="score">61.1%</td>
-              <td class="score">68.9%</td>
-              <td class="score">68.6%</td>
-            </tr>
-            <tr class="provider-anthropic" data-provider="anthropic">
-              <td>23</td>
-              <td class="model-name">Claude 3 Haiku</td>
-              <td class="eai-score">59.5</td>
-              <td class="score">65.6%</td>
-              <td class="score">63.9%</td>
-              <td class="score">53.8%</td>
-              <td class="score">56.5%</td>
-            </tr>
-          </tbody>
-        </table>
-
-        <div class="table-footer">
-          <span>Human teacher baseline on Neuromyths: ~50%. <a href="methodology/">View methodology</a></span>
-          <a href="data-access.html" class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.85rem;">Download Data</a>
+        <!-- Pedagogy Chart -->
+        <div class="chart-card">
+          <h3>Pedagogical Knowledge</h3>
+          <p class="subtitle">CDPK + SEND combined score; Higher is better</p>
+          <div class="chart-container">
+            <canvas id="pedagogyChart"></canvas>
+          </div>
         </div>
       </div>
-    </section>
-  </main>
 
+      <div class="chart-legend">
+        <div class="legend-item"><div class="legend-dot" style="background: #D97706;"></div> Anthropic</div>
+        <div class="legend-item"><div class="legend-dot" style="background: #10B981;"></div> OpenAI</div>
+        <div class="legend-item"><div class="legend-dot" style="background: #3B82F6;"></div> Google</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quick Links -->
+  <section class="quick-links">
+    <div class="container">
+      <div class="section-label">Explore</div>
+      <div class="quick-links-grid">
+        <div class="quick-link-card">
+          <h4>Which model best rejects neuromyths?</h4>
+          <a href="methodology/neuromyths.html">View analysis &rarr;</a>
+        </div>
+        <div class="quick-link-card">
+          <h4>How does temperature affect accuracy?</h4>
+          <a href="methodology/dimensions.html#temperature">View robustness data &rarr;</a>
+        </div>
+        <div class="quick-link-card">
+          <h4>How do Claude models compare?</h4>
+          <a href="models/">View model trajectories &rarr;</a>
+        </div>
+        <div class="quick-link-card">
+          <h4>What does AlignED test?</h4>
+          <a href="about.html">Learn about our approach &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
   <footer>
     <div class="container">
       <div class="footer-content">
         <div class="footer-brand">
-          <a href="index.html" class="logo">AlignED</a>
-          <p>Transparent benchmarks for AI in education</p>
+          <div class="logo" style="color: white;">AlignED</div>
+          <p>Transparent benchmarks for AI in education. Evaluating AI alignment with educational research evidence.</p>
         </div>
         <div class="footer-links">
           <h4>Navigation</h4>
           <ul>
-            <li><a href="about.html">About</a></li>
             <li><a href="methodology/">Methodology</a></li>
+            <li><a href="about.html">About</a></li>
             <li><a href="models/">Models</a></li>
-            <li><a href="data-access.html">Data</a></li>
           </ul>
         </div>
         <div class="footer-links">
-          <h4>Resources</h4>
+          <h4>Data</h4>
           <ul>
-            <li><a href="contact.html">Contact</a></li>
+            <li><a href="data-access.html">Access Data</a></li>
             <li><a href="https://github.com/trgallagher-research/AlignED-site" target="_blank">GitHub</a></li>
           </ul>
         </div>
+        <div class="footer-links">
+          <h4>Updates</h4>
+          <ul>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="#">Substack (coming soon)</a></li>
+          </ul>
+        </div>
       </div>
-      <p class="copyright">&copy; 2026 AlignED. All rights reserved.</p>
+      <div class="footer-bottom">
+        &copy; 2026 AlignED. Data hosted on OSF.
+      </div>
     </div>
   </footer>
 
-  <script src="js/main.js"></script>
   <script>
-    document.querySelectorAll('.filter-btn').forEach(btn => {
-      btn.addEventListener('click', function() {
-        const filter = this.dataset.filter;
-        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-        this.classList.add('active');
-        document.querySelectorAll('tbody tr').forEach(row => {
-          if (filter === 'all' || row.dataset.provider === filter) {
-            row.style.display = '';
-          } else {
-            row.style.display = 'none';
+    // Chart configuration
+    const chartConfig = {
+      responsive: true,
+      maintainAspectRatio: false,
+      indexAxis: 'y',
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            label: (ctx) => `${ctx.raw.toFixed(1)}%`
           }
-        });
-      });
+        }
+      },
+      scales: {
+        x: {
+          beginAtZero: true,
+          max: 100,
+          grid: { color: '#E2E6EA' },
+          ticks: {
+            callback: (v) => v + '%',
+            font: { size: 11 }
+          }
+        },
+        y: {
+          grid: { display: false },
+          ticks: { font: { size: 11 } }
+        }
+      }
+    };
+
+    // Provider colors
+    const colors = {
+      'GPT-5.2': '#10B981',
+      'GPT-5': '#10B981',
+      'Claude 4.5 Opus (T)': '#D97706',
+      'o3': '#10B981',
+      'Claude 4.5 Opus': '#D97706',
+      'Claude 4.5 Son (T)': '#D97706',
+      'GPT-5 Mini': '#10B981',
+      'Claude 4 Opus': '#D97706',
+      'Gemini 2.5 Pro': '#3B82F6',
+      'Claude 4.5 Sonnet': '#D97706'
+    };
+
+    // EAI Chart
+    const eaiLabels = ['GPT-5.2', 'GPT-5', 'Claude 4.5 Opus (T)', 'o3', 'Claude 4.5 Opus', 'Claude 4.5 Son (T)', 'GPT-5 Mini', 'Claude 4 Opus', 'Claude 4.1 Opus', 'Gemini 2.5 Pro'];
+    const eaiData = [90.6, 90.1, 89.7, 88.3, 87.8, 87.5, 87.3, 87.3, 87.2, 86.5];
+    const eaiColors = eaiLabels.map(l => colors[l] || '#6B7280');
+
+    new Chart(document.getElementById('eaiChart'), {
+      type: 'bar',
+      data: {
+        labels: eaiLabels,
+        datasets: [{
+          data: eaiData,
+          backgroundColor: eaiColors,
+          borderRadius: 4,
+          barThickness: 20
+        }]
+      },
+      options: chartConfig
+    });
+
+    // Neuromyths Chart
+    const nmLabels = ['GPT-5.2', 'GPT-5', 'o3', 'Claude 4.5 Opus (T)', 'GPT-5 Mini', 'Gemini 2.5 Flash', 'GPT-4 Turbo', 'Claude 3.7 Sonnet', 'Claude 4.1 Opus', 'Claude 4.5 Opus'];
+    const nmData = [93.8, 87.5, 87.5, 87.5, 87.5, 84.4, 84.4, 84.4, 84.4, 81.3];
+    const nmColors = nmLabels.map(l => colors[l] || '#6B7280');
+
+    new Chart(document.getElementById('neuromythsChart'), {
+      type: 'bar',
+      data: {
+        labels: nmLabels,
+        datasets: [{
+          data: nmData,
+          backgroundColor: nmColors,
+          borderRadius: 4,
+          barThickness: 20
+        }]
+      },
+      options: chartConfig
+    });
+
+    // Pedagogy Chart
+    const pedLabels = ['Gemini 2.5 Pro', 'Claude 4.5 Opus', 'Claude 4.5 Opus (T)', 'GPT-5', 'Claude 4.5 Son (T)', 'o3', 'Claude 4 Opus', 'GPT-5.2', 'Claude 4.1 Opus', 'Claude 4.5 Sonnet'];
+    const pedData = [88.1, 87.7, 87.1, 86.4, 86.0, 85.7, 85.4, 84.3, 83.6, 83.3];
+    const pedColors = pedLabels.map(l => colors[l] || '#6B7280');
+
+    new Chart(document.getElementById('pedagogyChart'), {
+      type: 'bar',
+      data: {
+        labels: pedLabels,
+        datasets: [{
+          data: pedData,
+          backgroundColor: pedColors,
+          borderRadius: 4,
+          barThickness: 20
+        }]
+      },
+      options: chartConfig
     });
   </script>
 </body>
