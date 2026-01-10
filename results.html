@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Full Results - AlignED</title>
+  <meta name="description" content="Complete evaluation results for all 31 AI models tested on AlignED benchmarks.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #3B6B9A;
+      --secondary: #7096B8;
+      --accent: #4A7DB3;
+      --background: #FAFAF8;
+      --surface: #FFFFFF;
+      --text: #2D3748;
+      --text-muted: #718096;
+      --border: #E2E6EA;
+      --dark-header: #1A2B3C;
+      --anthropic: #D97706;
+      --openai: #10B981;
+      --google: #3B82F6;
+      --meta: #0668E1;
+      --mistral: #F97316;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--background);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .container { max-width: 100%; margin: 0 auto; padding: 0 2rem; }
+
+    /* Top Bar */
+    .top-bar {
+      background: var(--dark-header);
+      color: white;
+      padding: 0.5rem 0;
+      font-size: 0.85rem;
+    }
+    .top-bar .container { display: flex; justify-content: flex-end; align-items: center; gap: 1rem; max-width: 1280px; }
+    .top-bar a { color: rgba(255,255,255,0.8); display: flex; align-items: center; gap: 0.5rem; }
+    .top-bar a:hover { color: white; text-decoration: none; }
+    .top-bar svg { width: 18px; height: 18px; }
+
+    /* Navigation */
+    .navbar {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .navbar .container { display: flex; justify-content: space-between; align-items: center; max-width: 1280px; }
+    .logo { font-size: 1.5rem; font-weight: 700; color: var(--primary); }
+    .nav-links { display: flex; align-items: center; gap: 2rem; }
+    .nav-links a { color: var(--text); font-weight: 500; font-size: 0.95rem; }
+    .nav-links a:hover { color: var(--primary); text-decoration: none; }
+    .nav-links a.active { color: var(--primary); }
+
+    .btn {
+      display: inline-block;
+      padding: 0.6rem 1.25rem;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn-primary { background: var(--primary); color: white; border: none; }
+    .btn-primary:hover { background: #2d5577; text-decoration: none; }
+
+    /* Page Header */
+    .page-header {
+      padding: 3rem 0 2rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .page-header .container { max-width: 1280px; }
+    .page-header h1 { font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .page-header p { color: var(--text-muted); font-size: 1.1rem; }
+
+    /* Results Section */
+    .results-section {
+      padding: 2rem 0;
+    }
+
+    .metric-row {
+      margin-bottom: 2.5rem;
+    }
+
+    .metric-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 1rem;
+      padding: 0 1rem;
+    }
+
+    .metric-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .metric-subtitle {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    /* Horizontal scroll container */
+    .models-scroll {
+      display: flex;
+      gap: 0.5rem;
+      overflow-x: auto;
+      padding: 0.5rem 1rem 1rem;
+      scroll-behavior: smooth;
+    }
+
+    .models-scroll::-webkit-scrollbar {
+      height: 6px;
+    }
+
+    .models-scroll::-webkit-scrollbar-track {
+      background: var(--border);
+      border-radius: 3px;
+    }
+
+    .models-scroll::-webkit-scrollbar-thumb {
+      background: var(--secondary);
+      border-radius: 3px;
+    }
+
+    /* Model Card */
+    .model-card {
+      flex-shrink: 0;
+      width: 100px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.75rem 0.5rem;
+      text-align: center;
+      transition: all 0.2s;
+    }
+
+    .model-card:hover {
+      border-color: var(--primary);
+      box-shadow: 0 2px 8px rgba(59,107,154,0.15);
+    }
+
+    .model-card.rank-1 { border-color: #FFD700; background: linear-gradient(135deg, #FFFEF0 0%, #FFF 100%); }
+    .model-card.rank-2 { border-color: #C0C0C0; background: linear-gradient(135deg, #FAFAFA 0%, #FFF 100%); }
+    .model-card.rank-3 { border-color: #CD7F32; background: linear-gradient(135deg, #FDF8F3 0%, #FFF 100%); }
+
+    .model-rank {
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      margin-bottom: 0.25rem;
+    }
+
+    .model-icon {
+      width: 32px;
+      height: 32px;
+      margin: 0 auto 0.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .model-icon svg {
+      width: 24px;
+      height: 24px;
+    }
+
+    .model-icon.anthropic { color: var(--anthropic); }
+    .model-icon.openai { color: var(--openai); }
+    .model-icon.google { color: var(--google); }
+    .model-icon.meta { color: var(--meta); }
+
+    .model-name {
+      font-size: 0.7rem;
+      font-weight: 500;
+      color: var(--text);
+      line-height: 1.3;
+      margin-bottom: 0.5rem;
+      height: 2.6em;
+      overflow: hidden;
+    }
+
+    .model-score {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .model-score span {
+      font-size: 0.75rem;
+      font-weight: 400;
+      color: var(--text-muted);
+    }
+
+    /* Legend */
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      padding: 1rem 1rem 2rem;
+      font-size: 0.8rem;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--text-muted);
+    }
+
+    .legend-item svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    /* Footer */
+    footer {
+      background: var(--dark-header);
+      color: white;
+      padding: 2rem 0;
+      margin-top: 2rem;
+    }
+    footer .container { max-width: 1280px; }
+    .footer-bottom {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.5);
+    }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .model-card { width: 85px; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Top Bar -->
+  <div class="top-bar">
+    <div class="container">
+      <span style="color: rgba(255,255,255,0.6);">Follow for updates:</span>
+      <a href="#" target="_blank">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+      </a>
+      <a href="#" target="_blank">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+      </a>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="container">
+      <a href="index.html" class="logo">AlignED</a>
+      <div class="nav-links">
+        <a href="methodology/">Methodology</a>
+        <a href="about.html">About</a>
+        <a href="results.html" class="active">Results</a>
+        <a href="models/">Models</a>
+        <a href="data-access.html">Data</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page Header -->
+  <div class="page-header">
+    <div class="container">
+      <h1>Full Evaluation Results</h1>
+      <p>All 31 models ranked by performance. Best models on the left, scroll right for more.</p>
+    </div>
+  </div>
+
+  <!-- Legend -->
+  <div class="container">
+    <div class="legend">
+      <div class="legend-item">
+        <svg viewBox="0 0 24 24" fill="#10B981"><path d="M22.2819 9.8211a5.9847 5.9847 0 0 0-.5157-4.9108 6.0462 6.0462 0 0 0-6.5098-2.9A6.0651 6.0651 0 0 0 4.9807 4.1818a5.9847 5.9847 0 0 0-3.9977 2.9 6.0462 6.0462 0 0 0 .7427 7.0966 5.98 5.98 0 0 0 .511 4.9107 6.051 6.051 0 0 0 6.5146 2.9001A5.9847 5.9847 0 0 0 13.2599 24a6.0557 6.0557 0 0 0 5.7718-4.2058 5.9894 5.9894 0 0 0 3.9977-2.9001 6.0557 6.0557 0 0 0-.7475-7.0729zm-9.022 12.6081a4.4755 4.4755 0 0 1-2.8764-1.0408l.1419-.0804 4.7783-2.7582a.7948.7948 0 0 0 .3927-.6813v-6.7369l2.02 1.1686a.071.071 0 0 1 .038.052v5.5826a4.504 4.504 0 0 1-4.4945 4.4944zm-9.6607-4.1254a4.4708 4.4708 0 0 1-.5346-3.0137l.142.0852 4.783 2.7582a.7712.7712 0 0 0 .7806 0l5.8428-3.3685v2.3324a.0804.0804 0 0 1-.0332.0615L9.74 19.9502a4.4992 4.4992 0 0 1-6.1408-1.6464zM2.3408 7.8956a4.485 4.485 0 0 1 2.3655-1.9728V11.6a.7664.7664 0 0 0 .3879.6765l5.8144 3.3543-2.0201 1.1685a.0757.0757 0 0 1-.071 0l-4.8303-2.7865A4.504 4.504 0 0 1 2.3408 7.872zm16.5963 3.8558L13.1038 8.364l2.0201-1.1685a.0757.0757 0 0 1 .071 0l4.8303 2.7913a4.4944 4.4944 0 0 1-.6765 8.1042v-5.6772a.79.79 0 0 0-.407-.667zm2.0107-3.0231l-.142-.0852-4.7735-2.7818a.7759.7759 0 0 0-.7854 0L9.409 9.2297V6.8974a.0662.0662 0 0 1 .0284-.0615l4.8303-2.7866a4.4992 4.4992 0 0 1 6.6802 4.66zM8.3065 12.863l-2.02-1.1638a.0804.0804 0 0 1-.038-.0567V6.0742a4.4992 4.4992 0 0 1 7.3757-3.4537l-.142.0805L8.704 5.459a.7948.7948 0 0 0-.3927.6813zm1.0976-2.3654l2.602-1.4998 2.6069 1.4998v2.9994l-2.5974 1.4997-2.6067-1.4997Z"/></svg>
+        OpenAI
+      </div>
+      <div class="legend-item">
+        <svg viewBox="0 0 24 24" fill="#D97706"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+        Anthropic
+      </div>
+      <div class="legend-item">
+        <svg viewBox="0 0 24 24" fill="#3B82F6"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+        Google
+      </div>
+    </div>
+  </div>
+
+  <!-- Results -->
+  <section class="results-section">
+    <div class="container">
+      <!-- EAI (Composite) -->
+      <div class="metric-row">
+        <div class="metric-header">
+          <span class="metric-title">Educational Alignment Index (EAI)</span>
+          <span class="metric-subtitle">Composite score across all benchmarks</span>
+        </div>
+        <div class="models-scroll" id="eai-row"></div>
+      </div>
+
+      <!-- Neuromyths -->
+      <div class="metric-row">
+        <div class="metric-header">
+          <span class="metric-title">Neuromyth Rejection</span>
+          <span class="metric-subtitle">32-item survey accuracy (Human baseline ~50%)</span>
+        </div>
+        <div class="models-scroll" id="neuromyths-row"></div>
+      </div>
+
+      <!-- Scenarios -->
+      <div class="metric-row">
+        <div class="metric-header">
+          <span class="metric-title">Implementation Scenarios</span>
+          <span class="metric-subtitle">12 diagnostic scenarios with LLM-as-judge</span>
+        </div>
+        <div class="models-scroll" id="scenarios-row"></div>
+      </div>
+
+      <!-- CDPK -->
+      <div class="metric-row">
+        <div class="metric-header">
+          <span class="metric-title">Cross-Domain Pedagogical Knowledge (CDPK)</span>
+          <span class="metric-subtitle">920 items from teacher certification assessments</span>
+        </div>
+        <div class="models-scroll" id="cdpk-row"></div>
+      </div>
+
+      <!-- SEND -->
+      <div class="metric-row">
+        <div class="metric-header">
+          <span class="metric-title">Special Education Needs & Disability (SEND)</span>
+          <span class="metric-subtitle">223 items on inclusive education</span>
+        </div>
+        <div class="models-scroll" id="send-row"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-bottom">
+        &copy; 2026 AlignED. Data hosted on OSF. <a href="index.html" style="color: rgba(255,255,255,0.7);">Back to Home</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Model data with all scores
+    const models = [
+      { name: 'GPT-5.2', provider: 'openai', eai: 90.6, neuromyths: 93.8, scenarios: 100, cdpk: 85.1, send: 81.2 },
+      { name: 'GPT-5', provider: 'openai', eai: 90.1, neuromyths: 87.5, scenarios: 100, cdpk: 87.7, send: 81.2 },
+      { name: 'Claude 4.5 Opus (T)', provider: 'anthropic', eai: 89.7, neuromyths: 87.5, scenarios: 97.2, cdpk: 88.2, send: 82.5 },
+      { name: 'o3', provider: 'openai', eai: 88.3, neuromyths: 87.5, scenarios: 94.4, cdpk: 86.2, send: 83.4 },
+      { name: 'Claude 4.5 Opus', provider: 'anthropic', eai: 87.8, neuromyths: 81.3, scenarios: 94.4, cdpk: 88.4, send: 84.8 },
+      { name: 'Claude 4.5 Son (T)', provider: 'anthropic', eai: 87.5, neuromyths: 78.1, scenarios: 100, cdpk: 86.3, send: 84.8 },
+      { name: 'GPT-5 Mini', provider: 'openai', eai: 87.3, neuromyths: 87.5, scenarios: 97.2, cdpk: 82.9, send: 79.8 },
+      { name: 'Claude 4 Opus', provider: 'anthropic', eai: 87.3, neuromyths: 81.3, scenarios: 97.2, cdpk: 85.9, send: 83.4 },
+      { name: 'Claude 4.1 Opus', provider: 'anthropic', eai: 87.2, neuromyths: 84.4, scenarios: 97.2, cdpk: 83.5, send: 83.9 },
+      { name: 'Gemini 2.5 Pro', provider: 'google', eai: 86.5, neuromyths: 78.1, scenarios: 91.7, cdpk: 89.0, send: 84.3 },
+      { name: 'o4-mini', provider: 'openai', eai: 85.3, neuromyths: 81.3, scenarios: 94.4, cdpk: 83.4, send: 80.3 },
+      { name: 'Claude 4.5 Sonnet', provider: 'anthropic', eai: 84.7, neuromyths: 75.0, scenarios: 97.2, cdpk: 84.2, send: 79.4 },
+      { name: 'Claude 3.7 Sonnet', provider: 'anthropic', eai: 82.7, neuromyths: 84.4, scenarios: 88.9, cdpk: 79.3, send: 76.7 },
+      { name: 'Claude 4 Sonnet', provider: 'anthropic', eai: 80.9, neuromyths: 75.0, scenarios: 91.7, cdpk: 78.4, send: 78.5 },
+      { name: 'Gemini 2.5 Flash', provider: 'google', eai: 80.7, neuromyths: 84.4, scenarios: 75.0, cdpk: 83.0, send: 75.8 },
+      { name: 'o3-mini', provider: 'openai', eai: 77.4, neuromyths: 78.1, scenarios: 75.0, cdpk: 79.2, send: 74.0 },
+      { name: 'GPT-4 Turbo', provider: 'openai', eai: 77.2, neuromyths: 84.4, scenarios: 77.8, cdpk: 75.2, send: 65.5 },
+      { name: 'Claude 4.5 Haiku', provider: 'anthropic', eai: 76.7, neuromyths: 68.8, scenarios: 86.1, cdpk: 76.5, send: 73.1 },
+      { name: 'Claude 3 Opus', provider: 'anthropic', eai: 75.6, neuromyths: 78.1, scenarios: 72.2, cdpk: 77.1, send: 72.2 },
+      { name: 'GPT-4o', provider: 'openai', eai: 75.0, neuromyths: 71.9, scenarios: 72.2, cdpk: 78.7, send: 74.4 },
+      { name: 'Claude 3.5 Haiku', provider: 'anthropic', eai: 70.8, neuromyths: 65.6, scenarios: 83.3, cdpk: 66.8, send: 68.6 },
+      { name: 'GPT-4o Mini', provider: 'openai', eai: 69.2, neuromyths: 78.1, scenarios: 61.1, cdpk: 68.9, send: 68.6 },
+      { name: 'Claude 3 Haiku', provider: 'anthropic', eai: 59.5, neuromyths: 65.6, scenarios: 63.9, cdpk: 53.8, send: 56.5 }
+    ];
+
+    // Provider icons (SVG paths)
+    const icons = {
+      openai: `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M22.2819 9.8211a5.9847 5.9847 0 0 0-.5157-4.9108 6.0462 6.0462 0 0 0-6.5098-2.9A6.0651 6.0651 0 0 0 4.9807 4.1818a5.9847 5.9847 0 0 0-3.9977 2.9 6.0462 6.0462 0 0 0 .7427 7.0966 5.98 5.98 0 0 0 .511 4.9107 6.051 6.051 0 0 0 6.5146 2.9001A5.9847 5.9847 0 0 0 13.2599 24a6.0557 6.0557 0 0 0 5.7718-4.2058 5.9894 5.9894 0 0 0 3.9977-2.9001 6.0557 6.0557 0 0 0-.7475-7.0729zm-9.022 12.6081a4.4755 4.4755 0 0 1-2.8764-1.0408l.1419-.0804 4.7783-2.7582a.7948.7948 0 0 0 .3927-.6813v-6.7369l2.02 1.1686a.071.071 0 0 1 .038.052v5.5826a4.504 4.504 0 0 1-4.4945 4.4944zm-9.6607-4.1254a4.4708 4.4708 0 0 1-.5346-3.0137l.142.0852 4.783 2.7582a.7712.7712 0 0 0 .7806 0l5.8428-3.3685v2.3324a.0804.0804 0 0 1-.0332.0615L9.74 19.9502a4.4992 4.4992 0 0 1-6.1408-1.6464zM2.3408 7.8956a4.485 4.485 0 0 1 2.3655-1.9728V11.6a.7664.7664 0 0 0 .3879.6765l5.8144 3.3543-2.0201 1.1685a.0757.0757 0 0 1-.071 0l-4.8303-2.7865A4.504 4.504 0 0 1 2.3408 7.872zm16.5963 3.8558L13.1038 8.364l2.0201-1.1685a.0757.0757 0 0 1 .071 0l4.8303 2.7913a4.4944 4.4944 0 0 1-.6765 8.1042v-5.6772a.79.79 0 0 0-.407-.667zm2.0107-3.0231l-.142-.0852-4.7735-2.7818a.7759.7759 0 0 0-.7854 0L9.409 9.2297V6.8974a.0662.0662 0 0 1 .0284-.0615l4.8303-2.7866a4.4992 4.4992 0 0 1 6.6802 4.66zM8.3065 12.863l-2.02-1.1638a.0804.0804 0 0 1-.038-.0567V6.0742a4.4992 4.4992 0 0 1 7.3757-3.4537l-.142.0805L8.704 5.459a.7948.7948 0 0 0-.3927.6813zm1.0976-2.3654l2.602-1.4998 2.6069 1.4998v2.9994l-2.5974 1.4997-2.6067-1.4997Z"/></svg>`,
+      anthropic: `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.304 3.541h-3.672l6.696 16.918h3.672l-6.696-16.918zm-10.608 0L0 20.459h3.744l1.32-3.468h6.24l1.344 3.468h3.744L9.696 3.541h-3zm.816 10.584l2.184-5.592 2.16 5.592h-4.344z"/></svg>`,
+      google: `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>`
+    };
+
+    // Create model card HTML
+    function createCard(model, rank, score, metric) {
+      const rankClass = rank <= 3 ? ` rank-${rank}` : '';
+      return `
+        <div class="model-card${rankClass}">
+          <div class="model-rank">#${rank}</div>
+          <div class="model-icon ${model.provider}">${icons[model.provider]}</div>
+          <div class="model-name">${model.name}</div>
+          <div class="model-score">${score.toFixed(1)}<span>%</span></div>
+        </div>
+      `;
+    }
+
+    // Sort and render each metric
+    function renderRow(containerId, metric) {
+      const sorted = [...models].sort((a, b) => b[metric] - a[metric]);
+      const container = document.getElementById(containerId);
+      container.innerHTML = sorted.map((m, i) => createCard(m, i + 1, m[metric], metric)).join('');
+    }
+
+    // Render all rows
+    renderRow('eai-row', 'eai');
+    renderRow('neuromyths-row', 'neuromyths');
+    renderRow('scenarios-row', 'scenarios');
+    renderRow('cdpk-row', 'cdpk');
+    renderRow('send-row', 'send');
+  </script>
+</body>
+</html>
