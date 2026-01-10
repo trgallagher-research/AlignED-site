@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pedagogical Knowledge (CDPK & SEND) - AlignED Methodology</title>
+  <meta name="description" content="Methodology for the AlignED Pedagogical Knowledge benchmark, including Cross-Domain Pedagogical Knowledge and Special Education components.">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <header>
+    <div class="container">
+      <a href="../index.html" class="logo">AlignED</a>
+      <button class="nav-toggle" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <nav>
+        <a href="../about.html">About</a>
+        <a href="../methodology/" class="active">Methodology</a>
+        <a href="../results.html">Results</a>
+        <a href="../data-access.html">Data Access</a>
+        <a href="../contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="page-header">
+      <div class="container">
+        <p class="text-muted"><a href="index.html">&larr; Methodology</a></p>
+        <h1>Pedagogical Knowledge</h1>
+        <p class="subtitle">Cross-Domain Pedagogical Knowledge (CDPK) and Special Education Needs and Disability (SEND)</p>
+      </div>
+    </div>
+
+    <section class="content-section">
+      <div class="container">
+        <div class="prose">
+          <h2>Overview</h2>
+          <p>The Pedagogical Knowledge benchmark evaluates foundational teaching knowledge using items from validated teacher certification assessments. This benchmark is integrated from the pedagogy-benchmark project, which curated items from Chilean national teacher evaluations.</p>
+
+          <div class="metric-grid">
+            <div class="metric-card">
+              <div class="metric-value">1,143</div>
+              <div class="metric-label">Total Items</div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-value">920</div>
+              <div class="metric-label">CDPK Items</div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-value">223</div>
+              <div class="metric-label">SEND Items</div>
+            </div>
+          </div>
+
+          <h2>CDPK: Cross-Domain Pedagogical Knowledge</h2>
+          <p>CDPK items test general pedagogical knowledge that applies across subject areas:</p>
+          <ul>
+            <li>Curriculum design and planning</li>
+            <li>Assessment and evaluation strategies</li>
+            <li>Classroom management principles</li>
+            <li>Learning theory and development</li>
+            <li>Instructional strategies</li>
+            <li>Professional responsibilities</li>
+          </ul>
+
+          <p>These items are drawn from the "Disciplinary and Curricular Knowledge" component of Chile's national teacher evaluation system, translated and validated for cross-cultural applicability.</p>
+
+          <h2>SEND: Special Education Needs and Disability</h2>
+          <p>SEND items focus on inclusive education and supporting diverse learners:</p>
+          <ul>
+            <li>Identification of learning difficulties</li>
+            <li>Differentiation strategies</li>
+            <li>Accommodations and modifications</li>
+            <li>Inclusive classroom practices</li>
+            <li>Legal and ethical frameworks</li>
+            <li>Collaboration with specialists and families</li>
+          </ul>
+
+          <p>Knowledge in this area is essential for any AI system providing educational advice, as it affects recommendations for diverse student populations.</p>
+
+          <h2>Item Format</h2>
+          <p>All items are multiple-choice with four options (A, B, C, D). Items are presented in standardised format:</p>
+
+          <div class="citation">
+[Question stem presenting a pedagogical scenario or knowledge prompt]
+
+A. [Option A]
+B. [Option B]
+C. [Option C]
+D. [Option D]
+
+Select the best answer.
+          </div>
+
+          <h2>Scoring</h2>
+          <p>Items are scored as correct (1) or incorrect (0). Component scores are calculated as:</p>
+          <ul>
+            <li><strong>CDPK Score:</strong> Percentage correct across 920 items</li>
+            <li><strong>SEND Score:</strong> Percentage correct across 223 items</li>
+            <li><strong>Combined Pedagogy Score:</strong> Weighted average (CDPK contributes 80%, SEND contributes 20%, reflecting item counts)</li>
+          </ul>
+
+          <h2>Integration with AlignED</h2>
+          <p>The Pedagogical Knowledge benchmark provides a complement to AlignED's native benchmarks:</p>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Benchmark</th>
+                <th>Focus</th>
+                <th>Source</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Neuromyths Survey</td>
+                <td>Misconception rejection</td>
+                <td>AlignED native (Dekker et al.)</td>
+              </tr>
+              <tr>
+                <td>Implementation Scenarios</td>
+                <td>Diagnostic reasoning</td>
+                <td>AlignED native</td>
+              </tr>
+              <tr>
+                <td>CDPK</td>
+                <td>General pedagogy</td>
+                <td>Pedagogy-benchmark (integrated)</td>
+              </tr>
+              <tr>
+                <td>SEND</td>
+                <td>Inclusive education</td>
+                <td>Pedagogy-benchmark (integrated)</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h2>Composite Score Weighting</h2>
+          <p>In the Educational Alignment Index (EAI), pedagogical knowledge contributes 50% of the total score:</p>
+          <ul>
+            <li>AlignED native benchmarks (Neuromyths + Scenarios): 50%</li>
+            <li>Pedagogical Knowledge (CDPK + SEND): 50%</li>
+          </ul>
+
+          <p>This weighting reflects the importance of both misconception rejection and foundational pedagogical competence.</p>
+
+          <h2>Key Findings</h2>
+          <ul>
+            <li>Top models achieve 88%+ combined accuracy</li>
+            <li>Performance on SEND tends to be slightly lower than CDPK across models</li>
+            <li>Models show consistent ranking across both components</li>
+          </ul>
+
+          <div class="btn-group mt-4">
+            <a href="dimensions.html" class="btn btn-primary">Next: Evaluation Dimensions &rarr;</a>
+            <a href="index.html" class="btn btn-secondary">Back to Methodology</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <a href="../index.html" class="logo">AlignED</a>
+          <p>Transparent benchmarks for AI in education</p>
+        </div>
+        <div class="footer-links">
+          <h4>Navigation</h4>
+          <ul>
+            <li><a href="../about.html">About</a></li>
+            <li><a href="../methodology/">Methodology</a></li>
+            <li><a href="../results.html">Results</a></li>
+            <li><a href="../data-access.html">Data Access</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h4>Resources</h4>
+          <ul>
+            <li><a href="../contact.html">Contact</a></li>
+            <li><a href="https://github.com/trgallagher-research/AlignED-site" target="_blank">GitHub</a></li>
+          </ul>
+        </div>
+      </div>
+      <p class="copyright">&copy; 2026 AlignED. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>

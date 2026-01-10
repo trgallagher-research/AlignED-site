@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Methodology - AlignED</title>
+  <meta name="description" content="How AlignED benchmarks are constructed, scored, and validated. Transparent methodology for evaluating AI alignment with educational research.">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <header>
+    <div class="container">
+      <a href="../index.html" class="logo">AlignED</a>
+      <button class="nav-toggle" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <nav>
+        <a href="../about.html">About</a>
+        <a href="../methodology/" class="active">Methodology</a>
+        <a href="../results.html">Results</a>
+        <a href="../data-access.html">Data Access</a>
+        <a href="../contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="page-header">
+      <div class="container">
+        <h1>Methodology</h1>
+        <p class="subtitle">How we construct, administer, and score AlignED benchmarks</p>
+      </div>
+    </div>
+
+    <section class="content-section">
+      <div class="container">
+        <div class="prose">
+          <h2>Overview</h2>
+          <p>AlignED evaluates AI alignment with educational research evidence through a multi-phase assessment process. Our methodology prioritises transparency, reproducibility, and grounding in peer-reviewed research.</p>
+
+          <h2>Benchmarks</h2>
+          <p>Each benchmark tests a distinct aspect of educational knowledge. Click through for detailed methodology on each.</p>
+
+          <ul class="benchmark-list">
+            <li>
+              <a href="neuromyths.html">Neuromyths Survey</a>
+              <p class="description">32 items testing rejection of brain-based misconceptions. Adapted from Dekker et al. (2012).</p>
+            </li>
+            <li>
+              <a href="scenarios.html">Implementation Scenarios</a>
+              <p class="description">12 diagnostic scenarios testing why evidence-based strategies fail in specific contexts.</p>
+            </li>
+            <li>
+              <a href="pedagogy.html">Pedagogical Knowledge (CDPK &amp; SEND)</a>
+              <p class="description">1,143 items from validated teacher certification assessments covering cross-domain pedagogy and special education.</p>
+            </li>
+          </ul>
+
+          <h2>Evaluation Dimensions</h2>
+          <p>Beyond baseline accuracy, we assess multiple dimensions of model performance.</p>
+
+          <ul class="benchmark-list">
+            <li>
+              <a href="dimensions.html#temperature">Temperature Robustness</a>
+              <p class="description">Performance stability across temperature settings (T=0, 0.5, 1.0).</p>
+            </li>
+            <li>
+              <a href="dimensions.html#prompt">Prompt Sensitivity</a>
+              <p class="description">Consistency across prompt framings: standard, interrogative, embedded, adversarial.</p>
+            </li>
+            <li>
+              <a href="dimensions.html#confidence">Confidence Calibration</a>
+              <p class="description">Alignment between stated confidence and actual accuracy.</p>
+            </li>
+            <li>
+              <a href="dimensions.html#efficiency">Token Efficiency</a>
+              <p class="description">Performance relative to reasoning length.</p>
+            </li>
+          </ul>
+
+          <h2>Composite Scoring</h2>
+          <ul class="benchmark-list">
+            <li>
+              <a href="scoring.html">Educational Alignment Index (EAI)</a>
+              <p class="description">How we combine benchmark scores and evaluation dimensions into a single composite metric.</p>
+            </li>
+          </ul>
+
+          <h2>Evaluation Process</h2>
+          <p>Our evaluation follows a structured multi-phase process:</p>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Phase</th>
+                <th>Component</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1-2</td>
+                <td>Baseline</td>
+                <td>Core benchmark administration at T=0 with 5 iterations for reliability</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>Temperature</td>
+                <td>Performance at T=0.5 and T=1.0 to assess robustness</td>
+              </tr>
+              <tr>
+                <td>4</td>
+                <td>Prompt Sensitivity</td>
+                <td>Four prompt variants to assess consistency</td>
+              </tr>
+              <tr>
+                <td>5-6</td>
+                <td>Core Benchmarks</td>
+                <td>Neuromyths survey and implementation scenarios</td>
+              </tr>
+              <tr>
+                <td>7</td>
+                <td>Temperature Analysis</td>
+                <td>Knowledge Robustness Index calculation</td>
+              </tr>
+              <tr>
+                <td>8</td>
+                <td>Prompt Analysis</td>
+                <td>Prompt Sensitivity Index calculation</td>
+              </tr>
+              <tr>
+                <td>9</td>
+                <td>Confidence Probe</td>
+                <td>Calibration assessment on highest-prevalence items</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h2>Models Evaluated</h2>
+          <p>We evaluate 23 models across major providers:</p>
+
+          <div class="grid grid-3 mt-3">
+            <div class="card">
+              <h4>Anthropic</h4>
+              <p>Claude 3 through Claude 4.5 family, including extended thinking variants</p>
+            </div>
+            <div class="card">
+              <h4>OpenAI</h4>
+              <p>GPT-4 Turbo, GPT-4o, GPT-5 family, o3 and o4-mini</p>
+            </div>
+            <div class="card">
+              <h4>Google</h4>
+              <p>Gemini 2.5 Flash and Pro</p>
+            </div>
+          </div>
+
+          <p class="mt-3">See the <a href="../results.html">Results page</a> for the full list of evaluated models and their scores.</p>
+
+          <h2>Reproducibility</h2>
+          <p>All evaluation parameters are documented and fixed:</p>
+          <ul>
+            <li>Pinned model versions (specific API model strings)</li>
+            <li>Fixed random seeds where applicable</li>
+            <li>Standardised prompt templates</li>
+            <li>Documented scoring rubrics with examples</li>
+          </ul>
+
+          <p>Raw data and scoring details are available through our <a href="../data-access.html">Data Access</a> page.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <a href="../index.html" class="logo">AlignED</a>
+          <p>Transparent benchmarks for AI in education</p>
+        </div>
+        <div class="footer-links">
+          <h4>Navigation</h4>
+          <ul>
+            <li><a href="../about.html">About</a></li>
+            <li><a href="../methodology/">Methodology</a></li>
+            <li><a href="../results.html">Results</a></li>
+            <li><a href="../data-access.html">Data Access</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h4>Resources</h4>
+          <ul>
+            <li><a href="../contact.html">Contact</a></li>
+            <li><a href="https://github.com/trgallagher-research/AlignED-site" target="_blank">GitHub</a></li>
+          </ul>
+        </div>
+      </div>
+      <p class="copyright">&copy; 2026 AlignED. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>

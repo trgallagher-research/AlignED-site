@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Data Access - AlignED</title>
+  <meta name="description" content="Access AlignED benchmark data, including sample datasets and full results via OSF.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header>
+    <div class="container">
+      <a href="index.html" class="logo">AlignED</a>
+      <button class="nav-toggle" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <nav>
+        <a href="about.html">About</a>
+        <a href="methodology/">Methodology</a>
+        <a href="results.html">Results</a>
+        <a href="data-access.html" class="active">Data Access</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="page-header">
+      <div class="container">
+        <h1>Data Access</h1>
+        <p class="subtitle">Download benchmark data and results</p>
+      </div>
+    </div>
+
+    <section class="content-section">
+      <div class="container">
+        <div class="prose">
+          <h2>Available Data</h2>
+          <p>AlignED data is available at multiple levels to support different use cases:</p>
+
+          <div class="grid grid-2 mt-3 mb-4">
+            <div class="card">
+              <h3>Summary Data</h3>
+              <p>Composite scores and rankings for all 23 models. Suitable for quick comparisons and reporting.</p>
+              <a href="data/composite_scores.json" class="btn btn-secondary mt-2" download>Download JSON</a>
+            </div>
+            <div class="card">
+              <h3>Full Dataset</h3>
+              <p>Complete item-level responses, scoring details, and raw outputs. Available via OSF.</p>
+              <a href="#full-access" class="btn btn-secondary mt-2">Request Access</a>
+            </div>
+          </div>
+
+          <h2>Data Contents</h2>
+
+          <h3>Summary Data (Direct Download)</h3>
+          <p>The summary dataset includes:</p>
+          <ul>
+            <li>Educational Alignment Index (EAI) composite scores</li>
+            <li>Component scores: Neuromyths Survey, Implementation Scenarios</li>
+            <li>Pedagogical Knowledge scores: CDPK, SEND</li>
+            <li>All 23 evaluated models</li>
+          </ul>
+
+          <h3>Full Dataset (Via OSF)</h3>
+          <p>The complete dataset includes:</p>
+          <ul>
+            <li>Item-level responses for all benchmarks</li>
+            <li>Raw model outputs and reasoning</li>
+            <li>Judge scoring with explanations (for scenarios)</li>
+            <li>Temperature robustness data (T=0, 0.5, 1.0)</li>
+            <li>Prompt sensitivity results (4 framings)</li>
+            <li>Confidence probe responses</li>
+            <li>Token usage statistics</li>
+          </ul>
+
+          <h2 id="full-access">Requesting Full Dataset Access</h2>
+          <p>The full dataset is hosted on the Open Science Framework (OSF). To request access:</p>
+
+          <ol>
+            <li>Email your request to the address below</li>
+            <li>Include your intended use (research, policy analysis, development, etc.)</li>
+            <li>Provide your institutional affiliation (if applicable)</li>
+          </ol>
+
+          <p>Access is typically granted within 2-3 business days for legitimate research and policy purposes.</p>
+
+          <div class="note">
+            <p><strong>Contact for data access:</strong> aligned.benchmark [at] gmail.com</p>
+          </div>
+
+          <h2>Citation</h2>
+          <p>If you use AlignED data in your work, please cite:</p>
+
+          <div class="citation">
+AlignED Benchmark (2026). Transparent benchmarks for AI in education.
+https://trgallagher-research.github.io/AlignED-site/
+          </div>
+
+          <p>For academic publications, a formal citation will be available once the accompanying paper is published.</p>
+
+          <h2>Data Format</h2>
+
+          <h3>JSON Structure</h3>
+          <p>Summary data follows this structure:</p>
+
+          <div class="citation">
+{
+  "generated": "2026-01-05T22:28:56.826Z",
+  "description": "Composite scores...",
+  "scoring": { ... },
+  "results": [
+    {
+      "model": "GPT-5.2",
+      "surveyAccuracy": 93.8,
+      "scenarioScore": 100,
+      "alignedCombined": 96.9,
+      "pedagogyCDPK": 85.1,
+      "pedagogySEND": 81.2,
+      "pedagogyCombined": 84.3,
+      "compositeScore": 90.6
+    },
+    ...
+  ]
+}
+          </div>
+
+          <h2>Terms of Use</h2>
+          <p>AlignED data is provided for research, policy analysis, and educational purposes. When using the data:</p>
+          <ul>
+            <li>Cite AlignED appropriately</li>
+            <li>Do not misrepresent scores as "certification" or "approval"</li>
+            <li>Acknowledge limitations noted in methodology</li>
+            <li>Contact us if you plan to redistribute modified versions</li>
+          </ul>
+
+          <h2>Updates</h2>
+          <p>We plan to update benchmark results as new models are released. To be notified of updates:</p>
+          <ul>
+            <li>Watch the <a href="https://github.com/trgallagher-research/AlignED-site" target="_blank">GitHub repository</a></li>
+            <li>Subscribe to our Substack (coming soon)</li>
+          </ul>
+
+          <div class="btn-group mt-4">
+            <a href="data/composite_scores.json" class="btn btn-primary" download>Download Summary Data</a>
+            <a href="contact.html" class="btn btn-secondary">Contact Us</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <a href="index.html" class="logo">AlignED</a>
+          <p>Transparent benchmarks for AI in education</p>
+        </div>
+        <div class="footer-links">
+          <h4>Navigation</h4>
+          <ul>
+            <li><a href="about.html">About</a></li>
+            <li><a href="methodology/">Methodology</a></li>
+            <li><a href="results.html">Results</a></li>
+            <li><a href="data-access.html">Data Access</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h4>Resources</h4>
+          <ul>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="https://github.com/trgallagher-research/AlignED-site" target="_blank">GitHub</a></li>
+          </ul>
+        </div>
+      </div>
+      <p class="copyright">&copy; 2026 AlignED. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

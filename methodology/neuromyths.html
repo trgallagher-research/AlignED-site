@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Neuromyths Survey - AlignED Methodology</title>
+  <meta name="description" content="Methodology for the AlignED Neuromyths Survey benchmark, adapted from Dekker et al. (2012).">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <header>
+    <div class="container">
+      <a href="../index.html" class="logo">AlignED</a>
+      <button class="nav-toggle" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <nav>
+        <a href="../about.html">About</a>
+        <a href="../methodology/" class="active">Methodology</a>
+        <a href="../results.html">Results</a>
+        <a href="../data-access.html">Data Access</a>
+        <a href="../contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="page-header">
+      <div class="container">
+        <p class="text-muted"><a href="index.html">&larr; Methodology</a></p>
+        <h1>Neuromyths Survey</h1>
+        <p class="subtitle">Testing rejection of brain-based misconceptions</p>
+      </div>
+    </div>
+
+    <section class="content-section">
+      <div class="container">
+        <div class="prose">
+          <h2>Overview</h2>
+          <p>The Neuromyths Survey tests whether AI systems can correctly identify false claims about the brain and learning. This benchmark is adapted from the foundational research by Dekker et al. (2012), which documented the prevalence of neuromyths among educators worldwide.</p>
+
+          <div class="metric-grid">
+            <div class="metric-card">
+              <div class="metric-value">32</div>
+              <div class="metric-label">Total Items</div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-value">15</div>
+              <div class="metric-label">Neuromyths</div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-value">17</div>
+              <div class="metric-label">General Assertions</div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-value">~50%</div>
+              <div class="metric-label">Human Teacher Baseline</div>
+            </div>
+          </div>
+
+          <h2>Source Research</h2>
+          <p>Dekker, S., Lee, N. C., Howard-Jones, P., &amp; Jolles, J. (2012). Neuromyths in education: Prevalence and predictors of misconceptions among teachers. <em>Frontiers in Psychology</em>, 3, 429.</p>
+
+          <p>This study surveyed 242 teachers across the UK and Netherlands, finding that 49% of neuromyths were believed by participants on average. Certain myths showed particularly high prevalence:</p>
+
+          <ul>
+            <li>"Learning styles" (93% belief rate)</li>
+            <li>"We only use 10% of our brain" (48% belief rate)</li>
+            <li>"Enriched environments improve brain function" (95% belief rate)</li>
+          </ul>
+
+          <h2>Benchmark Composition</h2>
+          <p>The survey contains two item types:</p>
+
+          <h3>Neuromyths (15 items)</h3>
+          <p>False statements about the brain and learning that are widely believed. The correct response is "False" for all items. Examples include:</p>
+          <ul>
+            <li>"Individuals learn better when they receive information in their preferred learning style."</li>
+            <li>"We only use 10% of our brain."</li>
+            <li>"Short bouts of co-ordination exercises can improve integration of left and right hemispheric brain function."</li>
+          </ul>
+
+          <h3>General Assertions (17 items)</h3>
+          <p>True statements about neuroscience and learning, included to prevent response bias. Examples include:</p>
+          <ul>
+            <li>"Learning occurs through modification of the brain's neural connections."</li>
+            <li>"Mental practice can improve motor performance."</li>
+          </ul>
+
+          <h2>Administration</h2>
+          <p>Each item is presented as a true/false question with standardised framing:</p>
+
+          <div class="citation">
+Consider the following statement about how the brain works and how people learn:
+
+"[Statement text]"
+
+Based on current scientific evidence, is this statement TRUE or FALSE?
+
+Respond with only: TRUE or FALSE
+          </div>
+
+          <h2>Scoring</h2>
+          <p>Responses are scored as correct (1) or incorrect (0). The Neuromyths Survey score is the percentage of correct responses across all 32 items.</p>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Response</th>
+                <th>Neuromyth Item</th>
+                <th>General Assertion</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>TRUE</td>
+                <td>Incorrect (0)</td>
+                <td>Correct (1)</td>
+              </tr>
+              <tr>
+                <td>FALSE</td>
+                <td>Correct (1)</td>
+                <td>Incorrect (0)</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h2>Reliability</h2>
+          <p>Each model is evaluated with 5 iterations at T=0 to establish baseline reliability. The reported score is the mean across iterations.</p>
+
+          <h2>Key Findings</h2>
+          <p>Our evaluation reveals significant variation across models:</p>
+          <ul>
+            <li>Top-performing models exceed 90% accuracy, substantially above the ~50% human teacher baseline</li>
+            <li>Some items remain challenging across all models (e.g., Q21 on enriched environments)</li>
+            <li>Models show universal overconfidence&mdash;no model ever expressed uncertainty when asked</li>
+          </ul>
+
+          <p>See the <a href="../results.html">Results page</a> for detailed model comparisons.</p>
+
+          <div class="btn-group mt-4">
+            <a href="scenarios.html" class="btn btn-primary">Next: Implementation Scenarios &rarr;</a>
+            <a href="index.html" class="btn btn-secondary">Back to Methodology</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <a href="../index.html" class="logo">AlignED</a>
+          <p>Transparent benchmarks for AI in education</p>
+        </div>
+        <div class="footer-links">
+          <h4>Navigation</h4>
+          <ul>
+            <li><a href="../about.html">About</a></li>
+            <li><a href="../methodology/">Methodology</a></li>
+            <li><a href="../results.html">Results</a></li>
+            <li><a href="../data-access.html">Data Access</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h4>Resources</h4>
+          <ul>
+            <li><a href="../contact.html">Contact</a></li>
+            <li><a href="https://github.com/trgallagher-research/AlignED-site" target="_blank">GitHub</a></li>
+          </ul>
+        </div>
+      </div>
+      <p class="copyright">&copy; 2026 AlignED. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Educational Alignment Index (EAI) Scoring - AlignED Methodology</title>
+  <meta name="description" content="How the AlignED Educational Alignment Index (EAI) composite score is calculated from benchmark components.">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <header>
+    <div class="container">
+      <a href="../index.html" class="logo">AlignED</a>
+      <button class="nav-toggle" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <nav>
+        <a href="../about.html">About</a>
+        <a href="../methodology/" class="active">Methodology</a>
+        <a href="../results.html">Results</a>
+        <a href="../data-access.html">Data Access</a>
+        <a href="../contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="page-header">
+      <div class="container">
+        <p class="text-muted"><a href="index.html">&larr; Methodology</a></p>
+        <h1>Educational Alignment Index</h1>
+        <p class="subtitle">Composite scoring methodology</p>
+      </div>
+    </div>
+
+    <section class="content-section">
+      <div class="container">
+        <div class="prose">
+          <h2>Overview</h2>
+          <p>The Educational Alignment Index (EAI) provides a single composite score for comparing model performance across all AlignED benchmarks. While the composite enables ranking, component scores remain available for detailed analysis.</p>
+
+          <h2>Score Components</h2>
+
+          <h3>AlignED Native Benchmarks (50%)</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Component</th>
+                <th>Weight</th>
+                <th>Range</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Neuromyths Survey</td>
+                <td>25%</td>
+                <td>0-100%</td>
+              </tr>
+              <tr>
+                <td>Implementation Scenarios</td>
+                <td>25%</td>
+                <td>0-100% (normalised from 0-36)</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h3>Pedagogical Knowledge (50%)</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Component</th>
+                <th>Weight</th>
+                <th>Range</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>CDPK (920 items)</td>
+                <td>40%</td>
+                <td>0-100%</td>
+              </tr>
+              <tr>
+                <td>SEND (223 items)</td>
+                <td>10%</td>
+                <td>0-100%</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h2>EAI Calculation</h2>
+
+          <div class="citation">
+EAI = (0.25 × Survey) + (0.25 × Scenarios) + (0.40 × CDPK) + (0.10 × SEND)
+          </div>
+
+          <p>Where each component is expressed as a percentage (0-100).</p>
+
+          <h3>Example Calculation</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Component</th>
+                <th>Score</th>
+                <th>Weight</th>
+                <th>Contribution</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Neuromyths Survey</td>
+                <td>87.5%</td>
+                <td>0.25</td>
+                <td>21.9</td>
+              </tr>
+              <tr>
+                <td>Implementation Scenarios</td>
+                <td>97.2%</td>
+                <td>0.25</td>
+                <td>24.3</td>
+              </tr>
+              <tr>
+                <td>CDPK</td>
+                <td>88.4%</td>
+                <td>0.40</td>
+                <td>35.4</td>
+              </tr>
+              <tr>
+                <td>SEND</td>
+                <td>84.8%</td>
+                <td>0.10</td>
+                <td>8.5</td>
+              </tr>
+              <tr>
+                <td><strong>EAI Total</strong></td>
+                <td></td>
+                <td></td>
+                <td><strong>90.1</strong></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h2>Weighting Rationale</h2>
+          <p>The 50/50 split between AlignED native benchmarks and pedagogical knowledge reflects two complementary aspects of educational AI evaluation:</p>
+
+          <ul>
+            <li><strong>Misconception rejection and diagnostic reasoning</strong> (AlignED native): Critical for avoiding harm and providing appropriate advice</li>
+            <li><strong>Foundational pedagogical competence</strong> (CDPK/SEND): Essential for general educational expertise</li>
+          </ul>
+
+          <p>Within pedagogical knowledge, CDPK receives higher weight due to the larger item count and broader applicability.</p>
+
+          <h2>Robustness Adjustments</h2>
+          <p>For advanced analysis, the Composite Robustness Score (CRS) adjusts for temperature and prompt sensitivity:</p>
+
+          <div class="citation">
+CRS = EAI × KRI × (1 - PSI)
+          </div>
+
+          <p>Where:</p>
+          <ul>
+            <li><strong>KRI</strong> = Knowledge Robustness Index (temperature stability)</li>
+            <li><strong>PSI</strong> = Prompt Sensitivity Index (framing consistency)</li>
+          </ul>
+
+          <p>In practice, most models show high robustness (KRI near 1.0) and low sensitivity (PSI near 0), so CRS typically approximates EAI.</p>
+
+          <h2>Interpretation Guidelines</h2>
+
+          <table>
+            <thead>
+              <tr>
+                <th>EAI Range</th>
+                <th>Interpretation</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>90+</td>
+                <td>Strong alignment with educational research evidence</td>
+              </tr>
+              <tr>
+                <td>80-89</td>
+                <td>Good alignment with some areas for improvement</td>
+              </tr>
+              <tr>
+                <td>70-79</td>
+                <td>Moderate alignment; significant gaps in some areas</td>
+              </tr>
+              <tr>
+                <td>Below 70</td>
+                <td>Limited alignment; substantial misconceptions or knowledge gaps</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="note">
+            <p><strong>Important:</strong> EAI scores indicate alignment with research evidence as measured by these specific benchmarks. They do not predict real-world tutoring effectiveness or constitute certification for educational deployment.</p>
+          </div>
+
+          <h2>Transparency</h2>
+          <p>All component scores are reported alongside the composite EAI. Users can:</p>
+          <ul>
+            <li>View individual benchmark performance</li>
+            <li>Compare models on specific dimensions</li>
+            <li>Access detailed item-level data through our <a href="../data-access.html">Data Access</a> page</li>
+          </ul>
+
+          <div class="btn-group mt-4">
+            <a href="../results.html" class="btn btn-primary">View Results</a>
+            <a href="index.html" class="btn btn-secondary">Back to Methodology</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <a href="../index.html" class="logo">AlignED</a>
+          <p>Transparent benchmarks for AI in education</p>
+        </div>
+        <div class="footer-links">
+          <h4>Navigation</h4>
+          <ul>
+            <li><a href="../about.html">About</a></li>
+            <li><a href="../methodology/">Methodology</a></li>
+            <li><a href="../results.html">Results</a></li>
+            <li><a href="../data-access.html">Data Access</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h4>Resources</h4>
+          <ul>
+            <li><a href="../contact.html">Contact</a></li>
+            <li><a href="https://github.com/trgallagher-research/AlignED-site" target="_blank">GitHub</a></li>
+          </ul>
+        </div>
+      </div>
+      <p class="copyright">&copy; 2026 AlignED. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>

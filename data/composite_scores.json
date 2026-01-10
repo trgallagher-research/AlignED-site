@@ -1,0 +1,241 @@
+{
+  "generated": "2026-01-05T22:28:56.826Z",
+  "description": "Composite scores combining AlignED (Survey + Scenario) and Pedagogy Benchmark",
+  "scoring": {
+    "survey": "25% - Neuromyth rejection (32 items)",
+    "scenario": "25% - Application scenarios with LLM-as-judge (12 items)",
+    "pedagogy": "50% - Pedagogical Content Knowledge (1143 items: 920 CDPK + 223 SEND)"
+  },
+  "results": [
+    {
+      "model": "GPT-5.2",
+      "surveyAccuracy": 93.8,
+      "scenarioScore": 100,
+      "alignedCombined": 96.9,
+      "pedagogyCDPK": 85.1,
+      "pedagogySEND": 81.2,
+      "pedagogyCombined": 84.3,
+      "compositeScore": 90.6
+    },
+    {
+      "model": "GPT-5",
+      "surveyAccuracy": 87.5,
+      "scenarioScore": 100,
+      "alignedCombined": 93.8,
+      "pedagogyCDPK": 87.7,
+      "pedagogySEND": 81.2,
+      "pedagogyCombined": 86.4,
+      "compositeScore": 90.1
+    },
+    {
+      "model": "Claude 4.5 Opus (Thinking)",
+      "surveyAccuracy": 87.5,
+      "scenarioScore": 97.2,
+      "alignedCombined": 92.3,
+      "pedagogyCDPK": 88.2,
+      "pedagogySEND": 82.5,
+      "pedagogyCombined": 87.1,
+      "compositeScore": 89.7
+    },
+    {
+      "model": "o3",
+      "surveyAccuracy": 87.5,
+      "scenarioScore": 94.4,
+      "alignedCombined": 91,
+      "pedagogyCDPK": 86.2,
+      "pedagogySEND": 83.4,
+      "pedagogyCombined": 85.7,
+      "compositeScore": 88.3
+    },
+    {
+      "model": "Claude 4.5 Opus",
+      "surveyAccuracy": 81.3,
+      "scenarioScore": 94.4,
+      "alignedCombined": 87.8,
+      "pedagogyCDPK": 88.4,
+      "pedagogySEND": 84.8,
+      "pedagogyCombined": 87.7,
+      "compositeScore": 87.8
+    },
+    {
+      "model": "Claude 4.5 Sonnet (Thinking)",
+      "surveyAccuracy": 78.1,
+      "scenarioScore": 100,
+      "alignedCombined": 89,
+      "pedagogyCDPK": 86.3,
+      "pedagogySEND": 84.8,
+      "pedagogyCombined": 86,
+      "compositeScore": 87.5
+    },
+    {
+      "model": "GPT-5 Mini",
+      "surveyAccuracy": 87.5,
+      "scenarioScore": 97.2,
+      "alignedCombined": 92.4,
+      "pedagogyCDPK": 82.9,
+      "pedagogySEND": 79.8,
+      "pedagogyCombined": 82.3,
+      "compositeScore": 87.3
+    },
+    {
+      "model": "Claude 4 Opus",
+      "surveyAccuracy": 81.3,
+      "scenarioScore": 97.2,
+      "alignedCombined": 89.3,
+      "pedagogyCDPK": 85.9,
+      "pedagogySEND": 83.4,
+      "pedagogyCombined": 85.4,
+      "compositeScore": 87.3
+    },
+    {
+      "model": "Claude 4.1 Opus",
+      "surveyAccuracy": 84.4,
+      "scenarioScore": 97.2,
+      "alignedCombined": 90.8,
+      "pedagogyCDPK": 83.5,
+      "pedagogySEND": 83.9,
+      "pedagogyCombined": 83.6,
+      "compositeScore": 87.2
+    },
+    {
+      "model": "Gemini 2.5 Pro",
+      "surveyAccuracy": 78.1,
+      "scenarioScore": 91.7,
+      "alignedCombined": 84.9,
+      "pedagogyCDPK": 89,
+      "pedagogySEND": 84.3,
+      "pedagogyCombined": 88.1,
+      "compositeScore": 86.5
+    },
+    {
+      "model": "o4-mini",
+      "surveyAccuracy": 81.3,
+      "scenarioScore": 94.4,
+      "alignedCombined": 87.8,
+      "pedagogyCDPK": 83.4,
+      "pedagogySEND": 80.3,
+      "pedagogyCombined": 82.8,
+      "compositeScore": 85.3
+    },
+    {
+      "model": "Claude 4.5 Sonnet",
+      "surveyAccuracy": 75,
+      "scenarioScore": 97.2,
+      "alignedCombined": 86.1,
+      "pedagogyCDPK": 84.2,
+      "pedagogySEND": 79.4,
+      "pedagogyCombined": 83.3,
+      "compositeScore": 84.7
+    },
+    {
+      "model": "Claude 3.7 Sonnet",
+      "surveyAccuracy": 84.4,
+      "scenarioScore": 88.9,
+      "alignedCombined": 86.7,
+      "pedagogyCDPK": 79.3,
+      "pedagogySEND": 76.7,
+      "pedagogyCombined": 78.8,
+      "compositeScore": 82.7
+    },
+    {
+      "model": "Claude 4 Sonnet",
+      "surveyAccuracy": 75,
+      "scenarioScore": 91.7,
+      "alignedCombined": 83.3,
+      "pedagogyCDPK": 78.4,
+      "pedagogySEND": 78.5,
+      "pedagogyCombined": 78.4,
+      "compositeScore": 80.9
+    },
+    {
+      "model": "Gemini 2.5 Flash",
+      "surveyAccuracy": 84.4,
+      "scenarioScore": 75,
+      "alignedCombined": 79.7,
+      "pedagogyCDPK": 83,
+      "pedagogySEND": 75.8,
+      "pedagogyCombined": 81.6,
+      "compositeScore": 80.7
+    },
+    {
+      "model": "o3-mini",
+      "surveyAccuracy": 78.1,
+      "scenarioScore": 75,
+      "alignedCombined": 76.5,
+      "pedagogyCDPK": 79.2,
+      "pedagogySEND": 74,
+      "pedagogyCombined": 78.2,
+      "compositeScore": 77.4
+    },
+    {
+      "model": "GPT-4 Turbo",
+      "surveyAccuracy": 84.4,
+      "scenarioScore": 77.8,
+      "alignedCombined": 81.1,
+      "pedagogyCDPK": 75.2,
+      "pedagogySEND": 65.5,
+      "pedagogyCombined": 73.3,
+      "compositeScore": 77.2
+    },
+    {
+      "model": "Claude 4.5 Haiku",
+      "surveyAccuracy": 68.8,
+      "scenarioScore": 86.1,
+      "alignedCombined": 77.4,
+      "pedagogyCDPK": 76.5,
+      "pedagogySEND": 73.1,
+      "pedagogyCombined": 75.9,
+      "compositeScore": 76.7
+    },
+    {
+      "model": "Claude 3 Opus",
+      "surveyAccuracy": 78.1,
+      "scenarioScore": 72.2,
+      "alignedCombined": 75.2,
+      "pedagogyCDPK": 77.1,
+      "pedagogySEND": 72.2,
+      "pedagogyCombined": 76.1,
+      "compositeScore": 75.6
+    },
+    {
+      "model": "GPT-4o",
+      "surveyAccuracy": 71.9,
+      "scenarioScore": 72.2,
+      "alignedCombined": 72.1,
+      "pedagogyCDPK": 78.7,
+      "pedagogySEND": 74.4,
+      "pedagogyCombined": 77.9,
+      "compositeScore": 75
+    },
+    {
+      "model": "Claude 3.5 Haiku",
+      "surveyAccuracy": 65.6,
+      "scenarioScore": 83.3,
+      "alignedCombined": 74.4,
+      "pedagogyCDPK": 66.8,
+      "pedagogySEND": 68.6,
+      "pedagogyCombined": 67.2,
+      "compositeScore": 70.8
+    },
+    {
+      "model": "GPT-4o Mini",
+      "surveyAccuracy": 78.1,
+      "scenarioScore": 61.1,
+      "alignedCombined": 69.6,
+      "pedagogyCDPK": 68.9,
+      "pedagogySEND": 68.6,
+      "pedagogyCombined": 68.9,
+      "compositeScore": 69.2
+    },
+    {
+      "model": "Claude 3 Haiku",
+      "surveyAccuracy": 65.6,
+      "scenarioScore": 63.9,
+      "alignedCombined": 64.8,
+      "pedagogyCDPK": 53.8,
+      "pedagogySEND": 56.5,
+      "pedagogyCombined": 54.3,
+      "compositeScore": 59.5
+    }
+  ]
+}

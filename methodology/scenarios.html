@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Implementation Scenarios - AlignED Methodology</title>
+  <meta name="description" content="Methodology for the AlignED Implementation Scenarios benchmark, testing diagnostic reasoning about why evidence-based strategies fail.">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <header>
+    <div class="container">
+      <a href="../index.html" class="logo">AlignED</a>
+      <button class="nav-toggle" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <nav>
+        <a href="../about.html">About</a>
+        <a href="../methodology/" class="active">Methodology</a>
+        <a href="../results.html">Results</a>
+        <a href="../data-access.html">Data Access</a>
+        <a href="../contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="page-header">
+      <div class="container">
+        <p class="text-muted"><a href="index.html">&larr; Methodology</a></p>
+        <h1>Implementation Scenarios</h1>
+        <p class="subtitle">Diagnostic reasoning about why evidence-based strategies fail</p>
+      </div>
+    </div>
+
+    <section class="content-section">
+      <div class="container">
+        <div class="prose">
+          <h2>Overview</h2>
+          <p>Evidence-based teaching strategies sometimes fail in practice&mdash;not because the research is wrong, but because implementation conditions matter. The Implementation Scenarios benchmark tests whether AI systems can diagnose <em>why</em> a proven strategy isn't working in a specific context.</p>
+
+          <div class="metric-grid">
+            <div class="metric-card">
+              <div class="metric-value">12</div>
+              <div class="metric-label">Scenarios</div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-value">0-3</div>
+              <div class="metric-label">Points Per Item</div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-value">36</div>
+              <div class="metric-label">Maximum Score</div>
+            </div>
+          </div>
+
+          <h2>Rationale</h2>
+          <p>Teachers and education policymakers often encounter situations where recommended practices don't produce expected results. The ability to diagnose implementation failures requires:</p>
+          <ul>
+            <li>Understanding the mechanism behind a strategy (not just that it "works")</li>
+            <li>Recognising specific conditions that enable or inhibit effectiveness</li>
+            <li>Distinguishing between strategy failure and implementation failure</li>
+          </ul>
+
+          <p>This benchmark tests whether AI can demonstrate this diagnostic reasoning, rather than simply recommending "evidence-based" approaches.</p>
+
+          <h2>Scenario Topics</h2>
+          <p>The 12 scenarios cover major evidence-based strategies:</p>
+
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Topic</th>
+                <th>Implementation Failure</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>S01</td>
+                <td>Retrieval Practice</td>
+                <td>Testing before encoding; no feedback provided</td>
+              </tr>
+              <tr>
+                <td>S02</td>
+                <td>Interleaving</td>
+                <td>Switching between unrelated topics without connection</td>
+              </tr>
+              <tr>
+                <td>S03</td>
+                <td>Worked Examples</td>
+                <td>Providing examples without fading or practice</td>
+              </tr>
+              <tr>
+                <td>S04</td>
+                <td>Spaced Practice</td>
+                <td>Spacing without initial mastery</td>
+              </tr>
+              <tr>
+                <td>S05</td>
+                <td>Formative Assessment</td>
+                <td>Assessment without responsive instruction</td>
+              </tr>
+              <tr>
+                <td>S06</td>
+                <td>Cognitive Load</td>
+                <td>Reducing load for experts (expertise reversal effect)</td>
+              </tr>
+              <tr>
+                <td>S07</td>
+                <td>Direct Instruction</td>
+                <td>Lecture without active engagement</td>
+              </tr>
+              <tr>
+                <td>S08</td>
+                <td>Critical Thinking</td>
+                <td>Teaching "skills" without domain knowledge</td>
+              </tr>
+              <tr>
+                <td>S09</td>
+                <td>Feedback Timing</td>
+                <td>Immediate feedback on complex tasks</td>
+              </tr>
+              <tr>
+                <td>S10</td>
+                <td>Scaffolding</td>
+                <td>Permanent scaffolds that prevent independence</td>
+              </tr>
+              <tr>
+                <td>S11</td>
+                <td>Rewards (Overjustification)</td>
+                <td>Extrinsic rewards undermining intrinsic motivation</td>
+              </tr>
+              <tr>
+                <td>S12</td>
+                <td>Personalisation</td>
+                <td>Surface personalisation without adaptation</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h2>Scenario Structure</h2>
+          <p>Each scenario presents:</p>
+          <ol>
+            <li>A classroom context with specific constraints</li>
+            <li>A teacher implementing an evidence-based strategy</li>
+            <li>Observed outcomes that fall short of expectations</li>
+          </ol>
+
+          <p>The model must explain why the strategy isn't working in this specific context.</p>
+
+          <h3>Example Scenario (S01: Retrieval Practice)</h3>
+          <div class="citation">
+A Year 8 science teacher has read about the benefits of retrieval practice for long-term retention. At the start of each lesson, she gives students a quiz on the topic they're about to learn. Students struggle with the questions and often guess. After revealing the answers, she moves directly into teaching the new content.
+
+After several weeks, she notices that students still seem to forget the material quickly. A colleague suggests that retrieval practice "doesn't work for science."
+
+What is actually going wrong with how retrieval practice is being implemented here?
+          </div>
+
+          <h2>Scoring Rubric</h2>
+          <p>Responses are scored on a 0-3 scale based on diagnostic accuracy:</p>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Score</th>
+                <th>Criteria</th>
+                <th>Example</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>0</strong></td>
+                <td>Misdiagnosis: Concludes the strategy is fundamentally flawed or suggests abandoning it</td>
+                <td>"Retrieval practice may not be suitable for science content"</td>
+              </tr>
+              <tr>
+                <td><strong>1</strong></td>
+                <td>Generic: Correct direction but no specific mechanism identified</td>
+                <td>"The implementation could be improved"</td>
+              </tr>
+              <tr>
+                <td><strong>2</strong></td>
+                <td>Partial: Identifies the core issue but misses important nuances</td>
+                <td>"Testing before teaching violates retrieval practice principles"</td>
+              </tr>
+              <tr>
+                <td><strong>3</strong></td>
+                <td>Full: Accurate diagnosis with mechanism and terminology</td>
+                <td>"Two critical issues: (1) testing before encoding violates the retrieval-must-follow-encoding sequence, (2) moving on without feedback eliminates the error correction mechanism that makes retrieval practice effective"</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h2>Scoring Process</h2>
+          <p>Responses are evaluated by an LLM judge (Claude 4.5 Sonnet) using a structured rubric with examples. The judge provides:</p>
+          <ul>
+            <li>A numerical score (0-3)</li>
+            <li>Reasoning explaining the score</li>
+            <li>Identification of key mechanisms mentioned or missed</li>
+          </ul>
+
+          <p>A sample of responses is manually validated to ensure scoring consistency.</p>
+
+          <h2>Key Findings</h2>
+          <p>Implementation Scenarios reveal significant variation in diagnostic reasoning:</p>
+          <ul>
+            <li>Top models achieve near-perfect scores (100% on some scenarios)</li>
+            <li>Weaker models often provide generic advice rather than specific diagnosis</li>
+            <li>Some scenarios (e.g., cognitive load, expertise reversal) prove consistently challenging</li>
+          </ul>
+
+          <div class="btn-group mt-4">
+            <a href="pedagogy.html" class="btn btn-primary">Next: Pedagogical Knowledge &rarr;</a>
+            <a href="index.html" class="btn btn-secondary">Back to Methodology</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <a href="../index.html" class="logo">AlignED</a>
+          <p>Transparent benchmarks for AI in education</p>
+        </div>
+        <div class="footer-links">
+          <h4>Navigation</h4>
+          <ul>
+            <li><a href="../about.html">About</a></li>
+            <li><a href="../methodology/">Methodology</a></li>
+            <li><a href="../results.html">Results</a></li>
+            <li><a href="../data-access.html">Data Access</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h4>Resources</h4>
+          <ul>
+            <li><a href="../contact.html">Contact</a></li>
+            <a href="https://github.com/trgallagher-research/AlignED-site" target="_blank">GitHub</a></li>
+          </ul>
+        </div>
+      </div>
+      <p class="copyright">&copy; 2026 AlignED. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>

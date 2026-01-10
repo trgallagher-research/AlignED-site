@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Evaluation Dimensions - AlignED Methodology</title>
+  <meta name="description" content="AlignED evaluation dimensions: temperature robustness, prompt sensitivity, confidence calibration, and token efficiency.">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <header>
+    <div class="container">
+      <a href="../index.html" class="logo">AlignED</a>
+      <button class="nav-toggle" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <nav>
+        <a href="../about.html">About</a>
+        <a href="../methodology/" class="active">Methodology</a>
+        <a href="../results.html">Results</a>
+        <a href="../data-access.html">Data Access</a>
+        <a href="../contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="page-header">
+      <div class="container">
+        <p class="text-muted"><a href="index.html">&larr; Methodology</a></p>
+        <h1>Evaluation Dimensions</h1>
+        <p class="subtitle">Beyond accuracy: measuring robustness, sensitivity, and calibration</p>
+      </div>
+    </div>
+
+    <section class="content-section">
+      <div class="container">
+        <div class="prose">
+          <h2>Overview</h2>
+          <p>Accuracy on a benchmark tells only part of the story. A model scoring 90% under controlled conditions may behave very differently in real-world deployment. AlignED evaluates multiple dimensions to reveal whether correct responses reflect robust knowledge or surface-level pattern matching.</p>
+
+          <h2 id="temperature">Temperature Robustness</h2>
+          <p>Temperature controls the randomness of model outputs. Higher temperatures increase variability. We test at three settings:</p>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Temperature</th>
+                <th>Behaviour</th>
+                <th>Testing Purpose</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>T=0</td>
+                <td>Deterministic (minimal variation)</td>
+                <td>Baseline performance</td>
+              </tr>
+              <tr>
+                <td>T=0.5</td>
+                <td>Moderate variation</td>
+                <td>Practical deployment settings</td>
+              </tr>
+              <tr>
+                <td>T=1.0</td>
+                <td>High variation</td>
+                <td>Stress testing knowledge stability</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h3>Knowledge Robustness Index (KRI)</h3>
+          <p>KRI measures how stable performance remains as temperature increases:</p>
+
+          <div class="citation">
+KRI = min(Accuracy_T0.5, Accuracy_T1.0) / Accuracy_T0
+          </div>
+
+          <p>A KRI of 1.0 indicates perfect robustness (no degradation). Lower values indicate that correct answers at T=0 may be fragile.</p>
+
+          <h3>Key Finding</h3>
+          <p>Most evaluated models show exceptional temperature robustness, with average accuracy variation of only 0.6% across temperature settings. This suggests that educational knowledge, once learned, is relatively stable.</p>
+
+          <h2 id="prompt">Prompt Sensitivity</h2>
+          <p>Does rephrasing a question change the answer? We test each item with four prompt framings:</p>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Framing</th>
+                <th>Description</th>
+                <th>Example Prefix</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Standard</td>
+                <td>Neutral, direct question</td>
+                <td>"Consider the following statement..."</td>
+              </tr>
+              <tr>
+                <td>Interrogative</td>
+                <td>Question form emphasising inquiry</td>
+                <td>"Is it true that..."</td>
+              </tr>
+              <tr>
+                <td>Embedded</td>
+                <td>Presented as common belief</td>
+                <td>"Many teachers believe that..."</td>
+              </tr>
+              <tr>
+                <td>Adversarial</td>
+                <td>Presented with apparent authority</td>
+                <td>"Research has shown that..."</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h3>Prompt Sensitivity Index (PSI)</h3>
+          <p>PSI measures the proportion of items where different framings produce different answers:</p>
+
+          <div class="citation">
+PSI = (Items with inconsistent responses) / (Total items)
+          </div>
+
+          <p>A PSI of 0% indicates perfect consistency. Higher values suggest the model is influenced by framing rather than content.</p>
+
+          <h3>Key Finding</h3>
+          <p>Average PSI across models is 7.1%, indicating relatively low prompt sensitivity. However, adversarial framings (presenting myths as "research-backed") do increase error rates for some models.</p>
+
+          <h2 id="confidence">Confidence Calibration</h2>
+          <p>When models are wrong, do they know it? We assess confidence calibration using a subset of 8 high-prevalence neuromyth items, asking models to rate their confidence:</p>
+
+          <ul>
+            <li><strong>Very confident</strong> (high certainty)</li>
+            <li><strong>Somewhat confident</strong> (moderate certainty)</li>
+            <li><strong>Uncertain</strong> (low certainty)</li>
+          </ul>
+
+          <h3>Calibration Assessment</h3>
+          <p>Well-calibrated models should:</p>
+          <ul>
+            <li>Express high confidence when correct</li>
+            <li>Express lower confidence when uncertain</li>
+            <li>Occasionally acknowledge uncertainty on difficult items</li>
+          </ul>
+
+          <h3>Key Finding</h3>
+          <p>All evaluated models show universal overconfidence. No model ever selected "Uncertain" across all confidence probes. Even when incorrect, models express "Very confident" or "Somewhat confident." This is particularly problematic for educational applications where appropriate epistemic humility is valuable.</p>
+
+          <h2 id="efficiency">Token Efficiency</h2>
+          <p>How much reasoning does a model require to reach correct answers? We measure:</p>
+
+          <ul>
+            <li><strong>Output tokens:</strong> Length of model response</li>
+            <li><strong>Performance-to-tokens ratio:</strong> Accuracy relative to reasoning length</li>
+          </ul>
+
+          <h3>Why This Matters</h3>
+          <p>For practical deployment, efficiency has implications for:</p>
+          <ul>
+            <li>Cost (more tokens = higher API costs)</li>
+            <li>Latency (longer responses take more time)</li>
+            <li>User experience (concise answers may be preferable)</li>
+          </ul>
+
+          <p>Models that achieve high accuracy with efficient responses may be preferable for real-time educational applications.</p>
+
+          <h2>Composite Robustness Score</h2>
+          <p>The Composite Robustness Score (CRS) combines accuracy with robustness measures:</p>
+
+          <div class="citation">
+CRS = Accuracy × KRI × (1 - PSI) × 100
+          </div>
+
+          <p>This penalises high accuracy that is fragile to temperature changes or prompt variations.</p>
+
+          <div class="btn-group mt-4">
+            <a href="scoring.html" class="btn btn-primary">Next: EAI Scoring &rarr;</a>
+            <a href="index.html" class="btn btn-secondary">Back to Methodology</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <a href="../index.html" class="logo">AlignED</a>
+          <p>Transparent benchmarks for AI in education</p>
+        </div>
+        <div class="footer-links">
+          <h4>Navigation</h4>
+          <ul>
+            <li><a href="../about.html">About</a></li>
+            <li><a href="../methodology/">Methodology</a></li>
+            <li><a href="../results.html">Results</a></li>
+            <li><a href="../data-access.html">Data Access</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h4>Resources</h4>
+          <ul>
+            <li><a href="../contact.html">Contact</a></li>
+            <li><a href="https://github.com/trgallagher-research/AlignED-site" target="_blank">GitHub</a></li>
+          </ul>
+        </div>
+      </div>
+      <p class="copyright">&copy; 2026 AlignED. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>
