@@ -612,13 +612,18 @@
       'GPT-5 Mini': '#10B981',
       'Claude 4 Opus': '#D97706',
       'Gemini 2.5 Pro': '#3B82F6',
+      'Claude 4.1 Opus': '#D97706',
+      'Gemini 2.5 Flash': '#3B82F6',
+      'GPT-4 Turbo': '#10B981',
+      'Claude 3.7 Sonnet': '#D97706',
       'Claude 4.5 Sonnet': '#D97706'
     };
 
     // EAI Chart
     const eaiLabels = ['1. GPT-5.2', '2. GPT-5', '3. Claude 4.5 Opus (T)', '4. o3', '5. Claude 4.5 Opus', '6. Claude 4.5 Son (T)', '7. GPT-5 Mini', '8. Claude 4 Opus', '9. Claude 4.1 Opus', '10. Gemini 2.5 Pro'];
     const eaiData = [90.6, 90.1, 89.7, 88.3, 87.8, 87.5, 87.3, 87.3, 87.2, 86.5];
-    const eaiColors = eaiLabels.map(l => colors[l] || '#6B7280');
+    const stripRank = l => l.split('. ').slice(1).join('. ');
+    const eaiColors = eaiLabels.map(l => colors[stripRank(l)] || '#6B7280');
 
     new Chart(document.getElementById('eaiChart'), {
       type: 'bar',
@@ -628,16 +633,16 @@
           data: eaiData,
           backgroundColor: eaiColors,
           borderRadius: 4,
-          barThickness: 20
+          barThickness: 28
         }]
       },
       options: chartConfig
     });
 
     // Neuromyths Chart
-    const nmLabels = ['GPT-5.2', 'GPT-5', 'o3', 'Claude 4.5 Opus (T)', 'GPT-5 Mini', 'Gemini 2.5 Flash', 'GPT-4 Turbo', 'Claude 3.7 Sonnet', 'Claude 4.1 Opus', 'Claude 4.5 Opus'];
+    const nmLabels = ['1. GPT-5.2', '2. GPT-5', '3. o3', '4. Claude 4.5 Opus (T)', '5. GPT-5 Mini', '6. Gemini 2.5 Flash', '7. GPT-4 Turbo', '8. Claude 3.7 Sonnet', '9. Claude 4.1 Opus', '10. Claude 4.5 Opus'];
     const nmData = [93.8, 87.5, 87.5, 87.5, 87.5, 84.4, 84.4, 84.4, 84.4, 81.3];
-    const nmColors = nmLabels.map(l => colors[l] || '#6B7280');
+    const nmColors = nmLabels.map(l => colors[stripRank(l)] || '#6B7280');
 
     new Chart(document.getElementById('neuromythsChart'), {
       type: 'bar',
@@ -647,16 +652,16 @@
           data: nmData,
           backgroundColor: nmColors,
           borderRadius: 4,
-          barThickness: 20
+          barThickness: 28
         }]
       },
       options: chartConfig
     });
 
     // Pedagogy Chart
-    const pedLabels = ['Gemini 2.5 Pro', 'Claude 4.5 Opus', 'Claude 4.5 Opus (T)', 'GPT-5', 'Claude 4.5 Son (T)', 'o3', 'Claude 4 Opus', 'GPT-5.2', 'Claude 4.1 Opus', 'Claude 4.5 Sonnet'];
+    const pedLabels = ['1. Gemini 2.5 Pro', '2. Claude 4.5 Opus', '3. Claude 4.5 Opus (T)', '4. GPT-5', '5. Claude 4.5 Son (T)', '6. o3', '7. Claude 4 Opus', '8. GPT-5.2', '9. Claude 4.1 Opus', '10. Claude 4.5 Sonnet'];
     const pedData = [88.1, 87.7, 87.1, 86.4, 86.0, 85.7, 85.4, 84.3, 83.6, 83.3];
-    const pedColors = pedLabels.map(l => colors[l] || '#6B7280');
+    const pedColors = pedLabels.map(l => colors[stripRank(l)] || '#6B7280');
 
     new Chart(document.getElementById('pedagogyChart'), {
       type: 'bar',
@@ -666,7 +671,7 @@
           data: pedData,
           backgroundColor: pedColors,
           borderRadius: 4,
-          barThickness: 20
+          barThickness: 28
         }]
       },
       options: chartConfig
