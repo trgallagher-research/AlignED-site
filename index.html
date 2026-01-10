@@ -4,8 +4,142 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AlignED - Transparent benchmarks for AI in education</title>
-  <meta name="description" content="AlignED tests whether AI responses align with evidence-based educational research. Transparent, standardised benchmarks for evaluating AI in education.">
+  <meta name="description" content="AlignED tests whether AI responses align with evidence-based educational research. Educational Alignment Index rankings for 23 AI models.">
   <link rel="stylesheet" href="css/style.css">
+  <style>
+    .hero-compact {
+      padding: 3rem 0 2rem;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+    }
+    .hero-compact h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.25rem;
+    }
+    .hero-compact .tagline {
+      font-size: 1.25rem;
+      color: var(--secondary);
+      margin-bottom: 0.5rem;
+    }
+    .hero-compact .context {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+    .hero-compact .context a {
+      color: var(--accent);
+    }
+    .leaderboard-section {
+      padding: 2rem 0 3rem;
+    }
+    .leaderboard-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .leaderboard-header h2 {
+      margin-bottom: 0;
+    }
+    .leaderboard-table {
+      font-size: 0.9rem;
+    }
+    .leaderboard-table th {
+      position: sticky;
+      top: 60px;
+      background: var(--background);
+      z-index: 10;
+    }
+    .leaderboard-table td {
+      vertical-align: middle;
+    }
+    .model-name {
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    .model-name a {
+      color: var(--text);
+    }
+    .model-name a:hover {
+      color: var(--primary);
+    }
+    .provider-anthropic { border-left: 3px solid #D97706; }
+    .provider-openai { border-left: 3px solid #10B981; }
+    .provider-google { border-left: 3px solid #3B82F6; }
+    .eai-score {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+    .score {
+      font-variant-numeric: tabular-nums;
+    }
+    .legend {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+    .legend-color {
+      width: 12px;
+      height: 12px;
+      border-radius: 2px;
+    }
+    .legend-color.anthropic { background: #D97706; }
+    .legend-color.openai { background: #10B981; }
+    .legend-color.google { background: #3B82F6; }
+    .rank {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      font-weight: 700;
+      font-size: 0.75rem;
+    }
+    .rank-1 { background: #FFD700; color: #1a1a1a; }
+    .rank-2 { background: #C0C0C0; color: #1a1a1a; }
+    .rank-3 { background: #CD7F32; color: white; }
+    .table-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .filters {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+    .filter-btn {
+      padding: 0.4rem 0.75rem;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 0.8rem;
+      transition: all 0.2s;
+    }
+    .filter-btn:hover, .filter-btn.active {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+    }
+  </style>
 </head>
 <body>
   <header>
@@ -19,135 +153,266 @@
       <nav>
         <a href="about.html">About</a>
         <a href="methodology/">Methodology</a>
-        <a href="results.html">Results</a>
-        <a href="data-access.html">Data Access</a>
+        <a href="models/">Models</a>
+        <a href="data-access.html">Data</a>
         <a href="contact.html">Contact</a>
       </nav>
     </div>
   </header>
 
   <main>
-    <section class="hero">
+    <section class="hero-compact">
       <div class="container">
         <h1>AlignED</h1>
         <p class="tagline">Transparent benchmarks for AI in education</p>
-        <p class="explanation">Evaluating AI alignment with educational research evidence</p>
-        <p class="intro">
-          AI systems are increasingly used to support teaching and learning. AlignED tests whether these systems align with evidence-based educational research&mdash;from rejecting common misconceptions to diagnosing why proven strategies sometimes fail in practice.
-        </p>
-        <div class="btn-group">
-          <a href="methodology/" class="btn btn-primary">Explore Methodology</a>
-          <a href="results.html" class="btn btn-secondary">View Results</a>
-        </div>
+        <p class="context">Evaluating AI alignment with educational research evidence. <a href="about.html">Why this matters &rarr;</a></p>
       </div>
     </section>
 
-    <section class="alt">
+    <section class="leaderboard-section">
       <div class="container">
-        <div class="section-header">
-          <h2>Why This Matters</h2>
-          <p>AI in education needs transparent, evidence-based evaluation</p>
-        </div>
-        <div class="grid grid-3">
-          <div class="card">
-            <h3>The Problem</h3>
-            <p>AI systems can reinforce educational misconceptions. Standard benchmarks test academic content knowledge, not pedagogical reasoning or alignment with research evidence.</p>
-          </div>
-          <div class="card">
-            <h3>Our Approach</h3>
-            <p>AlignED tests what teachers need to know: rejecting neuromyths, understanding why evidence-based strategies succeed or fail, and demonstrating pedagogical knowledge.</p>
-          </div>
-          <div class="card">
-            <h3>Beyond Accuracy</h3>
-            <p>We examine how performance changes across conditions&mdash;temperature settings, prompt variations, confidence levels&mdash;revealing whether responses reflect robust knowledge.</p>
+        <div class="leaderboard-header">
+          <h2>Educational Alignment Index</h2>
+          <div class="legend">
+            <div class="legend-item"><div class="legend-color anthropic"></div> Anthropic</div>
+            <div class="legend-item"><div class="legend-color openai"></div> OpenAI</div>
+            <div class="legend-item"><div class="legend-color google"></div> Google</div>
           </div>
         </div>
-      </div>
-    </section>
 
-    <section>
-      <div class="container">
-        <div class="section-header">
-          <h2>Current Benchmarks</h2>
-          <p>Evaluation instruments adapted from peer-reviewed research</p>
+        <div class="filters">
+          <button class="filter-btn active" data-filter="all">All</button>
+          <button class="filter-btn" data-filter="anthropic">Anthropic</button>
+          <button class="filter-btn" data-filter="openai">OpenAI</button>
+          <button class="filter-btn" data-filter="google">Google</button>
         </div>
-        <div class="grid grid-2">
-          <div class="card">
-            <h3>Neuromyths Survey</h3>
-            <p>32 items testing rejection of brain-based misconceptions, adapted from Dekker et al. (2012). Human teachers average around 50% accuracy.</p>
-          </div>
-          <div class="card">
-            <h3>Implementation Scenarios</h3>
-            <p>12 diagnostic scenarios testing whether models can identify why evidence-based strategies fail in specific classroom contexts.</p>
-          </div>
-          <div class="card">
-            <h3>Pedagogical Knowledge (CDPK)</h3>
-            <p>920 items from validated teacher certification assessments, testing cross-domain pedagogical knowledge.</p>
-          </div>
-          <div class="card">
-            <h3>Special Education (SEND)</h3>
-            <p>223 items assessing knowledge of special educational needs and disability, essential for inclusive teaching.</p>
-          </div>
-        </div>
-        <div class="text-center mt-4">
-          <a href="methodology/" class="btn btn-secondary">View Full Methodology</a>
-        </div>
-      </div>
-    </section>
 
-    <section class="alt">
-      <div class="container">
-        <div class="section-header">
-          <h2>Evaluation Dimensions</h2>
-          <p>Multiple perspectives on model capabilities</p>
-        </div>
-        <div class="metric-grid">
-          <div class="metric-card">
-            <div class="metric-value">23</div>
-            <div class="metric-label">Models Evaluated</div>
-          </div>
-          <div class="metric-card">
-            <div class="metric-value">5</div>
-            <div class="metric-label">Benchmarks</div>
-          </div>
-          <div class="metric-card">
-            <div class="metric-value">1,200+</div>
-            <div class="metric-label">Test Items</div>
-          </div>
-          <div class="metric-card">
-            <div class="metric-value">6</div>
-            <div class="metric-label">Evaluation Dimensions</div>
-          </div>
-        </div>
-        <div class="grid grid-3 mt-4">
-          <div class="card">
-            <h3>Temperature Robustness</h3>
-            <p>Performance stability across temperature settings (T=0, 0.5, 1.0).</p>
-          </div>
-          <div class="card">
-            <h3>Prompt Sensitivity</h3>
-            <p>Consistency across prompt variations: standard, interrogative, embedded, adversarial.</p>
-          </div>
-          <div class="card">
-            <h3>Confidence Calibration</h3>
-            <p>Alignment between stated confidence and actual accuracy.</p>
-          </div>
-        </div>
-      </div>
-    </section>
+        <table class="leaderboard-table" style="margin-top: 1rem;">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Model</th>
+              <th>EAI</th>
+              <th>Neuromyths</th>
+              <th>Scenarios</th>
+              <th>CDPK</th>
+              <th>SEND</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="provider-openai" data-provider="openai">
+              <td><span class="rank rank-1">1</span></td>
+              <td class="model-name"><a href="models/gpt-5-2.html">GPT-5.2</a></td>
+              <td class="eai-score">90.6</td>
+              <td class="score">93.8%</td>
+              <td class="score">100%</td>
+              <td class="score">85.1%</td>
+              <td class="score">81.2%</td>
+            </tr>
+            <tr class="provider-openai" data-provider="openai">
+              <td><span class="rank rank-2">2</span></td>
+              <td class="model-name">GPT-5</td>
+              <td class="eai-score">90.1</td>
+              <td class="score">87.5%</td>
+              <td class="score">100%</td>
+              <td class="score">87.7%</td>
+              <td class="score">81.2%</td>
+            </tr>
+            <tr class="provider-anthropic" data-provider="anthropic">
+              <td><span class="rank rank-3">3</span></td>
+              <td class="model-name">Claude 4.5 Opus (Thinking)</td>
+              <td class="eai-score">89.7</td>
+              <td class="score">87.5%</td>
+              <td class="score">97.2%</td>
+              <td class="score">88.2%</td>
+              <td class="score">82.5%</td>
+            </tr>
+            <tr class="provider-openai" data-provider="openai">
+              <td>4</td>
+              <td class="model-name">o3</td>
+              <td class="eai-score">88.3</td>
+              <td class="score">87.5%</td>
+              <td class="score">94.4%</td>
+              <td class="score">86.2%</td>
+              <td class="score">83.4%</td>
+            </tr>
+            <tr class="provider-anthropic" data-provider="anthropic">
+              <td>5</td>
+              <td class="model-name">Claude 4.5 Opus</td>
+              <td class="eai-score">87.8</td>
+              <td class="score">81.3%</td>
+              <td class="score">94.4%</td>
+              <td class="score">88.4%</td>
+              <td class="score">84.8%</td>
+            </tr>
+            <tr class="provider-anthropic" data-provider="anthropic">
+              <td>6</td>
+              <td class="model-name">Claude 4.5 Sonnet (Thinking)</td>
+              <td class="eai-score">87.5</td>
+              <td class="score">78.1%</td>
+              <td class="score">100%</td>
+              <td class="score">86.3%</td>
+              <td class="score">84.8%</td>
+            </tr>
+            <tr class="provider-openai" data-provider="openai">
+              <td>7</td>
+              <td class="model-name">GPT-5 Mini</td>
+              <td class="eai-score">87.3</td>
+              <td class="score">87.5%</td>
+              <td class="score">97.2%</td>
+              <td class="score">82.9%</td>
+              <td class="score">79.8%</td>
+            </tr>
+            <tr class="provider-anthropic" data-provider="anthropic">
+              <td>8</td>
+              <td class="model-name">Claude 4 Opus</td>
+              <td class="eai-score">87.3</td>
+              <td class="score">81.3%</td>
+              <td class="score">97.2%</td>
+              <td class="score">85.9%</td>
+              <td class="score">83.4%</td>
+            </tr>
+            <tr class="provider-anthropic" data-provider="anthropic">
+              <td>9</td>
+              <td class="model-name">Claude 4.1 Opus</td>
+              <td class="eai-score">87.2</td>
+              <td class="score">84.4%</td>
+              <td class="score">97.2%</td>
+              <td class="score">83.5%</td>
+              <td class="score">83.9%</td>
+            </tr>
+            <tr class="provider-google" data-provider="google">
+              <td>10</td>
+              <td class="model-name">Gemini 2.5 Pro</td>
+              <td class="eai-score">86.5</td>
+              <td class="score">78.1%</td>
+              <td class="score">91.7%</td>
+              <td class="score">89.0%</td>
+              <td class="score">84.3%</td>
+            </tr>
+            <tr class="provider-openai" data-provider="openai">
+              <td>11</td>
+              <td class="model-name">o4-mini</td>
+              <td class="eai-score">85.3</td>
+              <td class="score">81.3%</td>
+              <td class="score">94.4%</td>
+              <td class="score">83.4%</td>
+              <td class="score">80.3%</td>
+            </tr>
+            <tr class="provider-anthropic" data-provider="anthropic">
+              <td>12</td>
+              <td class="model-name">Claude 4.5 Sonnet</td>
+              <td class="eai-score">84.7</td>
+              <td class="score">75.0%</td>
+              <td class="score">97.2%</td>
+              <td class="score">84.2%</td>
+              <td class="score">79.4%</td>
+            </tr>
+            <tr class="provider-anthropic" data-provider="anthropic">
+              <td>13</td>
+              <td class="model-name">Claude 3.7 Sonnet</td>
+              <td class="eai-score">82.7</td>
+              <td class="score">84.4%</td>
+              <td class="score">88.9%</td>
+              <td class="score">79.3%</td>
+              <td class="score">76.7%</td>
+            </tr>
+            <tr class="provider-anthropic" data-provider="anthropic">
+              <td>14</td>
+              <td class="model-name">Claude 4 Sonnet</td>
+              <td class="eai-score">80.9</td>
+              <td class="score">75.0%</td>
+              <td class="score">91.7%</td>
+              <td class="score">78.4%</td>
+              <td class="score">78.5%</td>
+            </tr>
+            <tr class="provider-google" data-provider="google">
+              <td>15</td>
+              <td class="model-name">Gemini 2.5 Flash</td>
+              <td class="eai-score">80.7</td>
+              <td class="score">84.4%</td>
+              <td class="score">75.0%</td>
+              <td class="score">83.0%</td>
+              <td class="score">75.8%</td>
+            </tr>
+            <tr class="provider-openai" data-provider="openai">
+              <td>16</td>
+              <td class="model-name">o3-mini</td>
+              <td class="eai-score">77.4</td>
+              <td class="score">78.1%</td>
+              <td class="score">75.0%</td>
+              <td class="score">79.2%</td>
+              <td class="score">74.0%</td>
+            </tr>
+            <tr class="provider-openai" data-provider="openai">
+              <td>17</td>
+              <td class="model-name">GPT-4 Turbo</td>
+              <td class="eai-score">77.2</td>
+              <td class="score">84.4%</td>
+              <td class="score">77.8%</td>
+              <td class="score">75.2%</td>
+              <td class="score">65.5%</td>
+            </tr>
+            <tr class="provider-anthropic" data-provider="anthropic">
+              <td>18</td>
+              <td class="model-name">Claude 4.5 Haiku</td>
+              <td class="eai-score">76.7</td>
+              <td class="score">68.8%</td>
+              <td class="score">86.1%</td>
+              <td class="score">76.5%</td>
+              <td class="score">73.1%</td>
+            </tr>
+            <tr class="provider-anthropic" data-provider="anthropic">
+              <td>19</td>
+              <td class="model-name">Claude 3 Opus</td>
+              <td class="eai-score">75.6</td>
+              <td class="score">78.1%</td>
+              <td class="score">72.2%</td>
+              <td class="score">77.1%</td>
+              <td class="score">72.2%</td>
+            </tr>
+            <tr class="provider-openai" data-provider="openai">
+              <td>20</td>
+              <td class="model-name">GPT-4o</td>
+              <td class="eai-score">75.0</td>
+              <td class="score">71.9%</td>
+              <td class="score">72.2%</td>
+              <td class="score">78.7%</td>
+              <td class="score">74.4%</td>
+            </tr>
+            <tr class="provider-anthropic" data-provider="anthropic">
+              <td>21</td>
+              <td class="model-name">Claude 3.5 Haiku</td>
+              <td class="eai-score">70.8</td>
+              <td class="score">65.6%</td>
+              <td class="score">83.3%</td>
+              <td class="score">66.8%</td>
+              <td class="score">68.6%</td>
+            </tr>
+            <tr class="provider-openai" data-provider="openai">
+              <td>22</td>
+              <td class="model-name">GPT-4o Mini</td>
+              <td class="eai-score">69.2</td>
+              <td class="score">78.1%</td>
+              <td class="score">61.1%</td>
+              <td class="score">68.9%</td>
+              <td class="score">68.6%</td>
+            </tr>
+            <tr class="provider-anthropic" data-provider="anthropic">
+              <td>23</td>
+              <td class="model-name">Claude 3 Haiku</td>
+              <td class="eai-score">59.5</td>
+              <td class="score">65.6%</td>
+              <td class="score">63.9%</td>
+              <td class="score">53.8%</td>
+              <td class="score">56.5%</td>
+            </tr>
+          </tbody>
+        </table>
 
-    <section>
-      <div class="container">
-        <div class="section-header">
-          <h2>For Policymakers</h2>
-        </div>
-        <div class="content">
-          <p>AI systems are increasingly used in educational contexts. AlignED provides transparent, standardised benchmarks to evaluate whether these systems align with educational research evidence&mdash;helping inform decisions about responsible deployment.</p>
-          <p>Our methodology is open, our data is accessible, and our results are designed to support governance and policy decisions.</p>
-          <div class="btn-group mt-3">
-            <a href="about.html" class="btn btn-primary">Learn More</a>
-            <a href="data-access.html" class="btn btn-secondary">Access Data</a>
-          </div>
+        <div class="table-footer">
+          <span>Human teacher baseline on Neuromyths: ~50%. <a href="methodology/">View methodology</a></span>
+          <a href="data-access.html" class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.85rem;">Download Data</a>
         </div>
       </div>
     </section>
@@ -165,8 +430,8 @@
           <ul>
             <li><a href="about.html">About</a></li>
             <li><a href="methodology/">Methodology</a></li>
-            <li><a href="results.html">Results</a></li>
-            <li><a href="data-access.html">Data Access</a></li>
+            <li><a href="models/">Models</a></li>
+            <li><a href="data-access.html">Data</a></li>
           </ul>
         </div>
         <div class="footer-links">
@@ -182,5 +447,21 @@
   </footer>
 
   <script src="js/main.js"></script>
+  <script>
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        const filter = this.dataset.filter;
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        document.querySelectorAll('tbody tr').forEach(row => {
+          if (filter === 'all' || row.dataset.provider === filter) {
+            row.style.display = '';
+          } else {
+            row.style.display = 'none';
+          }
+        });
+      });
+    });
+  </script>
 </body>
 </html>
