@@ -29,83 +29,44 @@
   <main>
     <div class="page-header">
       <div class="container">
-        <h1>Why This Matters</h1>
-        <p class="subtitle">The case for evaluating AI alignment with educational research</p>
+        <h1>About AlignED</h1>
+        <p class="subtitle">Why educational alignment matters and what we test</p>
       </div>
     </div>
 
     <section class="content-section">
       <div class="container">
         <div class="prose">
-          <h2>The Challenge</h2>
-          <p>AI systems are increasingly deployed in educational settings&mdash;as tutors, teaching assistants, and content generators. Yet these systems may reinforce educational misconceptions that persist despite decades of research debunking them.</p>
+          <h2>What is educational alignment?</h2>
+          <p>When AI helps students learn, writes lesson plans, or gives teaching advice, it needs to know what good teaching looks like — according to research, not popular belief. Educational alignment means an AI's responses match what decades of educational research has established. AlignED measures this.</p>
 
-          <p>Consider neuromyths: false beliefs about the brain and learning that remain widespread among educators. Research consistently shows that around 50% of teachers believe claims like "we only use 10% of our brains" or "students learn best when taught in their preferred learning style." When AI systems perpetuate these misconceptions, they risk entrenching them further.</p>
+          <h2>Why it matters</h2>
+          <p>Many beliefs about learning — learning styles, left brain/right brain, "we only use 10% of our brains" — are myths. About half of teachers believe them. If AI perpetuates these misconceptions, it does harm. If AI knows better than these myths, and can explain why teaching strategies fail in practice, it becomes a genuinely useful tool.</p>
 
-          <h2>What Makes AlignED Different</h2>
-          <p>Standard AI benchmarks test academic content&mdash;mathematics, coding, general knowledge. AlignED tests something different: alignment with evidence-based educational research.</p>
-
-          <p>We focus on what teachers need to know, not what students should learn:</p>
+          <h2>Who should care</h2>
           <ul>
-            <li><strong>Misconception rejection:</strong> Can the model identify and reject neuromyths with appropriate confidence?</li>
-            <li><strong>Diagnostic reasoning:</strong> When evidence-based strategies fail in practice, can the model explain why?</li>
-            <li><strong>Pedagogical knowledge:</strong> Does the model demonstrate cross-domain teaching expertise?</li>
-            <li><strong>Assessment judgement:</strong> Can the model accurately compare student work against curriculum standards? (ACARA Comparative Judgement)</li>
+            <li><strong>Teachers and school leaders</strong> — Choosing which AI tools to trust in classrooms</li>
+            <li><strong>Policymakers</strong> — Writing guidelines for AI in education</li>
+            <li><strong>EdTech developers</strong> — Understanding where their models have blind spots</li>
+            <li><strong>Researchers</strong> — Transparent, reproducible benchmarks for study</li>
           </ul>
 
-          <h2>Beyond Accuracy</h2>
-          <p>A model that scores 90% on a benchmark under ideal conditions may perform very differently in practice. AlignED examines multiple dimensions:</p>
-
-          <div class="grid grid-2 mt-3 mb-3">
-            <div class="card">
-              <h4>Temperature Robustness</h4>
-              <p>How stable is performance across different temperature settings? A model that only performs well at T=0 may be brittle.</p>
-            </div>
-            <div class="card">
-              <h4>Prompt Sensitivity</h4>
-              <p>Does rephrasing questions change answers? We test standard, interrogative, embedded, and adversarial framings.</p>
-            </div>
-            <div class="card">
-              <h4>Confidence Calibration</h4>
-              <p>Are models appropriately uncertain when they should be? Overconfidence in wrong answers is particularly problematic in education.</p>
-            </div>
-            <div class="card">
-              <h4>Token Efficiency</h4>
-              <p>How much reasoning does the model require? Efficiency matters for real-world deployment.</p>
-            </div>
-          </div>
-
-          <h2>Grounded in Research</h2>
-          <p>AlignED benchmarks are adapted from peer-reviewed instruments and validated assessments:</p>
+          <h2>What AlignED tests</h2>
+          <p>AlignED evaluates AI across four areas of educational knowledge:</p>
           <ul>
-            <li><strong>Neuromyths Survey:</strong> Adapted from Dekker et al. (2012), the foundational study documenting neuromyth prevalence among teachers</li>
-            <li><strong>Implementation Scenarios:</strong> Developed from research on why evidence-based practices fail in real classrooms</li>
-            <li><strong>Pedagogical Knowledge:</strong> Based on validated teacher certification assessments</li>
-            <li><strong>ACARA Comparative Judgement:</strong> 79 verified pairs from Australian Curriculum work sample portfolios, testing applied assessment skills</li>
+            <li><strong>Brain science</strong> — Can AI separate myths from facts about how people learn? (32 items)</li>
+            <li><strong>Classroom reasoning</strong> — Can AI diagnose why good teaching strategies sometimes fail? (12 scenarios)</li>
+            <li><strong>Teaching knowledge</strong> — Does AI know what certified teachers are expected to know? (1,143 items)</li>
+            <li><strong>Student work judgement</strong> — Can AI accurately compare student work against curriculum standards? (79 pairs, reported separately)</li>
           </ul>
+          <p>The first three combine into a composite score. See <a href="methodology/">Methodology</a> for full details.</p>
 
-          <h2>Who This Is For</h2>
-
-          <h3>Policymakers and Governance Bodies</h3>
-          <p>AI governance requires transparent evaluation. AlignED provides standardised benchmarks that can inform deployment decisions, procurement guidelines, and regulatory frameworks.</p>
-
-          <h3>Educational Researchers</h3>
-          <p>AlignED offers a framework for evaluating AI educational capabilities with open methodology and reproducible results. The platform supports both model comparison and longitudinal tracking.</p>
-
-          <h3>AI Developers</h3>
-          <p>AlignED tests capabilities that standard benchmarks miss. Understanding where models succeed or fail on educational knowledge can guide training and development priorities.</p>
-
-          <h2>What We Can Claim</h2>
+          <h2>What we claim and don't claim</h2>
           <p>AlignED tests how well AI responses align with evidence-based educational research. Our benchmarks adapt peer-reviewed instruments for AI evaluation.</p>
 
           <div class="note">
             <p><strong>What we do not claim:</strong> Benchmark performance does not prove "understanding" or predict real-world tutoring effectiveness. High scores indicate alignment with research evidence, not certification for deployment.</p>
           </div>
-
-          <h2>The Educational Alignment Index</h2>
-          <p>The Educational Alignment Index (EAI) is our composite score, combining performance across all benchmarks and evaluation dimensions. It provides a single metric for comparing models while maintaining transparency about component scores.</p>
-
-          <p>See our <a href="methodology/scoring.html">scoring methodology</a> for details on how the EAI is calculated.</p>
 
           <div class="btn-group mt-4">
             <a href="methodology/" class="btn btn-primary">Explore Methodology</a>

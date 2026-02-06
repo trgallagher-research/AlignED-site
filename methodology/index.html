@@ -37,32 +37,35 @@
     <section class="content-section">
       <div class="container">
         <div class="prose">
-          <h2>Overview</h2>
-          <p>AlignED evaluates AI alignment with educational research evidence through a multi-phase assessment process. Our methodology prioritises transparency, reproducibility, and grounding in peer-reviewed research.</p>
+          <p>This section covers the technical details of how AlignED works. For a general overview, see <a href="../about.html">About</a>.</p>
 
-          <h2>Benchmarks</h2>
-          <p>Each benchmark tests a distinct aspect of educational knowledge. Click through for detailed methodology on each.</p>
+          <h2>What AlignED measures</h2>
+          <p>The <strong>composite score</strong> is a weighted combination of three knowledge areas:</p>
 
           <ul class="benchmark-list">
             <li>
-              <a href="neuromyths.html">Neuromyths Survey</a>
-              <p class="description">32 items testing rejection of brain-based misconceptions. Adapted from Dekker et al. (2012).</p>
+              <a href="neuromyths.html">Brain Science (25%)</a>
+              <p class="description">Can AI separate myths from facts about how people learn? 15 widely-believed myths + 17 verified facts = 32 items.</p>
             </li>
             <li>
-              <a href="scenarios.html">Implementation Scenarios</a>
-              <p class="description">12 diagnostic scenarios testing why evidence-based strategies fail in specific contexts.</p>
+              <a href="scenarios.html">Classroom Reasoning (25%)</a>
+              <p class="description">Can AI diagnose why good teaching strategies sometimes fail? 12 real-world scenarios scored 0&ndash;3 by an expert judge.</p>
             </li>
             <li>
-              <a href="pedagogy.html">Pedagogical Knowledge (CDPK &amp; SEND)</a>
-              <p class="description">1,143 items from validated teacher certification assessments covering cross-domain pedagogy and special education.</p>
-            </li>
-            <li>
-              <a href="acara.html">ACARA Comparative Judgement</a>
-              <p class="description">79 verified pairs comparing student work samples against Australian Curriculum standards. Reported separately from composite.</p>
+              <a href="pedagogy.html">Teaching Knowledge (50%)</a>
+              <p class="description">Does AI know what certified teachers are expected to know? 1,143 items from teacher certification assessments: general pedagogy (920 items) and inclusive education (223 items).</p>
             </li>
           </ul>
 
-          <h2>Evaluation Dimensions</h2>
+          <p><strong>Reported separately:</strong></p>
+          <ul class="benchmark-list">
+            <li>
+              <a href="acara.html">Student Work Judgement (ACARA)</a>
+              <p class="description">Can AI accurately compare student work against curriculum standards? 79 verified pairs, scored for accuracy and consistency. 12 models evaluated.</p>
+            </li>
+          </ul>
+
+          <h2>Evaluation dimensions</h2>
           <p>Beyond baseline accuracy, we assess multiple dimensions of model performance.</p>
 
           <ul class="benchmark-list">
@@ -84,7 +87,7 @@
             </li>
           </ul>
 
-          <h2>Composite Scoring</h2>
+          <h2>Composite scoring</h2>
           <ul class="benchmark-list">
             <li>
               <a href="scoring.html">Educational Alignment Index (EAI)</a>
@@ -92,58 +95,8 @@
             </li>
           </ul>
 
-          <h2>Evaluation Process</h2>
-          <p>Our evaluation follows a structured multi-phase process:</p>
-
-          <table>
-            <thead>
-              <tr>
-                <th>Phase</th>
-                <th>Component</th>
-                <th>Description</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>1-2</td>
-                <td>Baseline</td>
-                <td>Core benchmark administration at T=0 with 5 iterations for reliability</td>
-              </tr>
-              <tr>
-                <td>3</td>
-                <td>Temperature</td>
-                <td>Performance at T=0.5 and T=1.0 to assess robustness</td>
-              </tr>
-              <tr>
-                <td>4</td>
-                <td>Prompt Sensitivity</td>
-                <td>Four prompt variants to assess consistency</td>
-              </tr>
-              <tr>
-                <td>5-6</td>
-                <td>Core Benchmarks</td>
-                <td>Neuromyths survey and implementation scenarios</td>
-              </tr>
-              <tr>
-                <td>7</td>
-                <td>Temperature Analysis</td>
-                <td>Knowledge Robustness Index calculation</td>
-              </tr>
-              <tr>
-                <td>8</td>
-                <td>Prompt Analysis</td>
-                <td>Prompt Sensitivity Index calculation</td>
-              </tr>
-              <tr>
-                <td>9</td>
-                <td>Confidence Probe</td>
-                <td>Calibration assessment on highest-prevalence items</td>
-              </tr>
-            </tbody>
-          </table>
-
-          <h2>Models Evaluated</h2>
-          <p>21 models have complete composite scores across the three core benchmarks. The ACARA benchmark evaluates 12 models separately.</p>
+          <h2>Models evaluated</h2>
+          <p>21 models from three providers have complete composite scores. The ACARA benchmark additionally evaluates models from Meta (Llama 3.3 70B) and DeepSeek (V3.2).</p>
 
           <div class="grid grid-3 mt-3">
             <div class="card">
@@ -157,14 +110,6 @@
             <div class="card">
               <h4>Google</h4>
               <p>Gemini 2.0 Flash, 2.5 Pro, 3 Flash</p>
-            </div>
-            <div class="card">
-              <h4>Meta</h4>
-              <p>Llama 3.3 70B (ACARA only)</p>
-            </div>
-            <div class="card">
-              <h4>DeepSeek</h4>
-              <p>DeepSeek V3.2 (ACARA only)</p>
             </div>
           </div>
 

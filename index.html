@@ -436,12 +436,11 @@
     <div class="container">
       <a href="index.html" class="logo">AlignED</a>
       <div class="nav-links">
-        <a href="methodology/">Methodology</a>
         <a href="about.html">About</a>
+        <a href="methodology/">Methodology</a>
         <a href="results.html">Results</a>
-        <a href="models/">Models</a>
         <a href="data-access.html">Data</a>
-        <a href="#highlights" class="btn btn-primary">View Results</a>
+        <a href="contact.html">Contact</a>
       </div>
     </div>
   </nav>
@@ -450,13 +449,13 @@
   <section class="hero">
     <div class="container">
       <div class="hero-content">
-        <h1><span class="highlight">Transparent</span> benchmarks for AI in education</h1>
-        <p>Evaluating AI alignment with educational research evidence. Testing what teachers need to know, not what students should learn.</p>
+        <h1>Does AI know what <span class="highlight">good teaching</span> looks like?</h1>
+        <p>We tested 21 models to find out. AlignED measures whether AI aligns with what decades of educational research has established.</p>
       </div>
       <div class="hero-cards">
         <div class="promo-card">
           <h3>Latest Results: February 2026</h3>
-          <p>21 models with composite scores across 4 benchmarks. ACARA comparative judgement now included.</p>
+          <p>21 models ranked across brain science, classroom reasoning, and teaching knowledge — plus applied assessment.</p>
           <a href="#highlights" class="btn">View Rankings</a>
         </div>
         <div class="promo-card">
@@ -468,33 +467,42 @@
     </div>
   </section>
 
+  <!-- What is educational alignment? -->
+  <section style="padding: 2.5rem 0; border-bottom: 1px solid var(--border);">
+    <div class="container">
+      <h2 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 0.75rem;">What is educational alignment?</h2>
+      <p style="font-size: 1.05rem; color: var(--text); max-width: 800px; margin-bottom: 0.75rem;">When AI is used in classrooms, it needs to know what teachers know — not just facts, but which beliefs about learning are wrong, how to handle real classroom problems, and what good teaching actually looks like. That's educational alignment.</p>
+      <p style="font-size: 0.95rem; color: var(--text-muted); max-width: 800px;"><strong>Who should care:</strong> Teachers choosing AI tools, school leaders making procurement decisions, policymakers writing AI guidelines, and developers building educational AI.</p>
+    </div>
+  </section>
+
   <!-- Highlights -->
   <section id="highlights">
     <div class="container">
       <div class="section-label">Highlights</div>
       <div class="highlights-grid">
-        <!-- EAI Chart -->
+        <!-- Overall Ranking Chart -->
         <div class="chart-card">
-          <h3>Educational Alignment Index</h3>
-          <p class="subtitle">Composite score across all benchmarks; Higher is better</p>
+          <h3>Overall Ranking</h3>
+          <p class="subtitle">Composite score across all knowledge areas; Higher is better</p>
           <div class="chart-container">
             <canvas id="eaiChart"></canvas>
           </div>
         </div>
 
-        <!-- Neuromyths Chart -->
+        <!-- Brain Science Chart -->
         <div class="chart-card">
-          <h3>Neuromyth Rejection</h3>
-          <p class="subtitle">Accuracy on 32-item survey; Human baseline ~50%</p>
+          <h3>Brain Science Knowledge</h3>
+          <p class="subtitle">Can AI separate myths from facts? Human baseline ~50%</p>
           <div class="chart-container">
             <canvas id="neuromythsChart"></canvas>
           </div>
         </div>
 
-        <!-- Pedagogy Chart -->
+        <!-- Teaching Knowledge Chart -->
         <div class="chart-card">
-          <h3>Pedagogical Knowledge</h3>
-          <p class="subtitle">CDPK + SEND combined score; Higher is better</p>
+          <h3>Teaching Knowledge</h3>
+          <p class="subtitle">Performance on 1,143 teacher certification items</p>
           <div class="chart-container">
             <canvas id="pedagogyChart"></canvas>
           </div>
@@ -505,9 +513,9 @@
         <div class="legend-item"><div class="legend-dot" style="background: #D97757;"></div> Anthropic</div>
         <div class="legend-item"><div class="legend-dot" style="background: #10A37F;"></div> OpenAI</div>
         <div class="legend-item"><div class="legend-dot" style="background: #4285F4;"></div> Google</div>
-        <div class="legend-item"><div class="legend-dot" style="background: #0668E1;"></div> Meta</div>
-        <div class="legend-item"><div class="legend-dot" style="background: #536DFE;"></div> DeepSeek</div>
       </div>
+
+      <p style="margin-top: 1.25rem; font-size: 0.95rem; color: var(--text); max-width: 800px;"><strong>Headline finding:</strong> The best models score above 90% — but the gap between best and worst is over 30 percentage points. Provider and model size matter. <a href="results.html">See full results &rarr;</a></p>
     </div>
   </section>
 
@@ -515,21 +523,17 @@
   <section class="quick-links">
     <div class="container">
       <div class="section-label">Explore</div>
-      <div class="quick-links-grid">
+      <div class="quick-links-grid" style="grid-template-columns: repeat(3, 1fr);">
         <div class="quick-link-card">
-          <h4>Which model best rejects neuromyths?</h4>
+          <h4>Can AI separate brain science from brain myths?</h4>
           <a href="methodology/neuromyths.html">View analysis &rarr;</a>
         </div>
         <div class="quick-link-card">
-          <h4>How does temperature affect accuracy?</h4>
-          <a href="methodology/dimensions.html#temperature">View robustness data &rarr;</a>
+          <h4>How stable are results under different conditions?</h4>
+          <a href="methodology/dimensions.html">View robustness data &rarr;</a>
         </div>
         <div class="quick-link-card">
-          <h4>How do Claude models compare?</h4>
-          <a href="models/">View model trajectories &rarr;</a>
-        </div>
-        <div class="quick-link-card">
-          <h4>What does AlignED test?</h4>
+          <h4>What does AlignED test and why?</h4>
           <a href="about.html">Learn about our approach &rarr;</a>
         </div>
       </div>
@@ -547,9 +551,9 @@
         <div class="footer-links">
           <h4>Navigation</h4>
           <ul>
-            <li><a href="methodology/">Methodology</a></li>
             <li><a href="about.html">About</a></li>
-            <li><a href="models/">Models</a></li>
+            <li><a href="methodology/">Methodology</a></li>
+            <li><a href="results.html">Results</a></li>
           </ul>
         </div>
         <div class="footer-links">
@@ -560,10 +564,9 @@
           </ul>
         </div>
         <div class="footer-links">
-          <h4>Updates</h4>
+          <h4>Contact</h4>
           <ul>
-            <li><a href="contact.html">Contact</a></li>
-            <li><a href="#">Substack (coming soon)</a></li>
+            <li><a href="contact.html">Get in Touch</a></li>
           </ul>
         </div>
       </div>
