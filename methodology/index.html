@@ -6,6 +6,9 @@
   <title>Methodology - AlignED</title>
   <meta name="description" content="How AlignED benchmarks are constructed, scored, and validated. Transparent methodology for evaluating AI alignment with educational research.">
   <link rel="stylesheet" href="../css/style.css">
+  <!-- Mermaid.js for validation protocol diagram -->
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+  <script>mermaid.initialize({ startOnLoad: true, theme: 'neutral' });</script>
 </head>
 <body>
   <header>
@@ -20,7 +23,8 @@
         <a href="../about.html">About</a>
         <a href="../methodology/" class="active">Methodology</a>
         <a href="../results.html">Results</a>
-        <a href="../data-access.html">Data Access</a>
+        <a href="../benchmark-items.html">Benchmark Items</a>
+        <a href="../data-access.html">Data</a>
         <a href="../contact.html">Contact</a>
       </nav>
     </div>
@@ -37,14 +41,16 @@
     <section class="content-section">
       <div class="container">
         <div class="prose">
-          <p>This section covers the technical details of how AlignED works. For a general overview, see <a href="../about.html">About</a>.</p>
+          <p>This section covers the technical details of how AlignED works. For a general overview, see <a href="../about.html">About</a>. To see the actual items used, visit <a href="../benchmark-items.html">Benchmark Items</a>.</p>
 
           <h2>What AlignED measures</h2>
-          <p>The <strong>composite score</strong> is a weighted combination of three knowledge areas:</p>
+          <p>AlignED uses a <strong>two-tier composite scoring</strong> system:</p>
+
+          <p><strong>Full Composite</strong> (8 models with all four benchmarks, 25% each):</p>
 
           <ul class="benchmark-list">
             <li>
-              <a href="neuromyths.html">Brain Science (25%)</a>
+              <a href="neuromyths.html">Educational Neuroscience (25%)</a>
               <p class="description">Can AI separate myths from facts about how people learn? 15 widely-believed myths + 17 verified facts = 32 items.</p>
             </li>
             <li>
@@ -52,17 +58,45 @@
               <p class="description">Can AI diagnose why good teaching strategies sometimes fail? 12 real-world scenarios scored 0&ndash;3 by an expert judge.</p>
             </li>
             <li>
-              <a href="pedagogy.html">Teaching Knowledge (50%)</a>
+              <a href="pedagogy.html">Pedagogical Knowledge (25%)</a>
               <p class="description">Does AI know what certified teachers are expected to know? 1,143 items from teacher certification assessments: general pedagogy (920 items) and inclusive education (223 items).</p>
+            </li>
+            <li>
+              <a href="acara.html">Student Work Judgement / ACARA (25%)</a>
+              <p class="description">Can AI accurately compare student work against curriculum standards? 79 verified pairs, scored for accuracy and consistency. 12 models evaluated.</p>
             </li>
           </ul>
 
-          <p><strong>Reported separately:</strong></p>
-          <ul class="benchmark-list">
-            <li>
-              <a href="acara.html">Student Work Judgement (ACARA)</a>
-              <p class="description">Can AI accurately compare student work against curriculum standards? 79 verified pairs, scored for accuracy and consistency. 12 models evaluated.</p>
-            </li>
+          <p><strong>Knowledge Composite</strong> (21 models with three knowledge benchmarks):</p>
+          <p>Educational Neuroscience (25%) + Classroom Reasoning (25%) + Pedagogical Knowledge (50%). Used for models without ACARA data.</p>
+
+          <h2>Validation protocol</h2>
+          <p>Each benchmark passes through a structured validation pipeline before results are reported:</p>
+
+          <div class="mermaid" style="margin: 2rem 0; text-align: center;">
+graph LR
+    A[Item Preparation] --> B[Model Administration]
+    B --> C[Response Collection]
+    C --> D[Scoring]
+    D --> E[Tier 1: Baseline Reliability]
+    E --> F[Tier 2: Robustness Probes]
+    F --> G[Tier 3: Judge Validation]
+    G --> H[Composite Calculation]
+
+    style A fill:#EBF4FF,stroke:#3B6B9A
+    style B fill:#EBF4FF,stroke:#3B6B9A
+    style C fill:#EBF4FF,stroke:#3B6B9A
+    style D fill:#EBF4FF,stroke:#3B6B9A
+    style E fill:#FFF3E0,stroke:#D97706
+    style F fill:#FFF3E0,stroke:#D97706
+    style G fill:#FFF3E0,stroke:#D97706
+    style H fill:#E8F5E9,stroke:#2F855A
+          </div>
+
+          <ul>
+            <li><strong>Tier 1 &mdash; Baseline Reliability:</strong> Each model is run 5 times at T=0 to establish stable scores. Reported scores are means across iterations.</li>
+            <li><strong>Tier 2 &mdash; Robustness Probes:</strong> Temperature variation (T=0, 0.5, 1.0), prompt sensitivity (4 framings), and confidence calibration probes.</li>
+            <li><strong>Tier 3 &mdash; Judge Validation:</strong> For scenario scoring, a sample of LLM-judge scores is manually verified against the rubric.</li>
           </ul>
 
           <h2>Evaluation dimensions</h2>
@@ -83,7 +117,7 @@
             </li>
             <li>
               <a href="dimensions.html#efficiency">Token Efficiency</a>
-              <p class="description">Performance relative to reasoning length.</p>
+              <p class="description">Performance relative to reasoning length and cost.</p>
             </li>
           </ul>
 
@@ -91,12 +125,12 @@
           <ul class="benchmark-list">
             <li>
               <a href="scoring.html">Educational Alignment Index (EAI)</a>
-              <p class="description">How we combine benchmark scores and evaluation dimensions into a single composite metric.</p>
+              <p class="description">How we combine benchmark scores and evaluation dimensions into a single composite metric. Now uses a two-tier approach for models with and without ACARA data.</p>
             </li>
           </ul>
 
           <h2>Models evaluated</h2>
-          <p>21 models from three providers have complete composite scores. The ACARA benchmark additionally evaluates models from Meta (Llama 3.3 70B) and DeepSeek (V3.2).</p>
+          <p>21 models from three providers have complete knowledge composite scores. 12 models (including 4 ACARA-only) were evaluated on student work judgement. 8 models have all four benchmarks for the full composite.</p>
 
           <div class="grid grid-3 mt-3">
             <div class="card">
@@ -143,7 +177,8 @@
             <li><a href="../about.html">About</a></li>
             <li><a href="../methodology/">Methodology</a></li>
             <li><a href="../results.html">Results</a></li>
-            <li><a href="../data-access.html">Data Access</a></li>
+            <li><a href="../benchmark-items.html">Benchmark Items</a></li>
+            <li><a href="../data-access.html">Data</a></li>
           </ul>
         </div>
         <div class="footer-links">

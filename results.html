@@ -4,11 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Full Results - AlignED</title>
-  <meta name="description" content="Complete evaluation results for 21 AI models tested on AlignED v2 benchmarks, plus ACARA comparative judgement.">
+  <meta name="description" content="Complete evaluation results for 21 AI models tested on AlignED v2 benchmarks, including two-tier composite scoring and ACARA student work judgement.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- Date adapter for timeline chart -->
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>
   <style>
     :root {
       --primary: #3B6B9A;
@@ -129,6 +131,16 @@
       border: 1px solid var(--border);
     }
 
+    /* Note callout */
+    .note {
+      background: #EBF4FF;
+      border: 1px solid #BEE3F8;
+      border-radius: 6px;
+      padding: 1rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .note strong { color: var(--primary); }
+
     /* Footer */
     footer {
       background: var(--dark-header);
@@ -170,6 +182,7 @@
         <a href="about.html">About</a>
         <a href="methodology/">Methodology</a>
         <a href="results.html" class="active">Results</a>
+        <a href="benchmark-items.html">Benchmark Items</a>
         <a href="data-access.html">Data</a>
         <a href="contact.html">Contact</a>
       </div>
@@ -180,7 +193,7 @@
   <div class="page-header">
     <div class="container">
       <h1>Full Evaluation Results</h1>
-      <p>AlignED v2 tested 21 models across three areas of educational knowledge. Here are the full results, with key patterns highlighted.</p>
+      <p>AlignED v2 tested 21 models across four areas of educational knowledge. Results are shown in two tiers: a full composite (8 models with all four benchmarks) and a knowledge composite (all 21 models).</p>
     </div>
   </div>
 
@@ -212,30 +225,46 @@
 
   <!-- Charts -->
   <div class="container">
-    <!-- Overall Ranking (Composite) -->
+
+    <!-- Two-Tier Composite Explanation -->
     <section class="chart-section">
       <div class="chart-header">
         <h2 class="chart-title">How do models rank overall?</h2>
-        <p class="chart-subtitle">The composite score is a weighted combination of three knowledge areas: brain science (25%), classroom reasoning (25%), and teaching knowledge (50%).</p>
+        <p class="chart-subtitle">AlignED uses a two-tier composite. The <strong>full composite</strong> (8 models) weights all four benchmarks equally: educational neuroscience (25%), classroom reasoning (25%), pedagogical knowledge (25%), and student work judgement (25%). The <strong>knowledge composite</strong> (21 models) uses three benchmarks: educational neuroscience (25%), classroom reasoning (25%), and pedagogical knowledge (50%).</p>
       </div>
+
+      <div class="note" style="margin-bottom: 1.5rem;">
+        <p><strong>Why two tiers?</strong> Only 8 of the 21 models were evaluated on the ACARA student work judgement benchmark. Rather than exclude 13 models from the ranking, we report both composites. Notable: Claude 4.5 Opus (Thinking) &mdash; ranked #2 on the knowledge composite &mdash; has no ACARA data, so it does not appear in the full composite.</p>
+      </div>
+
+      <!-- Full Composite (8 models) -->
+      <p style="font-weight: 600; margin-bottom: 0.5rem;">Full Composite (8 models &mdash; all four benchmarks, 25% each)</p>
+      <div class="chart-container" style="height: 280px;">
+        <canvas id="fullCompositeChart"></canvas>
+      </div>
+
+      <!-- Knowledge Composite (21 models) -->
+      <p style="font-weight: 600; margin-top: 1.5rem; margin-bottom: 0.5rem;">Knowledge Composite (21 models &mdash; three knowledge benchmarks)</p>
       <div class="chart-container">
         <canvas id="eaiChart"></canvas>
       </div>
+
       <div style="margin-top: 1rem; font-size: 0.9rem; color: var(--text);">
         <strong>Key observations:</strong>
         <ul style="margin-top: 0.5rem; padding-left: 1.25rem; color: var(--text-muted);">
-          <li>The top 3 models (GPT-5, Claude 4.5 Opus Thinking, o3) are within 1 point of each other.</li>
-          <li>There is a 31-point gap between the highest and lowest scoring models.</li>
-          <li>Both OpenAI and Anthropic models appear in the top 5.</li>
+          <li>GPT-5 leads both composites (90.8% full, 91.7% knowledge).</li>
+          <li>There is a 31-point gap between the highest and lowest scoring models on the knowledge composite.</li>
+          <li>Both OpenAI and Anthropic models appear in the top 5 of each tier.</li>
+          <li>Adding ACARA to the composite changes some rankings: Claude 4 Sonnet rises from #13 to #5 on the full composite.</li>
         </ul>
       </div>
     </section>
 
-    <!-- Brain Science (Neuromyths) -->
+    <!-- Educational Neuroscience (Neuromyths) -->
     <section class="chart-section">
       <div class="chart-header">
-        <h2 class="chart-title">Can AI separate brain science from brain myths?</h2>
-        <p class="chart-subtitle">32 items — 15 widely-believed myths about the brain and learning, plus 17 verified neuroscience facts. Models must correctly identify which is which. The average teacher gets about 50% right.</p>
+        <h2 class="chart-title">Can AI separate educational neuroscience from myths?</h2>
+        <p class="chart-subtitle">32 items &mdash; 15 widely-believed myths about the brain and learning, plus 17 verified neuroscience facts. Models must correctly identify which is which. The average teacher gets about 50% right.</p>
       </div>
       <div class="chart-container">
         <canvas id="neuromythsChart"></canvas>
@@ -244,7 +273,7 @@
         <strong>Key observations:</strong>
         <ul style="margin-top: 0.5rem; padding-left: 1.25rem; color: var(--text-muted);">
           <li>GPT-5 and Claude 4.5 Opus (Thinking) lead at 92.9%.</li>
-          <li>Even the lowest-scoring model (GPT-4o Mini, 54.5%) barely beats the human teacher baseline of ~50%.</li>
+          <li>Even the lowest-scoring model (GPT-4o Mini, 54.5%) beats the human teacher baseline of ~50%.</li>
           <li>Several mid-tier models score above 85%, suggesting factual neuroscience knowledge is relatively strong across providers.</li>
         </ul>
       </div>
@@ -254,7 +283,7 @@
     <section class="chart-section">
       <div class="chart-header">
         <h2 class="chart-title">Can AI diagnose why teaching strategies fail?</h2>
-        <p class="chart-subtitle">12 realistic situations where an evidence-based teaching strategy isn't working. The model must explain why — not just recite the strategy. Each response is scored 0&ndash;3 by an expert judge.</p>
+        <p class="chart-subtitle">12 realistic situations where an evidence-based teaching strategy isn't working. The model must explain why &mdash; not just recite the strategy. Each response is scored 0&ndash;3 by an expert judge.</p>
       </div>
       <div class="chart-container">
         <canvas id="scenariosChart"></canvas>
@@ -264,21 +293,21 @@
         <ul style="margin-top: 0.5rem; padding-left: 1.25rem; color: var(--text-muted);">
           <li>Two models achieve perfect scores: GPT-5 and o3.</li>
           <li>Reasoning-focused models (o3, thinking variants) do especially well on this diagnostic task.</li>
-          <li>This benchmark has the biggest spread of any — from 100% down to 55.6% — making it the most discriminating test.</li>
+          <li>This benchmark has the biggest spread of any &mdash; from 100% down to 55.6% &mdash; making it the most discriminating test.</li>
         </ul>
       </div>
     </section>
 
-    <!-- Teaching Knowledge parent heading -->
+    <!-- Pedagogical Knowledge parent heading -->
     <div style="padding: 2rem 0 0;">
       <h2 style="font-size: 1.4rem; font-weight: 700; color: var(--text); margin-bottom: 0.25rem;">Does AI know what certified teachers know?</h2>
-      <p style="font-size: 0.95rem; color: var(--text-muted); max-width: 800px;">1,143 items from real teacher certification assessments, split into general pedagogy (920 items) and inclusive education (223 items), shown separately below.</p>
+      <p style="font-size: 0.95rem; color: var(--text-muted); max-width: 800px;">1,143 items from real teacher certification assessments, split into general pedagogical knowledge (920 items) and inclusive education (223 items), shown separately below.</p>
     </div>
 
-    <!-- CDPK (General Teaching Knowledge) -->
+    <!-- CDPK (General Pedagogical Knowledge) -->
     <section class="chart-section">
       <div class="chart-header">
-        <h2 class="chart-title">General Teaching Knowledge</h2>
+        <h2 class="chart-title">General Pedagogical Knowledge</h2>
         <p class="chart-subtitle">920 items covering cross-domain pedagogical knowledge from teacher certification exams</p>
       </div>
       <div class="chart-container">
@@ -287,9 +316,9 @@
       <div style="margin-top: 1rem; font-size: 0.9rem; color: var(--text);">
         <strong>Key observations:</strong>
         <ul style="margin-top: 0.5rem; padding-left: 1.25rem; color: var(--text-muted);">
-          <li>Gemini 2.5 Pro leads at 89.3% despite ranking #14 overall — the strongest pedagogical knowledge of any model.</li>
+          <li>Gemini 2.5 Pro leads at 89.3% despite ranking #14 overall &mdash; the strongest pedagogical knowledge of any model.</li>
           <li>Anthropic models cluster in the 78&ndash;89% range, showing consistent but varied performance.</li>
-          <li>The gap between top and bottom is smaller here than on other benchmarks, suggesting general teaching knowledge is more evenly distributed.</li>
+          <li>The gap between top and bottom is smaller here than on other benchmarks, suggesting general pedagogical knowledge is more evenly distributed.</li>
         </ul>
       </div>
     </section>
@@ -307,23 +336,22 @@
         <strong>Key observations:</strong>
         <ul style="margin-top: 0.5rem; padding-left: 1.25rem; color: var(--text-muted);">
           <li>Claude 4.5 Opus leads at 85.7%, closely followed by Gemini 2.5 Pro at 85.2%.</li>
-          <li>Models generally score lower on inclusive education than general pedagogy — a potential gap in training data.</li>
-          <li>The smallest models (Claude 3 Haiku, GPT-4o Mini) fall below 70%, a sharper drop-off than on general teaching knowledge.</li>
+          <li>Models generally score lower on inclusive education than general pedagogy &mdash; a potential gap in training data.</li>
+          <li>The smallest models (Claude 3 Haiku, GPT-4o Mini) fall below 70%, a sharper drop-off than on general pedagogical knowledge.</li>
         </ul>
       </div>
     </section>
 
-    <!-- ACARA separator -->
+    <!-- Student Work Judgement (ACARA) -->
     <div style="padding: 2.5rem 0 0.5rem; border-top: 3px solid var(--primary); margin-top: 1rem;">
-      <h2 style="font-size: 1.4rem; font-weight: 700; color: var(--text); margin-bottom: 0.25rem;">Applied Assessment: Can AI judge student work?</h2>
-      <p style="font-size: 0.95rem; color: var(--text-muted); max-width: 800px;">The following evaluation is reported separately from the composite score. It tests a different capability: applied assessment judgement rather than knowledge.</p>
+      <h2 style="font-size: 1.4rem; font-weight: 700; color: var(--text); margin-bottom: 0.25rem;">Student Work Judgement</h2>
+      <p style="font-size: 0.95rem; color: var(--text-muted); max-width: 800px;">ACARA comparative judgement: can AI accurately compare student work against curriculum standards? This benchmark is now part of the full composite for the 8 models with data. 4 additional ACARA-only models (Llama 3.3, Gemini 3 Flash, Gemini 2.0 Flash, DeepSeek V3.2) appear here but not in either composite.</p>
     </div>
 
-    <!-- ACARA -->
     <section class="chart-section">
       <div class="chart-header">
-        <h2 class="chart-title">Student Work Judgement</h2>
-        <p class="chart-subtitle">79 pairs of Australian student work samples. The model picks which sample better meets the curriculum standard. Tested in both orders to check consistency. 12 models evaluated. <a href="methodology/acara.html">View methodology &rarr;</a></p>
+        <h2 class="chart-title">Accuracy and Consistency</h2>
+        <p class="chart-subtitle">79 pairs of Australian student work samples. Tested in both orders to check consistency. 12 models evaluated. <a href="methodology/acara.html">View methodology &rarr;</a></p>
       </div>
       <div class="chart-container" style="height: 380px;">
         <canvas id="acaraChart"></canvas>
@@ -331,9 +359,53 @@
       <div style="margin-top: 1rem; font-size: 0.9rem; color: var(--text);">
         <strong>Key observations:</strong>
         <ul style="margin-top: 0.5rem; padding-left: 1.25rem; color: var(--text-muted);">
-          <li>No clear correlation with composite ranking — Claude 4.5 Haiku (#15 on composite) is #3 on ACARA accuracy.</li>
+          <li>No clear correlation with the knowledge composite &mdash; Claude 4.5 Haiku (#15 on knowledge) is #3 on ACARA accuracy.</li>
           <li>GPT-5 has the highest consistency (94.1%) but not the highest accuracy, suggesting strong position-invariance.</li>
           <li>Gemini 3 Flash shows a big accuracy-consistency gap (81% vs 69%), suggesting position bias in its judgements.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Cost and Token Usage -->
+    <div style="padding: 2.5rem 0 0.5rem; border-top: 3px solid var(--primary); margin-top: 1rem;">
+      <h2 style="font-size: 1.4rem; font-weight: 700; color: var(--text); margin-bottom: 0.25rem;">Cost and Efficiency</h2>
+      <p style="font-size: 0.95rem; color: var(--text-muted); max-width: 800px;">How many tokens does each model use to complete the survey and scenarios? Thinking models generate internal reasoning tokens that increase cost substantially, even when the final answer is the same length.</p>
+    </div>
+
+    <section class="chart-section">
+      <div class="chart-header">
+        <h2 class="chart-title">Token Usage: Survey + Scenarios</h2>
+        <p class="chart-subtitle">Total tokens (prompt + completion + reasoning) for 32 educational neuroscience items and 12 classroom scenarios. 18 models with available data.</p>
+      </div>
+      <div class="chart-container" style="height: 450px;">
+        <canvas id="tokenChart"></canvas>
+      </div>
+      <div style="margin-top: 1rem; font-size: 0.9rem; color: var(--text);">
+        <strong>Key observations:</strong>
+        <ul style="margin-top: 0.5rem; padding-left: 1.25rem; color: var(--text-muted);">
+          <li>Thinking models average ~20,000 tokens vs ~6,000 for standard models &mdash; roughly 3&times; more.</li>
+          <li>Gemini 2.5 Pro uses the most tokens (38,069) due to extensive internal reasoning, despite moderate accuracy.</li>
+          <li>Standard Claude and GPT-4o models cluster tightly around 5,300&ndash;6,700 tokens.</li>
+          <li>Token counts here cover only survey + scenarios; the full evaluation (including 1,143 pedagogy items) costs significantly more.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Model Timeline -->
+    <section class="chart-section">
+      <div class="chart-header">
+        <h2 class="chart-title">Model Release Timeline</h2>
+        <p class="chart-subtitle">When each model was released and how it scored. Later models tend to score higher, but the relationship is not linear &mdash; architecture and training choices matter as much as release date.</p>
+      </div>
+      <div class="chart-container" style="height: 380px;">
+        <canvas id="timelineChart"></canvas>
+      </div>
+      <div style="margin-top: 1rem; font-size: 0.9rem; color: var(--text);">
+        <strong>Key observations:</strong>
+        <ul style="margin-top: 0.5rem; padding-left: 1.25rem; color: var(--text-muted);">
+          <li>Models from late 2025 generally outperform those from early 2024, but there is wide variation within each period.</li>
+          <li>Claude 3 Haiku (March 2024) scores 60.3% while Claude 4.5 Opus (November 2025) scores 89.8% &mdash; a 29.5 point improvement in 20 months from the same provider.</li>
+          <li>GPT-4 Turbo (November 2023) and GPT-4o (May 2024) score similarly (~73%), while GPT-5 (August 2025) jumps to 91.7%.</li>
         </ul>
       </div>
     </section>
@@ -344,9 +416,11 @@
       <ul style="font-size: 0.95rem; color: var(--text); line-height: 1.8; padding-left: 1.25rem;">
         <li>The best models exceed 90%, well above what human teachers typically achieve on the same types of assessments.</li>
         <li>Reasoning-focused models (o3, thinking variants) excel at diagnostic scenarios but don't consistently lead on factual knowledge.</li>
-        <li>Model size matters — smaller and cheaper models consistently score lowest across all benchmarks.</li>
-        <li>Pedagogical knowledge varies independently of other skills — Gemini 2.5 Pro is #1 on teaching knowledge but #14 overall.</li>
-        <li>Applied assessment skill (ACARA) doesn't predict knowledge scores — it's a different capability with a different ranking.</li>
+        <li>Model size matters &mdash; smaller and cheaper models consistently score lowest across all benchmarks.</li>
+        <li>Pedagogical knowledge varies independently of other skills &mdash; Gemini 2.5 Pro is #1 on pedagogical knowledge but #14 overall.</li>
+        <li>Student work judgement is a different capability: ACARA rankings don't predict knowledge composite rankings.</li>
+        <li>The full composite (with ACARA) changes some rankings meaningfully &mdash; Claude 4 Sonnet jumps from #13 to #5 when applied assessment is included.</li>
+        <li>Thinking models use 3&times; more tokens but don't always score higher, raising questions about cost-effectiveness for educational applications.</li>
       </ul>
     </section>
   </div>

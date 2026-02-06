@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Data Access - AlignED</title>
-  <meta name="description" content="Access AlignED benchmark data, including sample datasets and full results via OSF.">
+  <meta name="description" content="Access AlignED benchmark data hosted on the Open Science Framework (OSF).">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -20,7 +20,8 @@
         <a href="about.html">About</a>
         <a href="methodology/">Methodology</a>
         <a href="results.html">Results</a>
-        <a href="data-access.html" class="active">Data Access</a>
+        <a href="benchmark-items.html">Benchmark Items</a>
+        <a href="data-access.html" class="active">Data</a>
         <a href="contact.html">Contact</a>
       </nav>
     </div>
@@ -30,7 +31,7 @@
     <div class="page-header">
       <div class="container">
         <h1>Data Access</h1>
-        <p class="subtitle">Download benchmark data and results</p>
+        <p class="subtitle">All AlignED data is hosted on the Open Science Framework</p>
       </div>
     </div>
 
@@ -38,55 +39,24 @@
       <div class="container">
         <div class="prose">
           <h2>Available Data</h2>
-          <p>AlignED data is available at multiple levels to support different use cases:</p>
+          <p>All AlignED benchmark data is hosted on the <strong>Open Science Framework (OSF)</strong>. To request access, contact us at the address below with your intended use case.</p>
 
-          <div class="grid grid-2 mt-3 mb-4">
-            <div class="card">
-              <h3>Composite Scores</h3>
-              <p>Rankings for all 21 models across brain science, classroom reasoning, and teaching knowledge. Suitable for quick comparisons and reporting.</p>
-              <a href="data/composite_scores.json" class="btn btn-secondary mt-2" download>Download JSON</a>
-            </div>
-            <div class="card">
-              <h3>ACARA Scores</h3>
-              <p>Accuracy and consistency scores for 12 models on student work judgement.</p>
-              <a href="data/acara_scores.json" class="btn btn-secondary mt-2" download>Download JSON</a>
-            </div>
-          </div>
-
-          <h2>Data Contents</h2>
-
-          <h3>Summary Data (Direct Download)</h3>
-          <p>Two summary datasets are available:</p>
+          <p>The dataset includes:</p>
           <ul>
-            <li><strong>Composite scores:</strong> Overall ranking, brain science, classroom reasoning, and teaching knowledge (general + inclusive) for 21 models</li>
-            <li><strong>ACARA scores:</strong> Accuracy and consistency on student work judgement for 12 models</li>
-          </ul>
-
-          <h3>Full Dataset (Via OSF)</h3>
-          <p>The complete dataset includes:</p>
-          <ul>
+            <li>Composite scores and individual benchmark scores for all 21 models</li>
+            <li>ACARA accuracy and consistency scores for 12 models</li>
             <li>Item-level responses for all benchmarks</li>
             <li>Raw model outputs and reasoning</li>
-            <li>Judge scoring with explanations (for scenarios)</li>
+            <li>Judge scoring with explanations (for classroom scenarios)</li>
             <li>Temperature robustness data (T=0, 0.5, 1.0)</li>
             <li>Prompt sensitivity results (4 framings)</li>
             <li>Confidence probe responses</li>
             <li>Token usage statistics</li>
           </ul>
 
-          <h2 id="full-access">Requesting Full Dataset Access</h2>
-          <p>The full dataset is hosted on the Open Science Framework (OSF). To request access:</p>
-
-          <ol>
-            <li>Email your request to the address below</li>
-            <li>Include your intended use (research, policy analysis, development, etc.)</li>
-            <li>Provide your institutional affiliation (if applicable)</li>
-          </ol>
-
-          <p>Access is typically granted within 2-3 business days for legitimate research and policy purposes.</p>
-
           <div class="note">
             <p><strong>Contact for data access:</strong> aligned.benchmark [at] gmail.com</p>
+            <p>Include your intended use (research, policy analysis, development, etc.) and institutional affiliation if applicable. Access is typically granted within 2&ndash;3 business days.</p>
           </div>
 
           <h2>Citation</h2>
@@ -99,39 +69,12 @@ https://trgallagher-research.github.io/AlignED-site/
 
           <p>For academic publications, a formal citation will be available once the accompanying paper is published.</p>
 
-          <h2>Data Format</h2>
-
-          <h3>JSON Structure</h3>
-          <p>Composite scores follow this structure:</p>
-
-          <div class="citation">
-{
-  "generated": "2026-02-06",
-  "version": "v2",
-  "description": "AlignED v2 composite scores...",
-  "scoring": { ... },
-  "results": [
-    {
-      "model": "GPT-5",
-      "provider": "OpenAI",
-      "neuromyths_pct": 92.9,
-      "scenarios_pct": 100.0,
-      "pedagogy_pct": 86.9,
-      "pedagogy_cdpk": 88.0,
-      "pedagogy_send": 82.1,
-      "composite": 91.7
-    },
-    ...
-  ]
-}
-          </div>
-
           <h2>Terms of Use</h2>
           <p>AlignED data is provided for research, policy analysis, and educational purposes. When using the data:</p>
           <ul>
             <li>Cite AlignED appropriately</li>
             <li>Do not misrepresent scores as "certification" or "approval"</li>
-            <li>Acknowledge limitations noted in methodology</li>
+            <li>Acknowledge limitations noted in <a href="about.html#limitations">our methodology</a></li>
             <li>Contact us if you plan to redistribute modified versions</li>
           </ul>
 
@@ -139,9 +82,8 @@ https://trgallagher-research.github.io/AlignED-site/
           <p>We plan to update benchmark results as new models are released. Watch the <a href="https://github.com/trgallagher-research/AlignED-site" target="_blank">GitHub repository</a> to be notified of updates.</p>
 
           <div class="btn-group mt-4">
-            <a href="data/composite_scores.json" class="btn btn-primary" download>Download Composite Scores</a>
-            <a href="data/acara_scores.json" class="btn btn-secondary" download>Download ACARA Scores</a>
-            <a href="contact.html" class="btn btn-secondary">Contact Us</a>
+            <a href="contact.html" class="btn btn-primary">Contact Us</a>
+            <a href="results.html" class="btn btn-secondary">View Results</a>
           </div>
         </div>
       </div>
@@ -161,7 +103,8 @@ https://trgallagher-research.github.io/AlignED-site/
             <li><a href="about.html">About</a></li>
             <li><a href="methodology/">Methodology</a></li>
             <li><a href="results.html">Results</a></li>
-            <li><a href="data-access.html">Data Access</a></li>
+            <li><a href="benchmark-items.html">Benchmark Items</a></li>
+            <li><a href="data-access.html">Data</a></li>
           </ul>
         </div>
         <div class="footer-links">

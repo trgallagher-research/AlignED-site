@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Benchmark Items - AlignED</title>
+  <meta name="description" content="Full list of AlignED benchmark items: 32 educational neuroscience items, 12 classroom scenarios, pedagogical knowledge, and student work judgement.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header>
+    <div class="container">
+      <a href="index.html" class="logo">AlignED</a>
+      <button class="nav-toggle" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <nav>
+        <a href="about.html">About</a>
+        <a href="methodology/">Methodology</a>
+        <a href="results.html">Results</a>
+        <a href="benchmark-items.html" class="active">Benchmark Items</a>
+        <a href="data-access.html">Data</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="page-header">
+      <div class="container">
+        <h1>Benchmark Items</h1>
+        <p class="subtitle">What we test and why &mdash; with the full items, scoring, and stories behind the data</p>
+      </div>
+    </div>
+
+    <section class="content-section">
+      <div class="container">
+        <div class="prose">
+
+          <p>AlignED evaluates AI across four benchmark areas. This page shows the actual items used, explains the scoring, and highlights patterns worth knowing about.</p>
+
+          <!-- ============================================ -->
+          <!-- EDUCATIONAL NEUROSCIENCE SURVEY (32 items)   -->
+          <!-- ============================================ -->
+
+          <h2 id="neuroscience">Educational Neuroscience Survey</h2>
+          <p>32 true/false statements about the brain and learning, adapted from <a href="https://doi.org/10.3389/fpsyg.2012.00429" target="_blank">Dekker et al. (2012)</a>. 15 are widely-believed myths (correct answer: False). 17 are verified neuroscience facts or established findings (correct answer: True, with two exceptions). The average teacher gets about 50% right.</p>
+
+          <p>Eight items marked with <strong>*</strong> are high-prevalence myths that also receive a confidence probe &mdash; after answering, the model is asked how confident it is. Every model tested selected "Very Confident" or "Somewhat Confident" on every item. No model ever expressed uncertainty.</p>
+
+          <h3>Neuromyths (15 items &mdash; correct answer: False)</h3>
+
+          <table>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Statement</th>
+                <th>Teacher Belief Rate</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Q02</td><td>Children must acquire their native language before a second language is learned. If they do not do so neither language will be fully acquired.</td><td></td></tr>
+              <tr><td>Q04</td><td>If pupils do not drink sufficient amounts of water (= 6-8 glasses a day) their brains shrink.</td><td></td></tr>
+              <tr><td>Q05*</td><td>It has been scientifically proven that fatty acid supplements (omega-3 and omega-6) have a positive effect on academic achievement.</td><td>54&ndash;69%</td></tr>
+              <tr><td>Q07*</td><td>We only use 10% of our brain.</td><td>46&ndash;48%</td></tr>
+              <tr><td>Q09*</td><td>Differences in hemispheric dominance (left brain, right brain) can help explain individual differences amongst learners.</td><td>86&ndash;91%</td></tr>
+              <tr><td>Q12</td><td>There are critical periods in childhood after which certain things can no longer be learned.</td><td></td></tr>
+              <tr><td>Q15*</td><td>Individuals learn better when they receive information in their preferred learning style (e.g., auditory, visual, kinesthetic).</td><td>93&ndash;96%</td></tr>
+              <tr><td>Q19</td><td>Mental capacity is hereditary and cannot be changed by the environment or experience.</td><td></td></tr>
+              <tr><td>Q21*</td><td>Environments that are rich in stimulus improve the brains of pre-school children.</td><td>56&ndash;95%</td></tr>
+              <tr><td>Q22*</td><td>Children are less attentive after consuming sugary drinks and/or snacks.</td><td>55&ndash;57%</td></tr>
+              <tr><td>Q24</td><td>Regular drinking of caffeinated drinks reduces alertness.</td><td></td></tr>
+              <tr><td>Q25*</td><td>Exercises that rehearse co-ordination of motor-perception skills can improve literacy skills.</td><td>63&ndash;78%</td></tr>
+              <tr><td>Q28</td><td>Learning problems associated with developmental differences in brain function cannot be remediated by education.</td><td></td></tr>
+              <tr><td>Q30*</td><td>Short bouts of co-ordination exercises can improve integration of left and right hemispheric brain function.</td><td>82&ndash;88%</td></tr>
+              <tr><td>Q32</td><td>When we sleep, the brain shuts down.</td><td></td></tr>
+            </tbody>
+          </table>
+
+          <h3>General Assertions (17 items &mdash; correct answer: True, except Q10 and Q11)</h3>
+
+          <table>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Statement</th>
+                <th>Expected</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Q01</td><td>We use our brains 24 hours a day.</td><td>True</td></tr>
+              <tr><td>Q03</td><td>Boys have bigger brains than girls.</td><td>True</td></tr>
+              <tr><td>Q06</td><td>When a brain region is damaged other parts of the brain can take up its function.</td><td>True</td></tr>
+              <tr><td>Q08</td><td>The left and right hemisphere of the brain always work together.</td><td>True</td></tr>
+              <tr><td>Q10</td><td>The brains of boys and girls develop at the same rate.</td><td>False</td></tr>
+              <tr><td>Q11</td><td>Brain development has finished by the time children reach secondary school.</td><td>False</td></tr>
+              <tr><td>Q13</td><td>Information is stored in the brain in a network of cells distributed throughout the brain.</td><td>True</td></tr>
+              <tr><td>Q14</td><td>Learning is not due to the addition of new cells to the brain.</td><td>True</td></tr>
+              <tr><td>Q16</td><td>Learning occurs through modification of the brains' neural connections.</td><td>True</td></tr>
+              <tr><td>Q17</td><td>Academic achievement can be affected by skipping breakfast.</td><td>True</td></tr>
+              <tr><td>Q18</td><td>Normal development of the human brain involves the birth and death of brain cells.</td><td>True</td></tr>
+              <tr><td>Q20</td><td>Vigorous exercise can improve mental function.</td><td>True</td></tr>
+              <tr><td>Q23</td><td>Circadian rhythms ('body-clock') shift during adolescence, causing pupils to be tired during the first lessons of the school day.</td><td>True</td></tr>
+              <tr><td>Q26</td><td>Extended rehearsal of some mental processes can change the shape and structure of some parts of the brain.</td><td>True</td></tr>
+              <tr><td>Q27</td><td>Individual learners show preferences for the mode in which they receive information (e.g., visual, auditory, kinesthetic).</td><td>True</td></tr>
+              <tr><td>Q29</td><td>Production of new connections in the brain can continue into old age.</td><td>True</td></tr>
+              <tr><td>Q31</td><td>There are sensitive periods in childhood when it's easier to learn things.</td><td>True</td></tr>
+            </tbody>
+          </table>
+
+          <h3>Prompt Variants</h3>
+          <p>Each item is tested in four framings to measure prompt sensitivity. Here is Q01 ("We use our brains 24 hours a day") in all four:</p>
+
+          <div class="citation">
+<strong>Standard:</strong> "We use our brains 24 hours a day."
+
+<strong>Interrogative:</strong> "Do we use our brains 24 hours a day?"
+
+<strong>Embedded:</strong> "A teacher claims that we use our brains 24 hours a day. Is this claim correct or incorrect?"
+
+<strong>Adversarial:</strong> "It's commonly believed that we only use our brains when awake and actively thinking. Is the statement 'We use our brains 24 hours a day' correct or incorrect?"
+          </div>
+
+          <h3>Stories from the data</h3>
+
+          <div class="note">
+            <p><strong>Q21: The item every model gets wrong.</strong> "Environments that are rich in stimulus improve the brains of pre-school children" sounds obviously true &mdash; and 56&ndash;95% of teachers believe it. But the research evidence does not support this broad claim for human children (the original finding was in rats raised in deprived conditions). Every model tested answered this item incorrectly, with high confidence. It is the single most resilient neuromyth in our benchmark.</p>
+          </div>
+
+          <div class="note">
+            <p><strong>Q15 vs Q27: The learning styles trap.</strong> Q15 ("Individuals learn better when they receive information in their preferred learning style") is false &mdash; it is the most widely-believed myth in education. But Q27 ("Individual learners show preferences for the mode in which they receive information") is true &mdash; people do have preferences, those preferences just don't improve learning outcomes. Many models confuse these two statements, getting Q15 right but Q27 wrong, or vice versa.</p>
+          </div>
+
+          <!-- ============================================ -->
+          <!-- CLASSROOM REASONING SCENARIOS (12 items)     -->
+          <!-- ============================================ -->
+
+          <h2 id="scenarios">Classroom Reasoning Scenarios</h2>
+          <p>12 realistic situations where an evidence-based teaching strategy isn't working. Models must explain <em>why</em> the strategy is failing &mdash; not just recite what the strategy is. Each response is scored 0&ndash;3 by an LLM judge (Claude 4.5 Sonnet).</p>
+
+          <h3>All 12 Scenarios</h3>
+
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Topic</th>
+                <th>Implementation Error</th>
+                <th>Key Mechanism</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>S01</td><td>Retrieval Practice</td><td>Testing before encoding; no feedback</td><td>Retrieval must follow encoding; error correction is essential</td></tr>
+              <tr><td>S02</td><td>Interleaving</td><td>Switching unrelated topics without connection</td><td>Interleaving works between related concepts, not random switching</td></tr>
+              <tr><td>S03</td><td>Worked Examples</td><td>Examples without fading or practice</td><td>Must gradually remove scaffolding to build independence</td></tr>
+              <tr><td>S04</td><td>Spaced Practice</td><td>Spacing without initial mastery</td><td>Material must be learned first before spacing is effective</td></tr>
+              <tr><td>S05</td><td>Formative Assessment</td><td>Assessment without responsive instruction</td><td>Assessment data must inform subsequent teaching</td></tr>
+              <tr><td>S06</td><td>Cognitive Load</td><td>Reducing load for experts</td><td>Expertise reversal effect: scaffolding experts is counterproductive</td></tr>
+              <tr><td>S07</td><td>Direct Instruction</td><td>Lecture without active engagement</td><td>Direct instruction includes structured practice, not just telling</td></tr>
+              <tr><td>S08</td><td>Critical Thinking</td><td>Teaching "skills" without domain knowledge</td><td>Critical thinking is domain-dependent, not a transferable skill</td></tr>
+              <tr><td>S09</td><td>Feedback Timing</td><td>Immediate feedback on complex tasks</td><td>Complex tasks benefit from delayed feedback for self-regulation</td></tr>
+              <tr><td>S10</td><td>Scaffolding</td><td>Permanent scaffolds preventing independence</td><td>Scaffolds must be faded as competence grows</td></tr>
+              <tr><td>S11</td><td>Rewards (Overjustification)</td><td>Extrinsic rewards undermining intrinsic motivation</td><td>Overjustification effect: rewards can reduce existing motivation</td></tr>
+              <tr><td>S12</td><td>Personalisation</td><td>Surface personalisation without adaptation</td><td>True personalisation adapts difficulty, not just context</td></tr>
+            </tbody>
+          </table>
+
+          <h3>Example: S01 &mdash; Retrieval Practice</h3>
+
+          <div class="citation">
+A Year 8 science teacher has read about the benefits of retrieval practice for long-term retention. At the start of each lesson, she gives students a quiz on the topic they're about to learn. Students struggle with the questions and often guess. After revealing the answers, she moves directly into teaching the new content.
+
+After several weeks, she notices that students still seem to forget the material quickly. A colleague suggests that retrieval practice "doesn't work for science."
+
+What is actually going wrong with how retrieval practice is being implemented here?
+          </div>
+
+          <h3>Scoring Rubric (0&ndash;3)</h3>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Score</th>
+                <th>Criteria</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>0</strong></td>
+                <td><strong>Misdiagnosis:</strong> Concludes the strategy is fundamentally flawed or suggests abandoning it</td>
+              </tr>
+              <tr>
+                <td><strong>1</strong></td>
+                <td><strong>Generic:</strong> Correct direction but no specific mechanism identified</td>
+              </tr>
+              <tr>
+                <td><strong>2</strong></td>
+                <td><strong>Partial:</strong> Identifies the core issue but misses important nuances</td>
+              </tr>
+              <tr>
+                <td><strong>3</strong></td>
+                <td><strong>Full:</strong> Accurate diagnosis with mechanism and appropriate terminology</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="note">
+            <p><strong>GPT-5 and o3 achieve perfect scores (36/36).</strong> These are the only two models to get every scenario completely right. Diagnostic reasoning about <em>why</em> strategies fail appears to be a strength of frontier reasoning models, while smaller models tend to give generic advice rather than specific diagnoses.</p>
+          </div>
+
+          <!-- ============================================ -->
+          <!-- PEDAGOGICAL KNOWLEDGE (1,143 items)          -->
+          <!-- ============================================ -->
+
+          <h2 id="pedagogy">Pedagogical Knowledge</h2>
+          <p>1,143 multiple-choice items from Chilean national teacher certification examinations, sourced via the <a href="https://huggingface.co/datasets" target="_blank">HuggingFace pedagogy-benchmark dataset</a>. Items are not reproduced in full here (they are an external dataset), but we describe the structure and scope.</p>
+
+          <h3>CDPK: Cross-Domain Pedagogical Knowledge (920 items)</h3>
+          <p>General pedagogical knowledge that applies across subject areas:</p>
+          <ul>
+            <li><strong>Curriculum design and planning</strong> &mdash; how to structure units, align objectives with assessments</li>
+            <li><strong>Assessment and evaluation</strong> &mdash; formative vs summative, rubric design, interpreting results</li>
+            <li><strong>Classroom management</strong> &mdash; establishing expectations, handling disruption, building community</li>
+            <li><strong>Learning theory and development</strong> &mdash; Piaget, Vygotsky, zone of proximal development</li>
+            <li><strong>Instructional strategies</strong> &mdash; differentiation, scaffolding, questioning techniques</li>
+            <li><strong>Professional responsibilities</strong> &mdash; ethics, collaboration, reflective practice</li>
+          </ul>
+
+          <h3>SEND: Special Education Needs and Disability (223 items)</h3>
+          <p>Inclusive education knowledge for supporting diverse learners:</p>
+          <ul>
+            <li><strong>Identification of learning difficulties</strong> &mdash; screening, referral processes</li>
+            <li><strong>Differentiation strategies</strong> &mdash; adapting content, process, and product</li>
+            <li><strong>Accommodations and modifications</strong> &mdash; IEPs, assistive technology</li>
+            <li><strong>Inclusive classroom practices</strong> &mdash; Universal Design for Learning, co-teaching</li>
+            <li><strong>Legal and ethical frameworks</strong> &mdash; rights, mandates, confidentiality</li>
+            <li><strong>Collaboration</strong> &mdash; working with specialists, families, and support staff</li>
+          </ul>
+
+          <p>All items are multiple-choice with four options (A&ndash;D). Scoring is binary: correct (1) or incorrect (0).</p>
+
+          <div class="note">
+            <p><strong>Gemini 2.5 Pro is #1 on pedagogical knowledge but #14 overall.</strong> With 89.3% on CDPK, it outperforms every other model on factual teaching knowledge &mdash; but its weaker scenario reasoning (69.4%) and educational neuroscience (75.9%) pull its composite score down. This shows that factual knowledge alone doesn't capture educational alignment.</p>
+          </div>
+
+          <!-- ============================================ -->
+          <!-- STUDENT WORK JUDGEMENT / ACARA (79 pairs)    -->
+          <!-- ============================================ -->
+
+          <h2 id="acara">Student Work Judgement (ACARA)</h2>
+          <p>79 verified pairs of student work samples from the Australian Curriculum, Assessment and Reporting Authority (ACARA) work sample portfolios. 12 models evaluated (4 ACARA-only models not in the main composite).</p>
+
+          <h3>Task Structure</h3>
+          <p>Each pair presents two student work samples at different achievement levels for the same curriculum area. The model must choose which sample better meets the curriculum standard. Example structure:</p>
+
+          <div class="citation">
+<strong>Subject:</strong> English
+<strong>Year Level:</strong> Year 4
+<strong>Comparison:</strong> Above Standard vs At Standard
+
+<strong>Sample A:</strong> [Student work text]
+<strong>Sample B:</strong> [Student work text]
+
+Which sample better demonstrates achievement of the Year 4 English standard?
+          </div>
+
+          <p>Each pair is tested in both forward (A vs B) and reverse (B vs A) orientations across 3 trials, yielding 237 evaluations per model. This tests for position bias &mdash; does the model prefer whichever sample is listed first?</p>
+
+          <h3>Scoring</h3>
+          <ul>
+            <li><strong>Accuracy:</strong> Percentage of pairs where the model chose the correct (higher-achieving) sample</li>
+            <li><strong>Consistency:</strong> Percentage of pairs where the model gave the same answer in both orientations</li>
+          </ul>
+
+          <p>High accuracy + low consistency suggests the model is guessing correctly some of the time. High consistency + low accuracy would mean systematically wrong. The ideal is high on both.</p>
+
+          <div class="note">
+            <p><strong>ACARA is now part of the full composite score.</strong> For the 8 models with ACARA data, we calculate a full composite: Educational Neuroscience (25%) + Scenarios (25%) + Pedagogy (25%) + ACARA Accuracy (25%). Models without ACARA data are ranked using the knowledge composite only. See <a href="results.html">Results</a> for the two-tier ranking.</p>
+          </div>
+
+          <div class="btn-group mt-4">
+            <a href="methodology/" class="btn btn-primary">View Methodology</a>
+            <a href="results.html" class="btn btn-secondary">View Results</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <a href="index.html" class="logo">AlignED</a>
+          <p>Transparent benchmarks for AI in education</p>
+        </div>
+        <div class="footer-links">
+          <h4>Navigation</h4>
+          <ul>
+            <li><a href="about.html">About</a></li>
+            <li><a href="methodology/">Methodology</a></li>
+            <li><a href="results.html">Results</a></li>
+            <li><a href="benchmark-items.html">Benchmark Items</a></li>
+            <li><a href="data-access.html">Data</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h4>Resources</h4>
+          <ul>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="https://github.com/trgallagher-research/AlignED-site" target="_blank">GitHub</a></li>
+          </ul>
+        </div>
+      </div>
+      <p class="copyright">&copy; 2026 AlignED. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

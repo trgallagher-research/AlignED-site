@@ -1,12 +1,14 @@
 {
   "generated": "2026-02-06",
-  "version": "v2",
-  "description": "AlignED v2 composite scores — 21 models with complete benchmark results",
+  "version": "v2.1",
+  "description": "AlignED v2 composite scores — two-tier system: full composite (8 models with ACARA data) and knowledge composite (21 models)",
   "scoring": {
-    "formula": "Neuromyths (25%) + Scenarios (25%) + Pedagogy (50%)",
+    "full_composite": "Educational Neuroscience (25%) + Scenarios (25%) + Pedagogy (25%) + ACARA Accuracy (25%) — 8 models with all four benchmarks",
+    "knowledge_composite": "Educational Neuroscience (25%) + Scenarios (25%) + Pedagogy (50%) — 21 models with three knowledge benchmarks",
     "neuromyths": "32 Dekker et al. (2012) items, binary correct/incorrect",
     "scenarios": "12 pedagogical vignettes, 0-3 LLM-judge scored, max 36",
-    "pedagogy": "1,143 Chilean teacher cert items (920 CDPK + 223 SEND)"
+    "pedagogy": "1,143 Chilean teacher cert items (920 CDPK + 223 SEND)",
+    "acara": "79 verified pairs of Australian student work, accuracy percentage"
   },
   "results": [
     {
@@ -17,7 +19,9 @@
       "pedagogy_pct": 86.9,
       "pedagogy_cdpk": 88.0,
       "pedagogy_send": 82.1,
-      "composite": 91.7
+      "acara_accuracy": 83.5,
+      "full_composite": 90.8,
+      "knowledge_composite": 91.7
     },
     {
       "model": "Claude 4.5 Opus (Thinking)",
@@ -27,7 +31,9 @@
       "pedagogy_pct": 87.5,
       "pedagogy_cdpk": 88.5,
       "pedagogy_send": 83.4,
-      "composite": 91.3
+      "acara_accuracy": null,
+      "full_composite": null,
+      "knowledge_composite": 91.3
     },
     {
       "model": "o3",
@@ -37,7 +43,9 @@
       "pedagogy_pct": 86.1,
       "pedagogy_cdpk": 86.5,
       "pedagogy_send": 84.3,
-      "composite": 90.8
+      "acara_accuracy": 84.8,
+      "full_composite": 90.5,
+      "knowledge_composite": 90.8
     },
     {
       "model": "Claude 4.5 Opus",
@@ -47,7 +55,9 @@
       "pedagogy_pct": 88.1,
       "pedagogy_cdpk": 88.7,
       "pedagogy_send": 85.7,
-      "composite": 89.8
+      "acara_accuracy": 82.7,
+      "full_composite": 88.4,
+      "knowledge_composite": 89.8
     },
     {
       "model": "Claude 4 Opus",
@@ -57,7 +67,9 @@
       "pedagogy_pct": 85.8,
       "pedagogy_cdpk": 86.2,
       "pedagogy_send": 84.3,
-      "composite": 88.6
+      "acara_accuracy": null,
+      "full_composite": null,
+      "knowledge_composite": 88.6
     },
     {
       "model": "Claude 4.1 Opus",
@@ -67,7 +79,9 @@
       "pedagogy_pct": 84.0,
       "pedagogy_cdpk": 83.8,
       "pedagogy_send": 84.8,
-      "composite": 88.6
+      "acara_accuracy": null,
+      "full_composite": null,
+      "knowledge_composite": 88.6
     },
     {
       "model": "Claude 4.5 Sonnet (Thinking)",
@@ -77,7 +91,9 @@
       "pedagogy_pct": 86.4,
       "pedagogy_cdpk": 86.6,
       "pedagogy_send": 85.7,
-      "composite": 87.3
+      "acara_accuracy": null,
+      "full_composite": null,
+      "knowledge_composite": 87.3
     },
     {
       "model": "GPT-5 Mini",
@@ -87,7 +103,9 @@
       "pedagogy_pct": 82.8,
       "pedagogy_cdpk": 83.3,
       "pedagogy_send": 80.7,
-      "composite": 85.5
+      "acara_accuracy": null,
+      "full_composite": null,
+      "knowledge_composite": 85.5
     },
     {
       "model": "Claude 4.5 Sonnet",
@@ -97,7 +115,9 @@
       "pedagogy_pct": 83.7,
       "pedagogy_cdpk": 84.6,
       "pedagogy_send": 80.3,
-      "composite": 85.1
+      "acara_accuracy": 66.2,
+      "full_composite": 80.7,
+      "knowledge_composite": 85.1
     },
     {
       "model": "GPT-5.2",
@@ -107,7 +127,9 @@
       "pedagogy_pct": 84.8,
       "pedagogy_cdpk": 85.4,
       "pedagogy_send": 82.1,
-      "composite": 84.4
+      "acara_accuracy": null,
+      "full_composite": null,
+      "knowledge_composite": 84.4
     },
     {
       "model": "o4-mini",
@@ -117,7 +139,9 @@
       "pedagogy_pct": 83.2,
       "pedagogy_cdpk": 83.7,
       "pedagogy_send": 81.2,
-      "composite": 83.9
+      "acara_accuracy": 84.8,
+      "full_composite": 84.3,
+      "knowledge_composite": 83.9
     },
     {
       "model": "Claude 3.7 Sonnet",
@@ -127,7 +151,9 @@
       "pedagogy_pct": 79.3,
       "pedagogy_cdpk": 79.7,
       "pedagogy_send": 77.6,
-      "composite": 83.5
+      "acara_accuracy": null,
+      "full_composite": null,
+      "knowledge_composite": 83.5
     },
     {
       "model": "Claude 4 Sonnet",
@@ -137,7 +163,9 @@
       "pedagogy_pct": 78.8,
       "pedagogy_cdpk": 78.7,
       "pedagogy_send": 79.4,
-      "composite": 83.4
+      "acara_accuracy": 83.5,
+      "full_composite": 84.5,
+      "knowledge_composite": 83.4
     },
     {
       "model": "Gemini 2.5 Pro",
@@ -147,7 +175,9 @@
       "pedagogy_pct": 88.5,
       "pedagogy_cdpk": 89.3,
       "pedagogy_send": 85.2,
-      "composite": 80.6
+      "acara_accuracy": 86.5,
+      "full_composite": 80.1,
+      "knowledge_composite": 80.6
     },
     {
       "model": "Claude 4.5 Haiku",
@@ -157,7 +187,9 @@
       "pedagogy_pct": 76.3,
       "pedagogy_cdpk": 76.8,
       "pedagogy_send": 74.0,
-      "composite": 77.5
+      "acara_accuracy": 85.2,
+      "full_composite": 79.8,
+      "knowledge_composite": 77.5
     },
     {
       "model": "o3-mini",
@@ -167,7 +199,9 @@
       "pedagogy_pct": 78.7,
       "pedagogy_cdpk": 79.6,
       "pedagogy_send": 74.9,
-      "composite": 74.5
+      "acara_accuracy": null,
+      "full_composite": null,
+      "knowledge_composite": 74.5
     },
     {
       "model": "GPT-4o",
@@ -177,7 +211,9 @@
       "pedagogy_pct": 78.3,
       "pedagogy_cdpk": 79.0,
       "pedagogy_send": 75.3,
-      "composite": 73.2
+      "acara_accuracy": null,
+      "full_composite": null,
+      "knowledge_composite": 73.2
     },
     {
       "model": "GPT-4 Turbo",
@@ -187,7 +223,9 @@
       "pedagogy_pct": 73.8,
       "pedagogy_cdpk": 75.5,
       "pedagogy_send": 66.4,
-      "composite": 73.1
+      "acara_accuracy": null,
+      "full_composite": null,
+      "knowledge_composite": 73.1
     },
     {
       "model": "Claude 3.5 Haiku",
@@ -197,7 +235,9 @@
       "pedagogy_pct": 67.6,
       "pedagogy_cdpk": 67.2,
       "pedagogy_send": 69.5,
-      "composite": 70.9
+      "acara_accuracy": null,
+      "full_composite": null,
+      "knowledge_composite": 70.9
     },
     {
       "model": "GPT-4o Mini",
@@ -207,7 +247,9 @@
       "pedagogy_pct": 69.3,
       "pedagogy_cdpk": 69.2,
       "pedagogy_send": 69.5,
-      "composite": 62.2
+      "acara_accuracy": null,
+      "full_composite": null,
+      "knowledge_composite": 62.2
     },
     {
       "model": "Claude 3 Haiku",
@@ -217,7 +259,9 @@
       "pedagogy_pct": 54.8,
       "pedagogy_cdpk": 54.1,
       "pedagogy_send": 57.4,
-      "composite": 60.3
+      "acara_accuracy": null,
+      "full_composite": null,
+      "knowledge_composite": 60.3
     }
   ]
 }
