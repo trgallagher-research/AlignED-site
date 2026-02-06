@@ -42,9 +42,14 @@
 
           <div class="grid grid-2 mt-3 mb-4">
             <div class="card">
-              <h3>Summary Data</h3>
-              <p>Composite scores and rankings for all 23 models. Suitable for quick comparisons and reporting.</p>
+              <h3>Composite Scores</h3>
+              <p>Composite scores and rankings for all 21 models with complete benchmark results. Suitable for quick comparisons and reporting.</p>
               <a href="data/composite_scores.json" class="btn btn-secondary mt-2" download>Download JSON</a>
+            </div>
+            <div class="card">
+              <h3>ACARA Scores</h3>
+              <p>Accuracy and consistency scores for 12 models on comparative judgement of student work.</p>
+              <a href="data/acara_scores.json" class="btn btn-secondary mt-2" download>Download JSON</a>
             </div>
             <div class="card">
               <h3>Full Dataset</h3>
@@ -56,12 +61,10 @@
           <h2>Data Contents</h2>
 
           <h3>Summary Data (Direct Download)</h3>
-          <p>The summary dataset includes:</p>
+          <p>Two summary datasets are available:</p>
           <ul>
-            <li>Educational Alignment Index (EAI) composite scores</li>
-            <li>Component scores: Neuromyths Survey, Implementation Scenarios</li>
-            <li>Pedagogical Knowledge scores: CDPK, SEND</li>
-            <li>All 23 evaluated models</li>
+            <li><strong>Composite scores:</strong> Educational Alignment Index (EAI) composite, Neuromyths, Scenarios, CDPK, SEND for 21 models</li>
+            <li><strong>ACARA scores:</strong> Accuracy and consistency on comparative judgement for 12 models</li>
           </ul>
 
           <h3>Full Dataset (Via OSF)</h3>
@@ -104,23 +107,24 @@ https://trgallagher-research.github.io/AlignED-site/
           <h2>Data Format</h2>
 
           <h3>JSON Structure</h3>
-          <p>Summary data follows this structure:</p>
+          <p>Composite scores follow this structure:</p>
 
           <div class="citation">
 {
-  "generated": "2026-01-05T22:28:56.826Z",
-  "description": "Composite scores...",
+  "generated": "2026-02-06",
+  "version": "v2",
+  "description": "AlignED v2 composite scores...",
   "scoring": { ... },
   "results": [
     {
-      "model": "GPT-5.2",
-      "surveyAccuracy": 93.8,
-      "scenarioScore": 100,
-      "alignedCombined": 96.9,
-      "pedagogyCDPK": 85.1,
-      "pedagogySEND": 81.2,
-      "pedagogyCombined": 84.3,
-      "compositeScore": 90.6
+      "model": "GPT-5",
+      "provider": "OpenAI",
+      "neuromyths_pct": 92.9,
+      "scenarios_pct": 100.0,
+      "pedagogy_pct": 86.9,
+      "pedagogy_cdpk": 88.0,
+      "pedagogy_send": 82.1,
+      "composite": 91.7
     },
     ...
   ]
@@ -144,7 +148,8 @@ https://trgallagher-research.github.io/AlignED-site/
           </ul>
 
           <div class="btn-group mt-4">
-            <a href="data/composite_scores.json" class="btn btn-primary" download>Download Summary Data</a>
+            <a href="data/composite_scores.json" class="btn btn-primary" download>Download Composite Scores</a>
+            <a href="data/acara_scores.json" class="btn btn-secondary" download>Download ACARA Scores</a>
             <a href="contact.html" class="btn btn-secondary">Contact Us</a>
           </div>
         </div>

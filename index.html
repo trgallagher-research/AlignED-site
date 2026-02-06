@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AlignED - Transparent benchmarks for AI in education</title>
-  <meta name="description" content="AlignED tests whether AI responses align with evidence-based educational research. Educational Alignment Index rankings for 23 AI models.">
+  <meta name="description" content="AlignED tests whether AI responses align with evidence-based educational research. Educational Alignment Index rankings for 21 AI models.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -455,8 +455,8 @@
       </div>
       <div class="hero-cards">
         <div class="promo-card">
-          <h3>Latest Results: January 2026</h3>
-          <p>31 models evaluated across 5 benchmarks and 6 evaluation dimensions.</p>
+          <h3>Latest Results: February 2026</h3>
+          <p>21 models with composite scores across 4 benchmarks. ACARA comparative judgement now included.</p>
           <a href="#highlights" class="btn">View Rankings</a>
         </div>
         <div class="promo-card">
@@ -502,9 +502,11 @@
       </div>
 
       <div class="chart-legend">
-        <div class="legend-item"><div class="legend-dot" style="background: #D97706;"></div> Anthropic</div>
-        <div class="legend-item"><div class="legend-dot" style="background: #10B981;"></div> OpenAI</div>
-        <div class="legend-item"><div class="legend-dot" style="background: #3B82F6;"></div> Google</div>
+        <div class="legend-item"><div class="legend-dot" style="background: #D97757;"></div> Anthropic</div>
+        <div class="legend-item"><div class="legend-dot" style="background: #10A37F;"></div> OpenAI</div>
+        <div class="legend-item"><div class="legend-dot" style="background: #4285F4;"></div> Google</div>
+        <div class="legend-item"><div class="legend-dot" style="background: #0668E1;"></div> Meta</div>
+        <div class="legend-item"><div class="legend-dot" style="background: #536DFE;"></div> DeepSeek</div>
       </div>
     </div>
   </section>
@@ -571,112 +573,6 @@
     </div>
   </footer>
 
-  <script>
-    // Chart configuration
-    const chartConfig = {
-      responsive: true,
-      maintainAspectRatio: false,
-      indexAxis: 'y',
-      plugins: {
-        legend: { display: false },
-        tooltip: {
-          callbacks: {
-            label: (ctx) => `${ctx.raw.toFixed(1)}%`
-          }
-        }
-      },
-      scales: {
-        x: {
-          min: 50,
-          max: 100,
-          grid: { color: '#E2E6EA' },
-          ticks: {
-            callback: (v) => v + '%',
-            font: { size: 11 }
-          }
-        },
-        y: {
-          grid: { display: false },
-          ticks: { font: { size: 11 } }
-        }
-      }
-    };
-
-    // Provider colors
-    const colors = {
-      'GPT-5.2': '#10B981',
-      'GPT-5': '#10B981',
-      'Claude 4.5 Opus (T)': '#D97706',
-      'o3': '#10B981',
-      'Claude 4.5 Opus': '#D97706',
-      'Claude 4.5 Son (T)': '#D97706',
-      'GPT-5 Mini': '#10B981',
-      'Claude 4 Opus': '#D97706',
-      'Gemini 2.5 Pro': '#3B82F6',
-      'Claude 4.1 Opus': '#D97706',
-      'Gemini 2.5 Flash': '#3B82F6',
-      'GPT-4 Turbo': '#10B981',
-      'Claude 3.7 Sonnet': '#D97706',
-      'Claude 4.5 Sonnet': '#D97706'
-    };
-
-    // EAI Chart
-    const eaiLabels = ['1. GPT-5.2', '2. GPT-5', '3. Claude 4.5 Opus (T)', '4. o3', '5. Claude 4.5 Opus', '6. Claude 4.5 Son (T)', '7. GPT-5 Mini', '8. Claude 4 Opus', '9. Claude 4.1 Opus', '10. Gemini 2.5 Pro'];
-    const eaiData = [90.6, 90.1, 89.7, 88.3, 87.8, 87.5, 87.3, 87.3, 87.2, 86.5];
-    const stripRank = l => l.split('. ').slice(1).join('. ');
-    const eaiColors = eaiLabels.map(l => colors[stripRank(l)] || '#6B7280');
-
-    new Chart(document.getElementById('eaiChart'), {
-      type: 'bar',
-      data: {
-        labels: eaiLabels,
-        datasets: [{
-          data: eaiData,
-          backgroundColor: eaiColors,
-          borderRadius: 4,
-          barThickness: 28
-        }]
-      },
-      options: chartConfig
-    });
-
-    // Neuromyths Chart
-    const nmLabels = ['1. GPT-5.2', '2. GPT-5', '3. o3', '4. Claude 4.5 Opus (T)', '5. GPT-5 Mini', '6. Gemini 2.5 Flash', '7. GPT-4 Turbo', '8. Claude 3.7 Sonnet', '9. Claude 4.1 Opus', '10. Claude 4.5 Opus'];
-    const nmData = [93.8, 87.5, 87.5, 87.5, 87.5, 84.4, 84.4, 84.4, 84.4, 81.3];
-    const nmColors = nmLabels.map(l => colors[stripRank(l)] || '#6B7280');
-
-    new Chart(document.getElementById('neuromythsChart'), {
-      type: 'bar',
-      data: {
-        labels: nmLabels,
-        datasets: [{
-          data: nmData,
-          backgroundColor: nmColors,
-          borderRadius: 4,
-          barThickness: 28
-        }]
-      },
-      options: chartConfig
-    });
-
-    // Pedagogy Chart
-    const pedLabels = ['1. Gemini 2.5 Pro', '2. Claude 4.5 Opus', '3. Claude 4.5 Opus (T)', '4. GPT-5', '5. Claude 4.5 Son (T)', '6. o3', '7. Claude 4 Opus', '8. GPT-5.2', '9. Claude 4.1 Opus', '10. Claude 4.5 Sonnet'];
-    const pedData = [88.1, 87.7, 87.1, 86.4, 86.0, 85.7, 85.4, 84.3, 83.6, 83.3];
-    const pedColors = pedLabels.map(l => colors[stripRank(l)] || '#6B7280');
-
-    new Chart(document.getElementById('pedagogyChart'), {
-      type: 'bar',
-      data: {
-        labels: pedLabels,
-        datasets: [{
-          data: pedData,
-          backgroundColor: pedColors,
-          borderRadius: 4,
-          barThickness: 28
-        }]
-      },
-      options: chartConfig
-    });
-  </script>
+  <script src="js/charts.js"></script>
 </body>
 </html>

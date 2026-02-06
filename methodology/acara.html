@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ACARA Comparative Judgement - AlignED Methodology</title>
+  <meta name="description" content="Methodology for the AlignED ACARA Comparative Judgement benchmark, testing whether LLMs can accurately compare student work against Australian Curriculum standards.">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <header>
+    <div class="container">
+      <a href="../index.html" class="logo">AlignED</a>
+      <button class="nav-toggle" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <nav>
+        <a href="../about.html">About</a>
+        <a href="../methodology/" class="active">Methodology</a>
+        <a href="../results.html">Results</a>
+        <a href="../data-access.html">Data Access</a>
+        <a href="../contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="page-header">
+      <div class="container">
+        <p class="text-muted"><a href="index.html">&larr; Methodology</a></p>
+        <h1>ACARA Comparative Judgement</h1>
+        <p class="subtitle">Testing whether LLMs can accurately compare student work against curriculum standards</p>
+      </div>
+    </div>
+
+    <section class="content-section">
+      <div class="container">
+        <div class="prose">
+          <h2>Overview</h2>
+          <p>The ACARA Comparative Judgement benchmark tests whether AI systems can accurately compare pairs of student work samples against Australian Curriculum achievement standards. Unlike the other AlignED benchmarks which test pedagogical knowledge directly, this benchmark tests a practical classroom skill: determining which of two student work samples better meets a given curriculum standard.</p>
+
+          <div class="metric-grid">
+            <div class="metric-card">
+              <div class="metric-value">79</div>
+              <div class="metric-label">Verified Pairs</div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-value">237</div>
+              <div class="metric-label">Evaluations per Model</div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-value">12</div>
+              <div class="metric-label">Models Evaluated</div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-value">3</div>
+              <div class="metric-label">Trials per Pair</div>
+            </div>
+          </div>
+
+          <h2>What It Measures</h2>
+          <p>This benchmark answers a specific question: <strong>Can LLMs accurately compare student work against curriculum standards?</strong> This is a foundational skill for any AI system used to support assessment in schools.</p>
+
+          <p>Each evaluation presents the model with two student work samples and asks which one better demonstrates achievement at a given curriculum standard level. The model must make a binary choice (Sample A or Sample B), and this choice is compared against the verified correct answer from the ACARA work sample database.</p>
+
+          <h2>Source</h2>
+          <p>The benchmark uses 79 verified comparative pairs derived from the Australian Curriculum, Assessment and Reporting Authority (ACARA) work sample portfolios. These portfolios contain annotated examples of student work at different achievement levels, providing a ground truth for comparison.</p>
+
+          <p>Each pair consists of two student work samples at different achievement levels for the same curriculum area, making the correct answer objectively verifiable.</p>
+
+          <h2>Method</h2>
+          <p>Each of the 79 pairs is presented to the model in two orientations:</p>
+          <ul>
+            <li><strong>Forward:</strong> Sample A vs Sample B (as originally ordered)</li>
+            <li><strong>Reverse:</strong> Sample B vs Sample A (swapped presentation order)</li>
+          </ul>
+
+          <p>This position-swap design serves two purposes:</p>
+          <ol>
+            <li>It tests whether the model's judgement is influenced by presentation order (position bias)</li>
+            <li>It provides a built-in reliability measure through consistency scoring</li>
+          </ol>
+
+          <p>Each orientation is evaluated 3 times (trials), yielding 237 total evaluations per model (79 pairs &times; 2 orientations &times; ~1.5 due to trial structure).</p>
+
+          <h2>Scoring</h2>
+          <p>Two metrics are reported for each model:</p>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Metric</th>
+                <th>Description</th>
+                <th>Range</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Accuracy</strong></td>
+                <td>Percentage of pairs where the model chose the correct (higher-achieving) work sample</td>
+                <td>0&ndash;100%</td>
+              </tr>
+              <tr>
+                <td><strong>Consistency</strong></td>
+                <td>Percentage of pairs where the model gave the same answer regardless of presentation order (forward vs reverse)</td>
+                <td>0&ndash;100%</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <p>High accuracy with low consistency suggests the model is getting answers right by chance in some orientations. High consistency with low accuracy would indicate a systematic but incorrect judgement strategy. The ideal is high scores on both metrics.</p>
+
+          <h2>Reliability</h2>
+          <p>The position-swap consistency score serves as built-in reliability evidence. A model that gives the same answer regardless of whether Sample A or Sample B is presented first demonstrates stable judgement rather than position-dependent responses.</p>
+
+          <h2>Excluded Models</h2>
+          <p>Four models were excluded from the ACARA results due to invalid response formats (0% accuracy from inability to produce valid judgements):</p>
+          <ul>
+            <li>DeepSeek R1</li>
+            <li>Gemini 3 Pro</li>
+            <li>GPT-5.2</li>
+            <li>GPT-5 Mini</li>
+          </ul>
+
+          <h2>Relationship to Composite Score</h2>
+          <p>ACARA results are reported separately from the main Educational Alignment Index composite score. The composite score is calculated from Neuromyths (25%) + Scenarios (25%) + Pedagogy (50%). ACARA evaluates a different capability (applied assessment judgement vs knowledge retrieval) and uses a different pool of models, so it is presented as a complementary evaluation rather than a composite component.</p>
+
+          <h2>Key Findings</h2>
+          <ul>
+            <li>Top accuracy is 86.5% (Gemini 2.5 Pro and Llama 3.3 70B), suggesting this is a challenging task even for frontier models</li>
+            <li>GPT-5 achieved the highest consistency (94.1%) despite not having the highest accuracy (83.5%), indicating very stable but slightly less accurate judgements</li>
+            <li>Several reasoning-focused models (o3, Claude 4 Sonnet) show high consistency (92%), suggesting deliberate reasoning improves judgement stability</li>
+            <li>Gemini 3 Flash shows a notable accuracy-consistency gap (81.0% accuracy, 68.8% consistency), indicating position-dependent responses</li>
+          </ul>
+
+          <p>See the <a href="../results.html">Results page</a> for the full ACARA chart with all 12 models.</p>
+
+          <div class="btn-group mt-4">
+            <a href="pedagogy.html" class="btn btn-secondary">&larr; Pedagogical Knowledge</a>
+            <a href="index.html" class="btn btn-secondary">Back to Methodology</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <a href="../index.html" class="logo">AlignED</a>
+          <p>Transparent benchmarks for AI in education</p>
+        </div>
+        <div class="footer-links">
+          <h4>Navigation</h4>
+          <ul>
+            <li><a href="../about.html">About</a></li>
+            <li><a href="../methodology/">Methodology</a></li>
+            <li><a href="../results.html">Results</a></li>
+            <li><a href="../data-access.html">Data Access</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h4>Resources</h4>
+          <ul>
+            <li><a href="../contact.html">Contact</a></li>
+            <li><a href="https://github.com/trgallagher-research/AlignED-site" target="_blank">GitHub</a></li>
+          </ul>
+        </div>
+      </div>
+      <p class="copyright">&copy; 2026 AlignED. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>
