@@ -20,6 +20,7 @@
         <span></span>
       </button>
       <nav>
+        <a href="../index.html">Home</a>
         <a href="../about.html">About</a>
         <a href="../methodology/" class="active">Methodology</a>
         <a href="../results.html">Results</a>
@@ -44,9 +45,9 @@
           <p>This section covers the technical details of how AlignED works. For a general overview, see <a href="../about.html">About</a>. To see the actual items used, visit <a href="../benchmark-items.html">Benchmark Items</a>.</p>
 
           <h2>What AlignED measures</h2>
-          <p>AlignED uses a <strong>two-tier composite scoring</strong> system:</p>
+          <p>AlignED uses the <strong>Educational Alignment Index (EAI)</strong> composite:</p>
 
-          <p><strong>Full Composite</strong> (8 models with all four benchmarks, 25% each):</p>
+          <p><strong>EAI Composite</strong> (21 models, three knowledge benchmarks):</p>
 
           <ul class="benchmark-list">
             <li>
@@ -55,7 +56,7 @@
             </li>
             <li>
               <a href="scenarios.html">Classroom Reasoning (25%)</a>
-              <p class="description">Can AI diagnose why good teaching strategies sometimes fail? 12 real-world scenarios scored 0&ndash;3 by an expert judge.</p>
+              <p class="description">Can AI diagnose why good teaching strategies sometimes fail? 12 real-world scenarios scored 0&ndash;3 by an LLM judge (Claude 4.5 Sonnet).</p>
             </li>
             <li>
               <a href="pedagogy.html">Pedagogical Knowledge (25%)</a>
@@ -67,8 +68,8 @@
             </li>
           </ul>
 
-          <p><strong>Knowledge Composite</strong> (21 models with three knowledge benchmarks):</p>
-          <p>Educational Neuroscience (25%) + Classroom Reasoning (25%) + Pedagogical Knowledge (50%). Used for models without ACARA data.</p>
+          <p>EAI = Educational Neuroscience (25%) + Classroom Reasoning (25%) + Pedagogical Knowledge (50%).</p>
+          <p>ACARA (Student Work Judgement) is reported separately as a complementary evaluation. See <a href="acara.html">ACARA methodology</a> for details.</p>
 
           <h2>Validation protocol</h2>
           <p>Each benchmark passes through a structured validation pipeline before results are reported:</p>
@@ -125,12 +126,12 @@ graph LR
           <ul class="benchmark-list">
             <li>
               <a href="scoring.html">Educational Alignment Index (EAI)</a>
-              <p class="description">How we combine benchmark scores and evaluation dimensions into a single composite metric. Now uses a two-tier approach for models with and without ACARA data.</p>
+              <p class="description">How we combine benchmark scores and evaluation dimensions into a single composite metric.</p>
             </li>
           </ul>
 
           <h2>Models evaluated</h2>
-          <p>21 models from three providers have complete knowledge composite scores. 12 models (including 4 ACARA-only) were evaluated on student work judgement. 8 models have all four benchmarks for the full composite.</p>
+          <p>21 models from three providers have complete EAI composite scores. 12 models (including 4 ACARA-only) were evaluated separately on student work judgement (ACARA).</p>
 
           <div class="grid grid-3 mt-3">
             <div class="card">

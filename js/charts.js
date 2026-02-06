@@ -2,8 +2,8 @@
  * AlignED Chart Rendering Module
  *
  * Loads benchmark data from JSON files and renders Chart.js charts
- * across the index and results pages. Supports two-tier composite
- * scoring (full composite for 8 models, knowledge composite for 21).
+ * across the index and results pages. Supports single-tier composite
+ * scoring (EAI) for 21 models.
  */
 
 /* ── Provider color mapping ── */
@@ -66,7 +66,7 @@ async function loadModelMetadata() {
  *
  * @param {string} canvasId - The id of the <canvas> element
  * @param {Array} data - Array of model objects from composite data
- * @param {string} metric - The field name to chart (e.g. "knowledge_composite")
+ * @param {string} metric - The field name to chart (e.g. "composite")
  * @param {string} label - Human-readable axis label
  * @param {number} count - How many top models to show (default 10)
  */
@@ -133,7 +133,7 @@ function renderTopChart(canvasId, data, metric, label, count = 10) {
  *
  * @param {string} canvasId - The id of the <canvas> element
  * @param {Array} data - Array of model objects from composite data
- * @param {string} metric - The field name to chart (e.g. "knowledge_composite")
+ * @param {string} metric - The field name to chart (e.g. "composite")
  * @param {string} label - Human-readable axis label
  */
 function renderAllModelsChart(canvasId, data, metric, label) {
@@ -276,10 +276,10 @@ function renderAcaraChart(canvasId, data) {
 
 /**
  * Renders a scatter/timeline chart showing model release dates on the X axis
- * and knowledge composite scores on the Y axis. Each point is colored by provider.
+ * and composite scores on the Y axis. Each point is colored by provider.
  *
  * @param {string} canvasId - The id of the <canvas> element
- * @param {Array} compositeData - Array of model objects with knowledge_composite scores
+ * @param {Array} compositeData - Array of model objects with composite scores
  * @param {Array} metadataArr - Array of model metadata objects with release_date
  */
 function renderTimelineChart(canvasId, compositeData, metadataArr) {
@@ -290,11 +290,11 @@ function renderTimelineChart(canvasId, compositeData, metadataArr) {
   const metaMap = {};
   metadataArr.forEach(m => { metaMap[m.model] = m; });
 
-  /* Build scatter data points: x = release date as timestamp, y = knowledge_composite */
+  /* Build scatter data points: x = release date as timestamp, y = composite */
   const points = [];
   compositeData.forEach(m => {
     const meta = metaMap[m.model];
-    if (!meta || !meta.release_date || m.knowledge_composite == null) return;
+    if (!meta || !meta.release_date || m.composite == null) return;
 
     /* Parse YYYY-MM to a date (use 15th of month as midpoint) */
     const parts = meta.release_date.split('-');
@@ -302,7 +302,7 @@ function renderTimelineChart(canvasId, compositeData, metadataArr) {
 
     points.push({
       x: dateObj.getTime(),
-      y: m.knowledge_composite,
+      y: m.composite,
       model: m.model,
       provider: m.provider,
       color: getProviderColor(m.provider)
@@ -360,7 +360,7 @@ function renderTimelineChart(canvasId, compositeData, metadataArr) {
         y: {
           min: 55,
           max: 95,
-          title: { display: true, text: 'Knowledge Composite (%)', font: { size: 12 } },
+          title: { display: true, text: 'Educational Alignment Index (%)', font: { size: 12 } },
           grid: { color: '#E2E6EA' },
           ticks: {
             callback: function(v) { return v + '%'; },
@@ -405,8 +405,11 @@ function renderTokenChart(canvasId, metadataArr, compositeData) {
         label: 'Total Tokens (Survey + Scenarios)',
         data: values,
         backgroundColor: colors,
+        borderColor: colors.map(c => c + 'CC'),
+        borderWidth: 1,
         borderRadius: 4,
-        barThickness: 22
+        barThickness: 20,
+        categoryPercentage: 0.8
       }]
     },
     options: {
@@ -447,7 +450,7 @@ document.addEventListener('DOMContentLoaded', async function() {
     /* Index page: has eaiChart, neuromythsChart, pedagogyChart as top-10 horizontal bars */
     if (document.getElementById('eaiChart') && !document.getElementById('scenariosChart')) {
       const data = await loadCompositeData();
-      renderTopChart('eaiChart', data, 'knowledge_composite', 'Educational Alignment Index');
+      renderTopChart('eaiChart', data, 'composite', 'Educational Alignment Index');
       renderTopChart('neuromythsChart', data, 'neuromyths_pct', 'Educational Neuroscience');
       renderTopChart('pedagogyChart', data, 'pedagogy_pct', 'Pedagogical Knowledge');
     }
@@ -456,11 +459,8 @@ document.addEventListener('DOMContentLoaded', async function() {
     if (document.getElementById('scenariosChart')) {
       const data = await loadCompositeData();
 
-      /* Full composite chart (8 models with ACARA data) */
-      renderAllModelsChart('fullCompositeChart', data, 'full_composite', 'Full Composite');
-
-      /* Knowledge composite chart (all 21 models) */
-      renderAllModelsChart('eaiChart', data, 'knowledge_composite', 'Knowledge Composite');
+      /* Educational Alignment Index chart (all 21 models) */
+      renderAllModelsChart('eaiChart', data, 'composite', 'Educational Alignment Index');
 
       /* Individual benchmark charts */
       renderAllModelsChart('neuromythsChart', data, 'neuromyths_pct', 'Educational Neuroscience');
