@@ -60,5 +60,5 @@ This is AlignED's key framing: "Most benchmarks test what students should know. 
 
 ### Footer Tagline (all pages)
 
-Use: "Benchmarking AI performance on professional teaching knowledge."
+Use: "Benchmarking AI performance on professional teaching tasks."
 Do NOT use: "Evaluating AI alignment with educational research evidence."
