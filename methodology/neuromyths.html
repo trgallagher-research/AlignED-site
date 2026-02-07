@@ -33,7 +33,7 @@
       <div class="container">
         <p class="text-muted"><a href="index.html">&larr; Methodology</a></p>
         <h1>Neuromyths Survey</h1>
-        <p class="subtitle">Testing rejection of brain-based misconceptions</p>
+        <p class="subtitle">Testing identification of brain-based misconceptions</p>
       </div>
     </div>
 
@@ -41,7 +41,7 @@
       <div class="container">
         <div class="prose">
           <h2>Overview</h2>
-          <p>The Neuromyths Survey tests whether AI systems can correctly identify false claims about the brain and learning. This benchmark is adapted from the foundational research by Dekker et al. (2012), which documented the prevalence of neuromyths among educators worldwide.</p>
+          <p>The Neuromyths Survey tests whether AI systems can correctly classify true and false claims about the brain and learning. This benchmark is adapted from the 2012 Dekker et al. study, which documented the prevalence of neuromyths among educators worldwide.</p>
 
           <div class="metric-grid">
             <div class="metric-card">
@@ -65,7 +65,7 @@
           <h2>Source Research</h2>
           <p>Dekker, S., Lee, N. C., Howard-Jones, P., &amp; Jolles, J. (2012). Neuromyths in education: Prevalence and predictors of misconceptions among teachers. <em>Frontiers in Psychology</em>, 3, 429.</p>
 
-          <p>This study surveyed 242 teachers across the UK and Netherlands, finding that 49% of neuromyths were believed by participants on average. Certain myths showed particularly high prevalence:</p>
+          <p>This study surveyed 242 teachers across the UK and Netherlands, finding that 49% of neuromyths were endorsed by participants on average. Certain myths showed particularly high prevalence:</p>
 
           <ul>
             <li>"Learning styles" (93% belief rate)</li>
@@ -77,7 +77,7 @@
           <p>The survey contains two item types:</p>
 
           <h3>Neuromyths (15 items)</h3>
-          <p>False statements about the brain and learning that are widely believed. The correct response is "False" for all items. Examples include:</p>
+          <p>False statements about the brain and learning that are widely believed. The correct response is "False" for all items. Examples:</p>
           <ul>
             <li>"Individuals learn better when they receive information in their preferred learning style."</li>
             <li>"We only use 10% of our brain."</li>
@@ -85,7 +85,7 @@
           </ul>
 
           <h3>General Assertions (17 items)</h3>
-          <p>True statements about neuroscience and learning, included to prevent response bias. Examples include:</p>
+          <p>True statements about neuroscience and learning, included to prevent response bias. Examples:</p>
           <ul>
             <li>"Learning occurs through modification of the brain's neural connections."</li>
             <li>"Mental practice can improve motor performance."</li>
@@ -137,7 +137,7 @@ Respond with only: TRUE or FALSE
           <ul>
             <li>Top-performing models exceed 90% accuracy, substantially above the ~50% human teacher baseline</li>
             <li>Some items remain challenging across all models (e.g., Q21 on enriched environments)</li>
-            <li>Models show universal overconfidence&mdash;no model ever expressed uncertainty when asked</li>
+            <li>No model ever expressed uncertainty when asked about its confidence, even on items it answered incorrectly</li>
           </ul>
 
           <p>See the <a href="../results.html">Results page</a> for detailed model comparisons.</p>

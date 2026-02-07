@@ -45,31 +45,35 @@
           <p>This section covers the technical details of how AlignED works. For a general overview, see <a href="../about.html">About</a>. To see the actual items used, visit <a href="../benchmark-items.html">Benchmark Items</a>.</p>
 
           <h2>What AlignED measures</h2>
-          <p>AlignED uses the <strong>Educational Alignment Index (EAI)</strong> composite:</p>
+          <p>AlignED reports two things: a composite index covering three knowledge benchmarks, and a separate evaluation of applied assessment judgement.</p>
 
-          <p><strong>EAI Composite</strong> (21 models, three knowledge benchmarks):</p>
+          <p><strong>EAI Composite (21 models)</strong></p>
 
           <ul class="benchmark-list">
             <li>
               <a href="neuromyths.html">Educational Neuroscience (25%)</a>
-              <p class="description">Can AI separate myths from facts about how people learn? 15 widely-believed myths + 17 verified facts = 32 items.</p>
+              <p class="description">32 items testing identification of myths and facts about the brain and learning. 15 widely-believed myths + 17 verified facts.</p>
             </li>
             <li>
               <a href="scenarios.html">Classroom Reasoning (25%)</a>
-              <p class="description">Can AI diagnose why good teaching strategies sometimes fail? 12 real-world scenarios scored 0&ndash;3 by an LLM judge (Claude 4.5 Sonnet).</p>
+              <p class="description">12 real-world scenarios scored 0&ndash;3 by an LLM judge (Claude 4.5 Sonnet). Models must diagnose why an evidence-based strategy is failing.</p>
             </li>
             <li>
-              <a href="pedagogy.html">Pedagogical Knowledge (25%)</a>
-              <p class="description">Does AI know what certified teachers are expected to know? 1,143 items from teacher certification assessments: general pedagogy (920 items) and inclusive education (223 items).</p>
-            </li>
-            <li>
-              <a href="acara.html">Student Work Judgement / ACARA (25%)</a>
-              <p class="description">Can AI accurately compare student work against curriculum standards? 79 verified pairs, scored for accuracy and consistency. 12 models evaluated.</p>
+              <a href="pedagogy.html">Pedagogical Knowledge (50%)</a>
+              <p class="description">1,143 items from teacher certification assessments. General pedagogy (920 items, weighted 40%) and inclusive education (223 items, weighted 10%).</p>
             </li>
           </ul>
 
-          <p>EAI = Educational Neuroscience (25%) + Classroom Reasoning (25%) + Pedagogical Knowledge (50%).</p>
-          <p>ACARA (Student Work Judgement) is reported separately as a complementary evaluation. See <a href="acara.html">ACARA methodology</a> for details.</p>
+          <p>EAI = (0.25 &times; Neuroscience) + (0.25 &times; Scenarios) + (0.40 &times; CDPK) + (0.10 &times; SEND)</p>
+
+          <p><strong>Reported separately</strong></p>
+
+          <ul class="benchmark-list">
+            <li>
+              <a href="acara.html">Student Work Judgement / ACARA</a>
+              <p class="description">79 verified pairs of student work compared against Australian curriculum standards. 12 models evaluated. Scored for accuracy and consistency. Reported separately because it tests applied assessment judgement rather than knowledge recall or reasoning. See <a href="acara.html">ACARA methodology</a> for details.</p>
+            </li>
+          </ul>
 
           <h2>Validation protocol</h2>
           <p>Each benchmark passes through a structured validation pipeline before results are reported:</p>
@@ -95,9 +99,9 @@ graph LR
           </div>
 
           <ul>
-            <li><strong>Tier 1 &mdash; Baseline Reliability:</strong> Each model is run 5 times at T=0 to establish stable scores. Reported scores are means across iterations.</li>
-            <li><strong>Tier 2 &mdash; Robustness Probes:</strong> Temperature variation (T=0, 0.5, 1.0), prompt sensitivity (4 framings), and confidence calibration probes.</li>
-            <li><strong>Tier 3 &mdash; Judge Validation:</strong> For scenario scoring, a sample of LLM-judge scores is manually verified against the rubric.</li>
+            <li><strong>Tier 1, Baseline Reliability:</strong> Each model is run 5 times at T=0 to establish stable scores. Reported scores are means across iterations.</li>
+            <li><strong>Tier 2, Robustness Probes:</strong> Temperature variation (T=0, 0.5, 1.0), prompt sensitivity (4 framings), and confidence calibration probes.</li>
+            <li><strong>Tier 3, Judge Validation:</strong> For scenario scoring, a sample of LLM-judge scores is manually verified against the rubric.</li>
           </ul>
 
           <h2>Evaluation dimensions</h2>
@@ -114,7 +118,7 @@ graph LR
             </li>
             <li>
               <a href="dimensions.html#confidence">Confidence Calibration</a>
-              <p class="description">Alignment between stated confidence and actual accuracy.</p>
+              <p class="description">Whether stated confidence tracks actual accuracy.</p>
             </li>
             <li>
               <a href="dimensions.html#efficiency">Token Efficiency</a>
@@ -126,7 +130,7 @@ graph LR
           <ul class="benchmark-list">
             <li>
               <a href="scoring.html">Educational Alignment Index (EAI)</a>
-              <p class="description">How we combine benchmark scores and evaluation dimensions into a single composite metric.</p>
+              <p class="description">How we combine benchmark scores into a single composite metric. See <a href="scoring.html">EAI Scoring</a> for the full methodology.</p>
             </li>
           </ul>
 

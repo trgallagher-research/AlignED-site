@@ -406,18 +406,18 @@
   <section class="hero">
     <div class="container">
       <div class="hero-content">
-        <h1>How well do AI systems align with <span class="highlight">educational knowledge</span>?</h1>
-        <p>We tested 21 models to find out. AlignED measures whether AI aligns with what decades of educational research has established &mdash; from neuroscience to classroom practice.</p>
+        <h1>How well do AI models handle what <span class="highlight">teachers need to know</span>?</h1>
+        <p>We benchmarked 21 models on neuromyth identification, diagnostic classroom reasoning, and teacher certification knowledge. The results vary more than you'd expect.</p>
       </div>
       <div class="hero-cards">
         <div class="promo-card">
           <h3>Latest Results: February 2026</h3>
-          <p>21 models ranked across educational neuroscience, classroom reasoning, and pedagogical knowledge &mdash; plus applied assessment.</p>
+          <p>21 models tested across educational neuroscience, classroom reasoning, and pedagogical knowledge, plus a separate evaluation of student work judgement.</p>
           <a href="#highlights" class="btn">View Rankings</a>
         </div>
         <div class="promo-card">
-          <h3>Methodology Overview</h3>
-          <p>How we test AI alignment with evidence-based educational research.</p>
+          <h3>Methodology</h3>
+          <p>How we construct, administer, and score each benchmark.</p>
           <a href="methodology/" class="btn">Learn More</a>
         </div>
       </div>
@@ -427,9 +427,10 @@
   <!-- What is educational alignment? -->
   <section style="padding: 2.5rem 0; border-bottom: 1px solid var(--border);">
     <div class="container">
-      <h2 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 0.75rem;">What is educational alignment?</h2>
-      <p style="font-size: 1.05rem; color: var(--text); max-width: 800px; margin-bottom: 0.75rem;">When AI is used in classrooms, it needs to know what teachers know — not just facts, but which beliefs about learning are wrong, how to handle real classroom problems, and what good teaching actually looks like. That's educational alignment.</p>
-      <p style="font-size: 0.95rem; color: var(--text-muted); max-width: 800px;"><strong>Who should care:</strong> Teachers choosing AI tools, school leaders making procurement decisions, policymakers writing AI guidelines, EdTech companies selecting which AI model powers their tools &mdash; a decision too often based only on cost and speed, when educational alignment should also matter &mdash; and developers building educational AI.</p>
+      <h2 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 0.75rem;">What does AlignED measure?</h2>
+      <p style="font-size: 1.05rem; color: var(--text); max-width: 800px; margin-bottom: 0.75rem;">Most AI benchmarks for education test whether a model can answer exam questions. They don't test whether it will confidently repeat a neuromyth, or whether it can explain why a lesson strategy failed.</p>
+      <p style="font-size: 1.05rem; color: var(--text); max-width: 800px; margin-bottom: 0.75rem;">AlignED tests three areas of professional teaching knowledge: educational neuroscience (can the model identify common myths about the brain and learning?), classroom reasoning (can it diagnose why an evidence-based strategy isn't working?), and pedagogical knowledge (how does it perform on teacher certification items?). A separate module evaluates student work judgement against Australian curriculum standards.</p>
+      <p style="font-size: 0.95rem; color: var(--text-muted); max-width: 800px;">Teachers evaluating AI tools. Leaders making procurement decisions. Developers choosing which model to build on. Policymakers setting the standards.</p>
     </div>
   </section>
 
@@ -441,7 +442,7 @@
         <!-- Overall Ranking Chart -->
         <div class="chart-card">
           <h3>Overall Ranking</h3>
-          <p class="subtitle">Composite score across all knowledge areas; Higher is better</p>
+          <p class="subtitle">Composite score across all benchmark modules</p>
           <div class="chart-container">
             <canvas id="eaiChart"></canvas>
           </div>
@@ -449,8 +450,8 @@
 
         <!-- Brain Science Chart -->
         <div class="chart-card">
-          <h3>Educational Neuroscience</h3>
-          <p class="subtitle">Can AI separate myths from facts? Average teacher accuracy ~50% (Dekker et al., 2012)</p>
+          <h3>Neuromyth Identification</h3>
+          <p class="subtitle">32 items adapted from Dekker et al. (2012). Average teacher accuracy: ~50%.</p>
           <div class="chart-container">
             <canvas id="neuromythsChart"></canvas>
           </div>
@@ -458,8 +459,8 @@
 
         <!-- Teaching Knowledge Chart -->
         <div class="chart-card">
-          <h3>Pedagogical Knowledge</h3>
-          <p class="subtitle">Performance on 1,143 teacher certification items</p>
+          <h3>Teacher Certification Knowledge</h3>
+          <p class="subtitle">Performance on 1,143 items from certification assessments</p>
           <div class="chart-container">
             <canvas id="pedagogyChart"></canvas>
           </div>
@@ -472,7 +473,7 @@
         <div class="legend-item"><div class="legend-dot" style="background: #4285F4;"></div> Google</div>
       </div>
 
-      <p style="margin-top: 1.25rem; font-size: 0.95rem; color: var(--text); max-width: 800px;"><strong>Headline finding:</strong> The best models score above 90% — but the gap between best and worst is over 30 percentage points. Provider and model size matter. <a href="results.html">See full results &rarr;</a></p>
+      <p style="margin-top: 1.25rem; font-size: 0.95rem; color: var(--text); max-width: 800px;">Top models score above 90%. The gap between best and worst exceeds 30 percentage points. Provider and model size both matter. <a href="results.html">See full results &rarr;</a></p>
     </div>
   </section>
 
@@ -482,15 +483,15 @@
       <div class="section-label">Explore</div>
       <div class="quick-links-grid" style="grid-template-columns: repeat(4, 1fr);">
         <div class="quick-link-card">
-          <h4>Can AI separate educational neuroscience from myths?</h4>
+          <h4>No model ever expressed uncertainty, even when wrong. How do models handle neuromyths?</h4>
           <a href="methodology/neuromyths.html">View analysis &rarr;</a>
         </div>
         <div class="quick-link-card">
-          <h4>See the actual benchmark items we test</h4>
+          <h4>See the actual benchmark items</h4>
           <a href="benchmark-items.html">View all items &rarr;</a>
         </div>
         <div class="quick-link-card">
-          <h4>How stable are results under different conditions?</h4>
+          <h4>How stable are results across temperatures and prompt framings?</h4>
           <a href="methodology/dimensions.html">View robustness data &rarr;</a>
         </div>
         <div class="quick-link-card">
@@ -507,7 +508,7 @@
       <div class="footer-content">
         <div class="footer-brand">
           <div class="logo" style="color: white;">AlignED</div>
-          <p>Transparent benchmarks for AI in education. Evaluating AI alignment with educational research evidence.</p>
+          <p>Transparent benchmarks for AI in education. Benchmarking AI performance on professional teaching knowledge.</p>
         </div>
         <div class="footer-links">
           <h4>Navigation</h4>

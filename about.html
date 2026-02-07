@@ -32,63 +32,61 @@
     <div class="page-header">
       <div class="container">
         <h1>About AlignED</h1>
-        <p class="subtitle">Why educational alignment matters and what we test</p>
+        <p class="subtitle">What we test and the limits of what it can tell you</p>
       </div>
     </div>
 
     <section class="content-section">
       <div class="container">
         <div class="prose">
-          <h2>What is educational alignment?</h2>
-          <p>When AI helps students learn, writes lesson plans, or gives teaching advice, it needs to know what good teaching looks like &mdash; according to research, not popular belief. Educational alignment means an AI's responses match what decades of educational research has established. AlignED measures this.</p>
+          <h2>The problem</h2>
+          <p>When AI is used in educational settings, the quality of its responses depends partly on what it has absorbed about teaching and learning. Some widely-believed claims about the brain and learning are wrong. About half of teachers endorse them (Dekker et al., 2012). If AI models repeat these same misconceptions, or if they give generic advice when a teacher needs a specific diagnosis of why a strategy failed, that is worth knowing before deploying them in schools.</p>
+          <p>Most AI benchmarks for education test whether a model can answer exam questions. They don't test whether a model will confidently repeat a neuromyth, or whether it can reason about why a lesson strategy isn't working. AlignED addresses that gap.</p>
 
-          <h2>Why it matters</h2>
-          <p>Many beliefs about learning &mdash; learning styles, left brain/right brain, "we only use 10% of our brains" &mdash; are myths. About half of teachers believe them. If AI perpetuates these misconceptions, it does harm. If AI knows better than these myths, and can explain why teaching strategies fail in practice, it becomes a genuinely useful tool.</p>
-
-          <h2>Who should care</h2>
+          <h2>Who this is for</h2>
           <ul>
-            <li><strong>Teachers and school leaders</strong> &mdash; Choosing which AI tools to trust in classrooms</li>
-            <li><strong>Policymakers</strong> &mdash; Writing guidelines for AI in education</li>
-            <li><strong>EdTech companies</strong> &mdash; Selecting which AI model powers their tools. This decision is too often based only on cost and speed, when educational alignment should also matter. A model that is fast and cheap but perpetuates neuromyths is not a good foundation for educational products.</li>
-            <li><strong>Researchers</strong> &mdash; Transparent, reproducible benchmarks for study</li>
+            <li>Teachers and school leaders choosing which AI tools to use in classrooms</li>
+            <li>Policymakers writing guidelines for AI in education</li>
+            <li>EdTech companies selecting which model powers their tools</li>
+            <li>Researchers looking for transparent, reproducible benchmarks</li>
           </ul>
 
           <h2>What AlignED tests</h2>
-          <p>AlignED evaluates AI across four areas of educational knowledge:</p>
+          <p>AlignED benchmarks AI across four areas of professional teaching knowledge:</p>
           <ul>
-            <li><strong>Educational neuroscience</strong> &mdash; Can AI separate myths from facts about how people learn? (32 items)</li>
-            <li><strong>Classroom reasoning</strong> &mdash; Can AI diagnose why good teaching strategies sometimes fail? (12 scenarios)</li>
-            <li><strong>Pedagogical knowledge</strong> &mdash; Does AI know what certified teachers are expected to know? (1,143 items)</li>
-            <li><strong>Student work judgement</strong> &mdash; Can AI accurately compare student work against curriculum standards? (79 pairs)</li>
+            <li><strong>Educational neuroscience:</strong> 32 items testing identification of myths and facts about the brain and learning, adapted from Dekker et al. (2012).</li>
+            <li><strong>Classroom reasoning:</strong> 12 scenarios testing diagnostic reasoning about why evidence-based strategies fail when implemented incorrectly.</li>
+            <li><strong>Pedagogical knowledge:</strong> 1,143 teacher certification items covering general pedagogy (920 items) and inclusive education (223 items).</li>
+            <li><strong>Student work judgement:</strong> 79 pairs of student work compared against Australian curriculum standards (ACARA).</li>
           </ul>
-          <p>The Educational Alignment Index (EAI) composite combines the first three benchmarks: 25% educational neuroscience + 25% classroom reasoning + 50% pedagogical knowledge. ACARA is reported separately as a complementary evaluation. See <a href="methodology/">Methodology</a> for full details and <a href="benchmark-items.html">Benchmark Items</a> for the actual test content.</p>
+          <p>The Educational Alignment Index (EAI) composite combines the first three: 25% educational neuroscience + 25% classroom reasoning + 50% pedagogical knowledge. ACARA is reported separately because it tests a different capability (applied assessment judgement rather than knowledge recall or reasoning). See <a href="methodology/">Methodology</a> for full details and <a href="benchmark-items.html">Benchmark Items</a> for the actual test content.</p>
 
           <h2>Limitations</h2>
           <p>We want to be transparent about what this benchmark can and cannot tell you:</p>
           <ul>
-            <li><strong>Training data contamination:</strong> Some benchmark items (especially the 32 neuromyths from Dekker et al., 2012) are published and may appear in model training data. High scores may partly reflect memorisation rather than genuine understanding.</li>
+            <li><strong>Training data contamination:</strong> Some benchmark items (especially the 32 neuromyths from Dekker et al., 2012) are published and may appear in model training data. High scores may partly reflect memorisation rather than robust knowledge.</li>
             <li><strong>LLM-as-judge scoring:</strong> The 12 classroom scenarios are scored by an LLM judge (Claude 4.5 Sonnet), which introduces potential judge model bias. We validate a sample manually, but systematic bias is possible.</li>
             <li><strong>Cultural specificity:</strong> The 1,143 pedagogical knowledge items are from Chilean teacher certification exams. While pedagogical principles are broadly universal, some items may reflect Chilean educational policy or context.</li>
             <li><strong>Varying sample sizes:</strong> The benchmarks range from 32 items (educational neuroscience) to 1,143 items (pedagogy), which affects statistical power differently across benchmarks.</li>
             <li><strong>Preliminary weighting:</strong> The composite score weights (25% educational neuroscience + 25% classroom reasoning + 50% pedagogical knowledge) are our initial best judgement, not empirically optimised.</li>
           </ul>
 
-          <h2>What we claim and don't claim</h2>
-          <p>AlignED measures one specific thing: how well AI responses match established educational research. It doesn't measure whether a model is a good tutor, whether it can teach effectively, or whether it's safe to deploy in a classroom.</p>
-          <p>A high score means the model knows what researchers know &mdash; not that it can apply that knowledge in a real classroom. These benchmarks are a starting point, not a finish line.</p>
+          <h2>What we claim and what we don't</h2>
+          <p>AlignED measures how well AI models perform on specific benchmark tasks related to professional teaching knowledge. It does not measure whether a model is a good tutor, whether it can teach effectively, or whether it is safe to deploy in a classroom.</p>
+          <p>A high score means the model answered these benchmark items correctly. It does not mean the model can apply that knowledge in a real classroom. These benchmarks are a starting point, not a finish line.</p>
 
           <div class="note">
-            <p><strong>In short:</strong> AlignED tests alignment with educational knowledge. High alignment is necessary but not sufficient for good educational AI. A model that doesn't know the research is unlikely to be helpful; a model that does know the research still needs to be evaluated for safety, bias, and pedagogical effectiveness before deployment.</p>
+            <p>AlignED tests performance on tasks related to educational knowledge. High performance is necessary but not sufficient for good educational AI. A model that cannot identify common neuromyths is unlikely to give good educational advice. But a model that can still needs to be evaluated for safety, bias, and pedagogical effectiveness before deployment.</p>
           </div>
 
-          <h2>Future research</h2>
-          <p>AlignED is an ongoing project. Our planned directions include:</p>
+          <h2>Planned work</h2>
+          <p>AlignED is an ongoing project. Planned directions include:</p>
           <ul>
-            <li><strong>Tracking capabilities over time</strong> &mdash; As models improve and costs decrease, we will re-evaluate to document progress</li>
-            <li><strong>New benchmarks</strong> &mdash; Lesson planning quality, unit design, and wellbeing/pastoral support are planned additions</li>
-            <li><strong>Composite score refinement</strong> &mdash; The current weighting scheme is preliminary; we plan to explore empirically-grounded alternatives</li>
-            <li><strong>Human validation studies</strong> &mdash; Comparing model performance to teacher panels, to calibrate what scores mean in practice</li>
-            <li><strong>Cross-cultural expansion</strong> &mdash; Extending pedagogical knowledge items beyond the Chilean context to improve generalisability</li>
+            <li>Tracking capabilities over time as models improve and costs decrease</li>
+            <li>New benchmark modules covering lesson planning quality, unit design, and wellbeing/pastoral support</li>
+            <li>Composite score refinement with empirically-grounded alternatives to the current weighting</li>
+            <li>Human validation studies comparing model performance to teacher panels</li>
+            <li>Cross-cultural expansion extending pedagogical knowledge items beyond the Chilean context</li>
           </ul>
 
           <div class="btn-group mt-4">
