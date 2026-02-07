@@ -447,16 +447,13 @@ function renderTokenChart(canvasId, metadataArr, compositeData) {
 /* ── Auto-detect which page we're on and render the right charts ── */
 document.addEventListener('DOMContentLoaded', async function() {
   try {
-    /* Index page: has eaiChart, neuromythsChart, pedagogyChart as top-10 horizontal bars */
-    if (document.getElementById('eaiChart') && !document.getElementById('scenariosChart')) {
-      const data = await loadCompositeData();
-      renderTopChart('eaiChart', data, 'composite', 'Educational Alignment Index');
-      renderTopChart('neuromythsChart', data, 'neuromyths_pct', 'Educational Neuroscience');
-      renderTopChart('pedagogyChart', data, 'pedagogy_pct', 'Pedagogical Knowledge');
-    }
+    /* Results page: has tokenChart (homepage does not) */
+    const isResultsPage = !!document.getElementById('tokenChart');
 
-    /* Results page: has scenariosChart (index page does not) */
-    if (document.getElementById('scenariosChart')) {
+    /* Homepage: has eaiChart but no tokenChart */
+    const isHomepage = !isResultsPage && !!document.getElementById('eaiChart');
+
+    if (isResultsPage) {
       const data = await loadCompositeData();
 
       /* Educational Alignment Index chart (all 21 models) */
@@ -481,9 +478,24 @@ document.addEventListener('DOMContentLoaded', async function() {
       }
 
       /* Token usage chart */
-      if (document.getElementById('tokenChart')) {
-        const metadata = await loadModelMetadata();
-        renderTokenChart('tokenChart', metadata, data);
+      const metadata = await loadModelMetadata();
+      renderTokenChart('tokenChart', metadata, data);
+    }
+
+    if (isHomepage) {
+      const data = await loadCompositeData();
+
+      /* All six benchmark charts with full model rankings */
+      renderAllModelsChart('eaiChart', data, 'composite', 'Educational Alignment Index');
+      renderAllModelsChart('neuromythsChart', data, 'neuromyths_pct', 'Educational Neuroscience');
+      renderAllModelsChart('scenariosChart', data, 'scenarios_pct', 'Implementation Scenarios');
+      renderAllModelsChart('cdpkChart', data, 'pedagogy_cdpk', 'General Pedagogical Knowledge');
+      renderAllModelsChart('sendChart', data, 'pedagogy_send', 'Special Education Needs & Disability');
+
+      /* ACARA chart */
+      if (document.getElementById('acaraChart')) {
+        const acaraData = await loadAcaraData();
+        renderAcaraChart('acaraChart', acaraData);
       }
     }
   } catch (error) {

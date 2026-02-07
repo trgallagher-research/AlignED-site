@@ -203,39 +203,36 @@
       margin-bottom: 1.5rem;
     }
 
-    /* Highlights Grid */
-    .highlights-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.5rem;
+    /* Chart Sections */
+    .chart-section {
+      padding: 2rem 0;
+      border-bottom: 1px solid var(--border);
     }
 
-    .chart-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 1.5rem;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    .chart-header {
+      margin-bottom: 1rem;
     }
 
-    .chart-card h3 {
-      font-size: 0.8rem;
+    .chart-title {
+      font-size: 1.25rem;
       font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
       color: var(--text);
       margin-bottom: 0.25rem;
     }
 
-    .chart-card .subtitle {
-      font-size: 0.85rem;
+    .chart-subtitle {
+      font-size: 0.9rem;
       color: var(--text-muted);
-      margin-bottom: 1rem;
     }
 
     .chart-container {
-      height: 400px;
       position: relative;
+      width: 100%;
+      height: 320px;
+      background: var(--surface);
+      border-radius: 8px;
+      padding: 1rem;
+      border: 1px solid var(--border);
     }
 
     /* Quick Links */
@@ -355,9 +352,6 @@
 
     /* Responsive */
     @media (max-width: 1024px) {
-      .highlights-grid {
-        grid-template-columns: 1fr;
-      }
       .quick-links-grid {
         grid-template-columns: repeat(2, 1fr);
       }
@@ -429,43 +423,83 @@
     </div>
   </section>
 
-  <!-- Highlights -->
-  <section id="highlights">
+  <!-- Rankings -->
+  <section id="rankings">
     <div class="container">
-      <div class="section-label">Highlights</div>
-      <div class="highlights-grid">
-        <!-- Overall Ranking Chart -->
-        <div class="chart-card">
-          <h3>Overall Ranking</h3>
-          <p class="subtitle">Composite score across all benchmark modules</p>
-          <div class="chart-container">
-            <canvas id="eaiChart"></canvas>
-          </div>
-        </div>
+      <div class="section-label">Rankings</div>
 
-        <!-- Brain Science Chart -->
-        <div class="chart-card">
-          <h3>Neuromyth Identification</h3>
-          <p class="subtitle">32 items adapted from Dekker et al. (2012). Average teacher accuracy: ~50%.</p>
-          <div class="chart-container">
-            <canvas id="neuromythsChart"></canvas>
-          </div>
+      <!-- Overall Ranking -->
+      <section class="chart-section">
+        <div class="chart-header">
+          <h2 class="chart-title">Overall Ranking</h2>
+          <p class="chart-subtitle">Composite score across all benchmark modules</p>
         </div>
+        <div class="chart-container">
+          <canvas id="eaiChart"></canvas>
+        </div>
+      </section>
 
-        <!-- Teaching Knowledge Chart -->
-        <div class="chart-card">
-          <h3>Teacher Certification Knowledge</h3>
-          <p class="subtitle">Performance on 1,143 items from certification assessments</p>
-          <div class="chart-container">
-            <canvas id="pedagogyChart"></canvas>
-          </div>
+      <!-- Neuromyth Identification -->
+      <section class="chart-section">
+        <div class="chart-header">
+          <h2 class="chart-title">Neuromyth Identification</h2>
+          <p class="chart-subtitle">32 items adapted from Dekker et al. (2012). Average teacher accuracy: ~50%.</p>
         </div>
-      </div>
+        <div class="chart-container">
+          <canvas id="neuromythsChart"></canvas>
+        </div>
+      </section>
+
+      <!-- Diagnostic Reasoning -->
+      <section class="chart-section">
+        <div class="chart-header">
+          <h2 class="chart-title">Diagnostic Reasoning</h2>
+          <p class="chart-subtitle">12 scenarios scored 0&ndash;3 by an LLM judge. Models must diagnose why an evidence-based strategy is failing.</p>
+        </div>
+        <div class="chart-container">
+          <canvas id="scenariosChart"></canvas>
+        </div>
+      </section>
+
+      <!-- General Pedagogical Knowledge -->
+      <section class="chart-section">
+        <div class="chart-header">
+          <h2 class="chart-title">General Pedagogical Knowledge</h2>
+          <p class="chart-subtitle">920 items covering cross-domain pedagogical knowledge from teacher certification exams</p>
+        </div>
+        <div class="chart-container">
+          <canvas id="cdpkChart"></canvas>
+        </div>
+      </section>
+
+      <!-- Inclusive Education -->
+      <section class="chart-section">
+        <div class="chart-header">
+          <h2 class="chart-title">Inclusive Education</h2>
+          <p class="chart-subtitle">223 items on special education needs and disability (SEND) from teacher certification exams</p>
+        </div>
+        <div class="chart-container">
+          <canvas id="sendChart"></canvas>
+        </div>
+      </section>
+
+      <!-- Student Work Judgement (ACARA) -->
+      <section class="chart-section" style="border-bottom: none;">
+        <div class="chart-header">
+          <h2 class="chart-title">Student Work Judgement (ACARA)</h2>
+          <p class="chart-subtitle">79 pairs of Australian student work samples. Accuracy and consistency across 12 models.</p>
+        </div>
+        <div class="chart-container">
+          <canvas id="acaraChart"></canvas>
+        </div>
+      </section>
 
       <div class="chart-legend">
         <div class="legend-item"><div class="legend-dot" style="background: #D97757;"></div> Anthropic</div>
         <div class="legend-item"><div class="legend-dot" style="background: #10A37F;"></div> OpenAI</div>
         <div class="legend-item"><div class="legend-dot" style="background: #4285F4;"></div> Google</div>
+        <div class="legend-item"><div class="legend-dot" style="background: #0668E1;"></div> Meta</div>
+        <div class="legend-item"><div class="legend-dot" style="background: #536DFE;"></div> DeepSeek</div>
       </div>
 
       <p style="margin-top: 1.25rem; font-size: 0.95rem; color: var(--text); max-width: 800px;">Top models score above 90%. The gap between best and worst exceeds 30 percentage points. Provider and model size both matter. <a href="results.html">See full results &rarr;</a></p>
