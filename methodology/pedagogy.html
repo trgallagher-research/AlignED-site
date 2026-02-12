@@ -22,8 +22,7 @@
         <a href="../methodology/" class="active">Methodology</a>
         <a href="../results.html">Results</a>
         <a href="../benchmark-items.html">Benchmark Items</a>
-        <a href="../data-access.html">Data</a>
-        <a href="../contact.html">Contact</a>
+        <a href="../data-access.html">Data & Contact</a>
       </nav>
     </div>
   </header>
@@ -124,7 +123,7 @@ Select the best answer.
                 <td>Adapted from Dekker et al. (2012)</td>
               </tr>
               <tr>
-                <td>Implementation Scenarios</td>
+                <td>Diagnostic Reasoning</td>
                 <td>Diagnostic reasoning</td>
                 <td>AlignED</td>
               </tr>
@@ -141,14 +140,21 @@ Select the best answer.
             </tbody>
           </table>
 
-          <h2>Composite Score Weighting</h2>
-          <p>In the Educational Alignment Index (EAI), pedagogical knowledge contributes 50% of the total score:</p>
-          <ul>
-            <li>Neuromyths + Scenarios: 50%</li>
-            <li>Pedagogical Knowledge (CDPK + SEND): 50%</li>
-          </ul>
+          <h2>Prompt template</h2>
+          <p>Each item is presented as a single user message with no system prompt. The model is asked to respond with the letter of the correct answer only.</p>
 
-          <p>This weighting reflects the importance of both misconception rejection and foundational pedagogical competence.</p>
+          <pre><code>Teacher certification exam - respond with letter only.
+
+[Question stem]
+
+A. [Option A]
+B. [Option B]
+C. [Option C]
+D. [Option D]
+
+Your answer (A/B/C/D):</code></pre>
+
+          <p>No additional instructions are provided. Items are sourced from the <a href="https://huggingface.co/datasets/AI-for-Education/pedagogy-benchmark" target="_blank">pedagogy-benchmark dataset on HuggingFace</a>.</p>
 
           <h2>Key Findings</h2>
           <ul>
@@ -171,7 +177,7 @@ Select the best answer.
       <div class="footer-content">
         <div class="footer-brand">
           <a href="../index.html" class="logo">AlignED</a>
-          <p>Transparent benchmarks for AI in education</p>
+          <p>Benchmarking AI performance on professional teaching tasks.</p>
         </div>
         <div class="footer-links">
           <h4>Navigation</h4>
@@ -180,18 +186,18 @@ Select the best answer.
             <li><a href="../methodology/">Methodology</a></li>
             <li><a href="../results.html">Results</a></li>
             <li><a href="../benchmark-items.html">Benchmark Items</a></li>
-            <li><a href="../data-access.html">Data</a></li>
+            <li><a href="../data-access.html">Data & Contact</a></li>
           </ul>
         </div>
         <div class="footer-links">
           <h4>Resources</h4>
           <ul>
-            <li><a href="../contact.html">Contact</a></li>
             <li><a href="https://github.com/trgallagher-research/AlignED-site" target="_blank">GitHub</a></li>
           </ul>
         </div>
       </div>
       <p class="copyright">&copy; 2026 AlignED. All rights reserved.</p>
+      <p class="copyright">Last updated: February 2026</p>
     </div>
   </footer>
 

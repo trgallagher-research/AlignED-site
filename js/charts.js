@@ -1,9 +1,9 @@
 /**
  * AlignED Chart Rendering Module
  *
- * Loads benchmark data from JSON files and renders Chart.js charts
- * across the index and results pages. Supports single-tier composite
- * scoring (EAI) for 21 models.
+ * Loads benchmark data from per-eval JSON files and renders Chart.js charts
+ * across the index and results pages. Each evaluation has its own data file
+ * and model pool. There is no composite score.
  */
 
 /* ── Provider color mapping ── */
@@ -27,24 +27,59 @@ function getProviderColor(provider) {
   return PROVIDER_COLORS[provider] || '#6B7280';
 }
 
+/* ── Data loaders ── */
+
 /**
- * Fetches and parses the composite scores JSON file.
+ * Fetches and parses the neuromyths scores JSON file.
  *
- * @returns {Promise<Array>} Array of model result objects
+ * @returns {Promise<Array>} Array of neuromyth result objects
  */
-async function loadCompositeData() {
-  const response = await fetch('data/composite_scores.json');
+async function loadNeuromythsData() {
+  const response = await fetch('data/neuromyths_scores.json');
   const json = await response.json();
   return json.results;
 }
 
 /**
- * Fetches and parses the ACARA scores JSON file.
+ * Fetches and parses the scenarios scores JSON file.
  *
- * @returns {Promise<Array>} Array of ACARA result objects
+ * @returns {Promise<Array>} Array of scenario result objects
+ */
+async function loadScenariosData() {
+  const response = await fetch('data/scenarios_scores.json');
+  const json = await response.json();
+  return json.results;
+}
+
+/**
+ * Fetches and parses the pedagogy scores JSON file.
+ *
+ * @returns {Promise<Array>} Array of pedagogy result objects
+ */
+async function loadPedagogyData() {
+  const response = await fetch('data/pedagogy_scores.json');
+  const json = await response.json();
+  return json.results;
+}
+
+/**
+ * Fetches and parses the ACARA comparative judgement scores JSON file.
+ *
+ * @returns {Promise<Array>} Array of ACARA CJ result objects
  */
 async function loadAcaraData() {
   const response = await fetch('data/acara_scores.json');
+  const json = await response.json();
+  return json.results;
+}
+
+/**
+ * Fetches and parses the ACARA standards-based grading scores JSON file.
+ *
+ * @returns {Promise<Array>} Array of ACARA SG result objects
+ */
+async function loadAcaraSgData() {
+  const response = await fetch('data/acara_standards_grading_scores.json');
   const json = await response.json();
   return json.results;
 }
@@ -60,13 +95,15 @@ async function loadModelMetadata() {
   return json.models;
 }
 
+/* ── Chart rendering functions ── */
+
 /**
  * Renders a horizontal bar chart showing the top N models for a given metric.
  * Used on the index/home page for the highlights section.
  *
  * @param {string} canvasId - The id of the <canvas> element
- * @param {Array} data - Array of model objects from composite data
- * @param {string} metric - The field name to chart (e.g. "composite")
+ * @param {Array} data - Array of model objects
+ * @param {string} metric - The field name to chart (e.g. "score_pct")
  * @param {string} label - Human-readable axis label
  * @param {number} count - How many top models to show (default 10)
  */
@@ -132,11 +169,12 @@ function renderTopChart(canvasId, data, metric, label, count = 10) {
  * Used on the results page for detailed breakdowns.
  *
  * @param {string} canvasId - The id of the <canvas> element
- * @param {Array} data - Array of model objects from composite data
- * @param {string} metric - The field name to chart (e.g. "composite")
+ * @param {Array} data - Array of model objects
+ * @param {string} metric - The field name to chart (e.g. "score_pct")
  * @param {string} label - Human-readable axis label
+ * @param {Object} options - Optional overrides (e.g. { yMin: 0 })
  */
-function renderAllModelsChart(canvasId, data, metric, label) {
+function renderAllModelsChart(canvasId, data, metric, label, options = {}) {
   const canvas = document.getElementById(canvasId);
   if (!canvas) return;
 
@@ -173,7 +211,7 @@ function renderAllModelsChart(canvasId, data, metric, label) {
       },
       scales: {
         y: {
-          min: 50,
+          min: options.yMin != null ? options.yMin : 50,
           max: 100,
           grid: { color: '#E2E6EA' },
           ticks: {
@@ -195,11 +233,11 @@ function renderAllModelsChart(canvasId, data, metric, label) {
 }
 
 /**
- * Renders a grouped bar chart for ACARA results showing accuracy
- * and consistency side by side for each model.
+ * Renders a grouped bar chart for ACARA CJ results showing accuracy
+ * and reliability side by side for each model.
  *
  * @param {string} canvasId - The id of the <canvas> element
- * @param {Array} data - Array of ACARA result objects
+ * @param {Array} data - Array of ACARA CJ result objects
  */
 function renderAcaraChart(canvasId, data) {
   const canvas = document.getElementById(canvasId);
@@ -210,7 +248,7 @@ function renderAcaraChart(canvasId, data) {
 
   const labels = sorted.map(m => m.model);
   const accuracyValues = sorted.map(m => m.accuracy);
-  const consistencyValues = sorted.map(m => m.consistency);
+  const reliabilityValues = sorted.map(m => m.reliability);
   const barColors = sorted.map(m => getProviderColor(m.provider));
 
   new Chart(canvas, {
@@ -226,9 +264,9 @@ function renderAcaraChart(canvasId, data) {
           barPercentage: 0.8
         },
         {
-          label: 'Consistency',
-          data: consistencyValues,
-          backgroundColor: barColors.map(c => c + '80'),  /* 50% opacity */
+          label: 'Reliability',
+          data: reliabilityValues,
+          backgroundColor: barColors.map(c => c + '80'),
           borderRadius: 4,
           barPercentage: 0.8
         }
@@ -275,14 +313,102 @@ function renderAcaraChart(canvasId, data) {
 }
 
 /**
- * Renders a scatter/timeline chart showing model release dates on the X axis
- * and composite scores on the Y axis. Each point is colored by provider.
+ * Renders a grouped bar chart for ACARA Standards-Based Grading results.
+ * Shows per-level accuracy (Above Satisfactory, Satisfactory, Below Satisfactory)
+ * for each model, sorted by overall accuracy.
  *
  * @param {string} canvasId - The id of the <canvas> element
- * @param {Array} compositeData - Array of model objects with composite scores
+ * @param {Array} data - Array of ACARA SG result objects
+ */
+function renderAcaraSgChart(canvasId, data) {
+  const canvas = document.getElementById(canvasId);
+  if (!canvas) return;
+
+  /* Sort by overall accuracy descending */
+  const sorted = [...data].sort((a, b) => b.overall_accuracy - a.overall_accuracy);
+
+  const labels = sorted.map(m => m.model);
+  const barColors = sorted.map(m => getProviderColor(m.provider));
+
+  new Chart(canvas, {
+    type: 'bar',
+    data: {
+      labels: labels,
+      datasets: [
+        {
+          label: 'Above Satisfactory',
+          data: sorted.map(m => m.above_sat_accuracy),
+          backgroundColor: '#EF4444',
+          borderRadius: 4,
+          barPercentage: 0.8
+        },
+        {
+          label: 'Satisfactory',
+          data: sorted.map(m => m.sat_accuracy),
+          backgroundColor: '#F59E0B',
+          borderRadius: 4,
+          barPercentage: 0.8
+        },
+        {
+          label: 'Below Satisfactory',
+          data: sorted.map(m => m.below_sat_accuracy),
+          backgroundColor: '#10B981',
+          borderRadius: 4,
+          barPercentage: 0.8
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          display: true,
+          position: 'top',
+          labels: { font: { size: 11 } }
+        },
+        tooltip: {
+          callbacks: {
+            label: function(ctx) {
+              return ctx.dataset.label + ': ' + ctx.raw.toFixed(1) + '%';
+            }
+          }
+        }
+      },
+      scales: {
+        y: {
+          min: 0,
+          max: 100,
+          grid: { color: '#E2E6EA' },
+          ticks: {
+            callback: function(v) { return v + '%'; },
+            font: { size: 11 }
+          }
+        },
+        x: {
+          grid: { display: false },
+          ticks: {
+            font: { size: 9 },
+            maxRotation: 45,
+            minRotation: 45
+          }
+        }
+      }
+    }
+  });
+}
+
+/**
+ * Renders a scatter/timeline chart showing model release dates on the X axis
+ * and a score metric on the Y axis. Each point is colored by provider.
+ *
+ * @param {string} canvasId - The id of the <canvas> element
+ * @param {Array} scoreData - Array of model objects with the score metric
+ * @param {string} scoreField - The field name for the Y axis value
+ * @param {string} yLabel - Human-readable Y axis label
  * @param {Array} metadataArr - Array of model metadata objects with release_date
  */
-function renderTimelineChart(canvasId, compositeData, metadataArr) {
+function renderTimelineChart(canvasId, scoreData, scoreField, yLabel, metadataArr) {
   const canvas = document.getElementById(canvasId);
   if (!canvas) return;
 
@@ -290,11 +416,11 @@ function renderTimelineChart(canvasId, compositeData, metadataArr) {
   const metaMap = {};
   metadataArr.forEach(m => { metaMap[m.model] = m; });
 
-  /* Build scatter data points: x = release date as timestamp, y = composite */
+  /* Build scatter data points: x = release date as timestamp, y = score */
   const points = [];
-  compositeData.forEach(m => {
+  scoreData.forEach(m => {
     const meta = metaMap[m.model];
-    if (!meta || !meta.release_date || m.composite == null) return;
+    if (!meta || !meta.release_date || m[scoreField] == null) return;
 
     /* Parse YYYY-MM to a date (use 15th of month as midpoint) */
     const parts = meta.release_date.split('-');
@@ -302,7 +428,7 @@ function renderTimelineChart(canvasId, compositeData, metadataArr) {
 
     points.push({
       x: dateObj.getTime(),
-      y: m.composite,
+      y: m[scoreField],
       model: m.model,
       provider: m.provider,
       color: getProviderColor(m.provider)
@@ -358,9 +484,9 @@ function renderTimelineChart(canvasId, compositeData, metadataArr) {
           grid: { color: '#E2E6EA' }
         },
         y: {
-          min: 55,
+          min: 50,
           max: 95,
-          title: { display: true, text: 'Educational Alignment Index (%)', font: { size: 12 } },
+          title: { display: true, text: yLabel, font: { size: 12 } },
           grid: { color: '#E2E6EA' },
           ticks: {
             callback: function(v) { return v + '%'; },
@@ -378,15 +504,10 @@ function renderTimelineChart(canvasId, compositeData, metadataArr) {
  *
  * @param {string} canvasId - The id of the <canvas> element
  * @param {Array} metadataArr - Array of model metadata objects with survey_scenario_tokens
- * @param {Array} compositeData - Array of composite data for provider colors
  */
-function renderTokenChart(canvasId, metadataArr, compositeData) {
+function renderTokenChart(canvasId, metadataArr) {
   const canvas = document.getElementById(canvasId);
   if (!canvas) return;
-
-  /* Build a lookup from model name to provider */
-  const providerMap = {};
-  compositeData.forEach(m => { providerMap[m.model] = m.provider; });
 
   /* Filter to models with token data, sort by total tokens descending */
   const withTokens = metadataArr
@@ -395,7 +516,7 @@ function renderTokenChart(canvasId, metadataArr, compositeData) {
 
   const labels = withTokens.map(m => m.model);
   const values = withTokens.map(m => m.survey_scenario_tokens);
-  const colors = withTokens.map(m => getProviderColor(providerMap[m.model] || m.provider));
+  const colors = withTokens.map(m => getProviderColor(m.provider));
 
   new Chart(canvas, {
     type: 'bar',
@@ -444,57 +565,73 @@ function renderTokenChart(canvasId, metadataArr, compositeData) {
   });
 }
 
-/* ── Auto-detect which page we're on and render the right charts ── */
+/* ── Page initialisation ── */
 document.addEventListener('DOMContentLoaded', async function() {
   try {
-    /* Results page: has tokenChart (homepage does not) */
-    const isResultsPage = !!document.getElementById('tokenChart');
+    /* Results page: has acaraSgChart (unique to results page) */
+    const isResultsPage = !!document.getElementById('acaraSgChart');
 
-    /* Homepage: has eaiChart but no tokenChart */
-    const isHomepage = !isResultsPage && !!document.getElementById('eaiChart');
+    /* Homepage: has neuromythsChart but no acaraSgChart */
+    const isHomepage = !isResultsPage && !!document.getElementById('neuromythsChart');
 
     if (isResultsPage) {
-      const data = await loadCompositeData();
+      /* Load all per-eval data files in parallel */
+      const [neuromythsData, scenariosData, pedagogyData, acaraData, acaraSgData, metadata] =
+        await Promise.all([
+          loadNeuromythsData(),
+          loadScenariosData(),
+          loadPedagogyData(),
+          loadAcaraData(),
+          loadAcaraSgData(),
+          loadModelMetadata()
+        ]);
 
-      /* Educational Alignment Index chart (all 21 models) */
-      renderAllModelsChart('eaiChart', data, 'composite', 'Educational Alignment Index');
+      /* Neuromyth identification (31 models) */
+      renderAllModelsChart('neuromythsChart', neuromythsData, 'score_pct', 'Neuromyth Identification');
 
-      /* Individual benchmark charts */
-      renderAllModelsChart('neuromythsChart', data, 'neuromyths_pct', 'Educational Neuroscience');
-      renderAllModelsChart('scenariosChart', data, 'scenarios_pct', 'Implementation Scenarios');
-      renderAllModelsChart('cdpkChart', data, 'pedagogy_cdpk', 'General Pedagogical Knowledge');
-      renderAllModelsChart('sendChart', data, 'pedagogy_send', 'Special Education Needs & Disability');
+      /* Diagnostic reasoning (30 models) */
+      renderAllModelsChart('scenariosChart', scenariosData, 'score_pct', 'Diagnostic Reasoning');
 
-      /* ACARA chart */
-      if (document.getElementById('acaraChart')) {
-        const acaraData = await loadAcaraData();
-        renderAcaraChart('acaraChart', acaraData);
-      }
+      /* Teacher certification knowledge (23 models) */
+      renderAllModelsChart('cdpkChart', pedagogyData, 'pedagogy_cdpk_pct', 'General Pedagogical Knowledge');
+      renderAllModelsChart('sendChart', pedagogyData, 'pedagogy_send_pct', 'Inclusive Education');
 
-      /* Timeline chart — requires date adapter for time scale */
-      if (document.getElementById('timelineChart')) {
-        const metadata = await loadModelMetadata();
-        renderTimelineChart('timelineChart', data, metadata);
-      }
+      /* ACARA comparative judgement (12 models) */
+      renderAcaraChart('acaraChart', acaraData);
+
+      /* ACARA standards-based grading pilot (7 models) */
+      renderAcaraSgChart('acaraSgChart', acaraSgData);
 
       /* Token usage chart */
-      const metadata = await loadModelMetadata();
-      renderTokenChart('tokenChart', metadata, data);
+      renderTokenChart('tokenChart', metadata);
+
+      /* Timeline chart using pedagogy total score */
+      renderTimelineChart(
+        'timelineChart',
+        pedagogyData,
+        'pedagogy_total_pct',
+        'Teacher Certification Knowledge (%)',
+        metadata
+      );
     }
 
     if (isHomepage) {
-      const data = await loadCompositeData();
+      /* Load data files for homepage charts */
+      const [neuromythsData, scenariosData, pedagogyData, acaraData] =
+        await Promise.all([
+          loadNeuromythsData(),
+          loadScenariosData(),
+          loadPedagogyData(),
+          loadAcaraData()
+        ]);
 
-      /* All six benchmark charts with full model rankings */
-      renderAllModelsChart('eaiChart', data, 'composite', 'Educational Alignment Index');
-      renderAllModelsChart('neuromythsChart', data, 'neuromyths_pct', 'Educational Neuroscience');
-      renderAllModelsChart('scenariosChart', data, 'scenarios_pct', 'Implementation Scenarios');
-      renderAllModelsChart('cdpkChart', data, 'pedagogy_cdpk', 'General Pedagogical Knowledge');
-      renderAllModelsChart('sendChart', data, 'pedagogy_send', 'Special Education Needs & Disability');
+      /* Render whichever chart canvases exist on the homepage */
+      renderAllModelsChart('neuromythsChart', neuromythsData, 'score_pct', 'Neuromyth Identification');
+      renderAllModelsChart('scenariosChart', scenariosData, 'score_pct', 'Diagnostic Reasoning');
+      renderAllModelsChart('cdpkChart', pedagogyData, 'pedagogy_cdpk_pct', 'General Pedagogical Knowledge');
+      renderAllModelsChart('sendChart', pedagogyData, 'pedagogy_send_pct', 'Inclusive Education');
 
-      /* ACARA chart */
       if (document.getElementById('acaraChart')) {
-        const acaraData = await loadAcaraData();
         renderAcaraChart('acaraChart', acaraData);
       }
     }

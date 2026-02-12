@@ -1,5 +1,5 @@
 {
-  "generated": "2026-02-06",
+  "generated": "2026-02-12",
   "description": "Model release dates and API pricing for AlignED benchmark models",
   "notes": {
     "pricing": "USD per million tokens, as of February 2026. Thinking models bill reasoning tokens at output rate.",
@@ -152,12 +152,28 @@
       "survey_scenario_tokens": 6422
     },
     {
+      "model": "Claude 3.5 Sonnet",
+      "provider": "Anthropic",
+      "release_date": "2024-06",
+      "cost_per_m_input": 3.00,
+      "cost_per_m_output": 15.00,
+      "survey_scenario_tokens": null
+    },
+    {
       "model": "Claude 3.5 Haiku",
       "provider": "Anthropic",
       "release_date": "2024-11",
       "cost_per_m_input": 0.80,
       "cost_per_m_output": 4.00,
       "survey_scenario_tokens": 6505
+    },
+    {
+      "model": "Claude 3 Opus",
+      "provider": "Anthropic",
+      "release_date": "2024-03",
+      "cost_per_m_input": 15.00,
+      "cost_per_m_output": 75.00,
+      "survey_scenario_tokens": null
     },
     {
       "model": "Claude 3 Haiku",
@@ -184,6 +200,14 @@
       "survey_scenario_tokens": null
     },
     {
+      "model": "Gemini 2.5 Flash",
+      "provider": "Google",
+      "release_date": "2025-05",
+      "cost_per_m_input": 0.15,
+      "cost_per_m_output": 0.60,
+      "survey_scenario_tokens": null
+    },
+    {
       "model": "Gemini 2.0 Flash",
       "provider": "Google",
       "release_date": "2025-02",
@@ -197,6 +221,38 @@
       "release_date": "2024-12",
       "cost_per_m_input": 0.10,
       "cost_per_m_output": 0.32,
+      "survey_scenario_tokens": null
+    },
+    {
+      "model": "Llama 3.1 405B",
+      "provider": "Meta",
+      "release_date": "2024-07",
+      "cost_per_m_input": 0.80,
+      "cost_per_m_output": 0.80,
+      "survey_scenario_tokens": null
+    },
+    {
+      "model": "Llama 3.1 70B",
+      "provider": "Meta",
+      "release_date": "2024-07",
+      "cost_per_m_input": 0.10,
+      "cost_per_m_output": 0.32,
+      "survey_scenario_tokens": null
+    },
+    {
+      "model": "DeepSeek V3",
+      "provider": "DeepSeek",
+      "release_date": "2024-12",
+      "cost_per_m_input": 0.14,
+      "cost_per_m_output": 0.28,
+      "survey_scenario_tokens": null
+    },
+    {
+      "model": "DeepSeek R1",
+      "provider": "DeepSeek",
+      "release_date": "2025-01",
+      "cost_per_m_input": 0.55,
+      "cost_per_m_output": 2.19,
       "survey_scenario_tokens": null
     },
     {

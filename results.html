@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Evaluation Results - AlignED</title>
-  <meta name="description" content="Complete evaluation results for 21 AI models tested on AlignED v2 benchmarks, including Educational Alignment Index composite scoring and separate ACARA student work judgement.">
+  <meta name="description" content="Benchmark results for AI models across four evaluation areas and six benchmarks of professional teaching knowledge: neuromyth identification, diagnostic reasoning, teacher certification knowledge, and student work judgement.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -129,18 +129,77 @@
     }
     .note strong { color: var(--primary); }
 
+    /* Pilot badge */
+    .pilot-badge {
+      display: inline-block;
+      background: #FEF3C7;
+      color: #92400E;
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 0.2rem 0.6rem;
+      border-radius: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-left: 0.5rem;
+      vertical-align: middle;
+    }
+
+    /* Section divider */
+    .section-divider {
+      padding: 2.5rem 0 0.5rem;
+      border-top: 3px solid var(--primary);
+      margin-top: 1rem;
+    }
+
+    .section-divider h2 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 0.25rem;
+    }
+
+    .section-divider p {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      max-width: 800px;
+    }
+
     /* Footer */
     footer {
       background: var(--dark-header);
       color: white;
-      padding: 2rem 0;
+      padding: 3rem 0 2rem;
       margin-top: 2rem;
     }
-    .footer-bottom {
-      font-size: 0.85rem;
-      color: rgba(255,255,255,0.5);
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      gap: 2rem;
+      margin-bottom: 2rem;
     }
-    .footer-bottom a { color: rgba(255,255,255,0.7); }
+    .footer-brand p {
+      color: rgba(255,255,255,0.6);
+      font-size: 0.875rem;
+    }
+    .footer-links h4 {
+      font-size: 0.875rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 1rem;
+    }
+    .footer-links ul { list-style: none; }
+    .footer-links li { margin-bottom: 0.5rem; }
+    .footer-links a {
+      color: rgba(255,255,255,0.6);
+      font-size: 0.875rem;
+    }
+    .footer-links a:hover { color: white; }
+    .copyright {
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.4);
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding-top: 1.5rem;
+    }
 
     @media (max-width: 768px) {
       .nav-links { display: none; }
@@ -159,8 +218,7 @@
         <a href="methodology/">Methodology</a>
         <a href="results.html" class="active">Results</a>
         <a href="benchmark-items.html">Benchmark Items</a>
-        <a href="data-access.html">Data</a>
-        <a href="contact.html">Contact</a>
+        <a href="data-access.html">Data & Contact</a>
       </div>
     </div>
   </nav>
@@ -169,7 +227,8 @@
   <div class="page-header">
     <div class="container">
       <h1>Evaluation Results</h1>
-      <p>AlignED v2 tested 21 models across three benchmark modules (educational neuroscience, classroom reasoning, and pedagogical knowledge), with a separate evaluation of student work judgement (ACARA).</p>
+      <p>Four evaluation areas, six benchmarks, each with its own model pool and scoring method. Results are reported separately because performance on one benchmark does not predict performance on another.</p>
+      <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.5rem;">AlignED is an active research project. Results are updated as new models and evaluations are added. Current data: February 2026.</p>
     </div>
   </div>
 
@@ -202,32 +261,11 @@
   <!-- Charts -->
   <div class="container">
 
-    <!-- Educational Alignment Index -->
-    <section class="chart-section">
-      <div class="chart-header">
-        <h2 class="chart-title">Overall Ranking</h2>
-        <p class="chart-subtitle">The Educational Alignment Index (EAI) combines three benchmarks: educational neuroscience (25%), classroom reasoning (25%), and pedagogical knowledge (50%). All 21 models are ranked on the same composite.</p>
-      </div>
-
-      <div class="chart-container">
-        <canvas id="eaiChart"></canvas>
-      </div>
-
-      <div style="margin-top: 1rem; font-size: 0.9rem; color: var(--text);">
-        <strong>Key observations:</strong>
-        <ul style="margin-top: 0.5rem; padding-left: 1.25rem; color: var(--text-muted);">
-          <li>GPT-5 leads the composite at 91.7%.</li>
-          <li>A 31-point gap separates the highest and lowest scoring models.</li>
-          <li>OpenAI and Anthropic models both appear in the top 5.</li>
-        </ul>
-      </div>
-    </section>
-
-    <!-- Educational Neuroscience (Neuromyths) -->
+    <!-- Neuromyth Identification -->
     <section class="chart-section">
       <div class="chart-header">
         <h2 class="chart-title">Neuromyth Identification</h2>
-        <p class="chart-subtitle">32 items: 15 widely-believed myths about the brain and learning, plus 17 verified neuroscience facts. Models must correctly classify each one. The average teacher gets about 50% right on this survey (Dekker et al., 2012).</p>
+        <p class="chart-subtitle">31 models tested on 32 items. Human teacher baseline: ~50%. <a href="methodology/neuromyths.html">Methodology &rarr;</a></p>
       </div>
       <div class="chart-container">
         <canvas id="neuromythsChart"></canvas>
@@ -235,18 +273,18 @@
       <div style="margin-top: 1rem; font-size: 0.9rem; color: var(--text);">
         <strong>Key observations:</strong>
         <ul style="margin-top: 0.5rem; padding-left: 1.25rem; color: var(--text-muted);">
-          <li>GPT-5 and Claude 4.5 Opus (Thinking) lead at 92.9%.</li>
-          <li>Even the lowest-scoring model (GPT-4o Mini, 54.5%) edges past the human teacher baseline of ~50%.</li>
-          <li>Several mid-tier models score above 85%, suggesting factual neuroscience knowledge is relatively strong across providers.</li>
+          <li>Gemini 3 Flash leads at 93.8%, followed by Claude 4.5 Opus (Thinking) and GPT-5 tied at 92.9%.</li>
+          <li>All 31 models scored above the ~50% human teacher baseline, with even the lowest (GPT-4o Mini) reaching 65.6%.</li>
+          <li>Most models answered 28 of 32 items; five models were run on the full 32-item survey with the v2 corrected answer key.</li>
         </ul>
       </div>
     </section>
 
-    <!-- Classroom Reasoning (Scenarios) -->
+    <!-- Diagnostic Reasoning (Scenarios) -->
     <section class="chart-section">
       <div class="chart-header">
         <h2 class="chart-title">Diagnostic Reasoning</h2>
-        <p class="chart-subtitle">12 realistic situations where an evidence-based teaching strategy isn't working. The model must explain why, not just describe the strategy. Each response is scored 0&ndash;3 by an LLM judge (Claude 4.5 Sonnet), with a sample of judgements validated by humans.</p>
+        <p class="chart-subtitle">30 models tested on 12 scenarios, scored 0&ndash;3 by LLM judge. <a href="methodology/scenarios.html">Methodology &rarr;</a></p>
       </div>
       <div class="chart-container">
         <canvas id="scenariosChart"></canvas>
@@ -254,24 +292,24 @@
       <div style="margin-top: 1rem; font-size: 0.9rem; color: var(--text);">
         <strong>Key observations:</strong>
         <ul style="margin-top: 0.5rem; padding-left: 1.25rem; color: var(--text-muted);">
-          <li>Two models achieve perfect scores: GPT-5 and o3.</li>
-          <li>Reasoning-focused models (o3, thinking variants) perform well on this diagnostic task.</li>
-          <li>This benchmark has the widest spread of any, from 100% down to 55.6%, making it the most discriminating module.</li>
+          <li>Three models achieved perfect scores (36/36): Claude 4.5 Sonnet, GPT-5, and GPT-5.2.</li>
+          <li>Scores ranged from 100% down to 61.1% (GPT-4o Mini), making this the most discriminating benchmark.</li>
+          <li>Most frontier models scored 94% or above (34+/36), suggesting diagnostic reasoning is relatively strong at the top end.</li>
         </ul>
       </div>
     </section>
 
-    <!-- Pedagogical Knowledge parent heading -->
-    <div style="padding: 2rem 0 0;">
-      <h2 style="font-size: 1.4rem; font-weight: 700; color: var(--text); margin-bottom: 0.25rem;">Teacher Certification Knowledge</h2>
-      <p style="font-size: 0.95rem; color: var(--text-muted); max-width: 800px;">1,143 items from teacher certification assessments, split into general pedagogical knowledge (920 items) and inclusive education (223 items), shown separately below.</p>
+    <!-- Teacher Certification Knowledge parent heading -->
+    <div class="section-divider">
+      <h2>Teacher Certification Knowledge</h2>
+      <p>1,143 items from Chilean teacher certification exams. 23 models tested. <a href="methodology/pedagogy.html">Methodology &rarr;</a></p>
     </div>
 
     <!-- CDPK (General Pedagogical Knowledge) -->
     <section class="chart-section">
       <div class="chart-header">
         <h2 class="chart-title">General Pedagogical Knowledge</h2>
-        <p class="chart-subtitle">920 items covering cross-domain pedagogical knowledge from teacher certification exams</p>
+        <p class="chart-subtitle">920 items, general pedagogical knowledge. 23 models tested.</p>
       </div>
       <div class="chart-container">
         <canvas id="cdpkChart"></canvas>
@@ -279,9 +317,9 @@
       <div style="margin-top: 1rem; font-size: 0.9rem; color: var(--text);">
         <strong>Key observations:</strong>
         <ul style="margin-top: 0.5rem; padding-left: 1.25rem; color: var(--text-muted);">
-          <li>Gemini 2.5 Pro leads at 89.3% despite ranking #14 overall, the highest pedagogical knowledge score of any model tested.</li>
-          <li>Anthropic models cluster in the 78&ndash;89% range, showing consistent but varied performance.</li>
-          <li>The gap between top and bottom is smaller here than on other benchmarks, suggesting general pedagogical knowledge is more evenly distributed across models.</li>
+          <li>Gemini 2.5 Pro leads at 89.3%, the highest pedagogical knowledge score of any model tested.</li>
+          <li>Claude 4.5 Opus is close behind at 88.7%, and several models cluster above 83%.</li>
+          <li>The gap between top and bottom is narrower here than on other benchmarks, suggesting general pedagogical knowledge is more evenly distributed across models.</li>
         </ul>
       </div>
     </section>
@@ -290,7 +328,7 @@
     <section class="chart-section">
       <div class="chart-header">
         <h2 class="chart-title">Inclusive Education</h2>
-        <p class="chart-subtitle">223 items on special education needs and disability (SEND) from teacher certification exams</p>
+        <p class="chart-subtitle">223 items, inclusive education (SEND). 23 models tested.</p>
       </div>
       <div class="chart-container">
         <canvas id="sendChart"></canvas>
@@ -298,23 +336,23 @@
       <div style="margin-top: 1rem; font-size: 0.9rem; color: var(--text);">
         <strong>Key observations:</strong>
         <ul style="margin-top: 0.5rem; padding-left: 1.25rem; color: var(--text-muted);">
-          <li>Claude 4.5 Opus leads at 85.7%, closely followed by Gemini 2.5 Pro at 85.2%.</li>
+          <li>Claude 4.5 Opus and Claude 4.5 Sonnet (Thinking) share the lead at 85.7%.</li>
           <li>Models generally score lower on inclusive education than general pedagogy, a potential gap in training data.</li>
-          <li>The smallest models (Claude 3 Haiku, GPT-4o Mini) fall below 70%, a sharper drop-off than on general pedagogical knowledge.</li>
+          <li>The smallest models (Claude 3 Haiku at 57.4%, GPT-4o Mini at 69.5%) show a sharper drop-off than on general pedagogical knowledge.</li>
         </ul>
       </div>
     </section>
 
-    <!-- Student Work Judgement (ACARA) -->
-    <div style="padding: 2.5rem 0 0.5rem; border-top: 3px solid var(--primary); margin-top: 1rem;">
-      <h2 style="font-size: 1.4rem; font-weight: 700; color: var(--text); margin-bottom: 0.25rem;">Student Work Judgement (Separate Evaluation)</h2>
-      <p style="font-size: 0.95rem; color: var(--text-muted); max-width: 800px;">The EAI measures performance on knowledge and reasoning benchmarks. ACARA measures something different: applied assessment judgement, specifically whether a model can compare real student work against curriculum standards. Because it tests a different capability and uses a partially different pool of models (12 models, including 4 not in the main evaluation), ACARA results are reported separately.</p>
+    <!-- Student Work Judgement (ACARA Comparative Judgement) -->
+    <div class="section-divider">
+      <h2>Student Work Judgement</h2>
+      <p>Applied assessment judgement rather than knowledge recall. 12 models tested on comparative judgement, 7 on standards-based grading (pilot). <a href="methodology/acara.html">Methodology &rarr;</a></p>
     </div>
 
     <section class="chart-section">
       <div class="chart-header">
-        <h2 class="chart-title">Accuracy and Consistency</h2>
-        <p class="chart-subtitle">79 pairs of Australian student work samples. Tested in both orders to check for position bias. 12 models evaluated. <a href="methodology/acara.html">View methodology &rarr;</a></p>
+        <h2 class="chart-title">Comparative Judgement: Accuracy and Reliability</h2>
+        <p class="chart-subtitle">79 pairs of student work, tested in both presentation orders. 12 models.</p>
       </div>
       <div class="chart-container" style="height: 380px;">
         <canvas id="acaraChart"></canvas>
@@ -322,23 +360,45 @@
       <div style="margin-top: 1rem; font-size: 0.9rem; color: var(--text);">
         <strong>Key observations:</strong>
         <ul style="margin-top: 0.5rem; padding-left: 1.25rem; color: var(--text-muted);">
-          <li>No clear correlation with the EAI. Claude 4.5 Haiku (#15 on the composite) is #3 on ACARA accuracy.</li>
-          <li>GPT-5 has the highest consistency (94.1%) but not the highest accuracy, suggesting strong position-invariance.</li>
-          <li>Gemini 3 Flash shows a notable accuracy-consistency gap (81% vs 69%), suggesting position bias in its judgements.</li>
+          <li>Rankings here do not predict rankings on other benchmarks. Each evaluation tests a different capability.</li>
+          <li>GPT-5 has the highest reliability (94.1%) but not the highest accuracy, suggesting strong position-invariance.</li>
+          <li>Gemini 3 Flash shows a notable accuracy-reliability gap (81% vs 69%), suggesting position bias in its judgements.</li>
         </ul>
       </div>
     </section>
 
+    <!-- ACARA Standards-Based Grading (Pilot) -->
+    <section class="chart-section">
+      <div class="chart-header">
+        <h2 class="chart-title">Standards-Based Grading <span class="pilot-badge">Pilot</span></h2>
+        <p class="chart-subtitle">7 models tested on 204 cases. Absolute classification against ACARA standards.</p>
+      </div>
+      <div class="chart-container" style="height: 300px;">
+        <canvas id="acaraSgChart"></canvas>
+      </div>
+      <div style="margin-top: 1rem; font-size: 0.9rem; color: var(--text);">
+        <strong>Key observations:</strong>
+        <ul style="margin-top: 0.5rem; padding-left: 1.25rem; color: var(--text-muted);">
+          <li>Overall accuracy was 50.1% across all seven models. All models showed strong central tendency bias, over-predicting Satisfactory.</li>
+          <li>Above Satisfactory accuracy was 5.5% across models. Models almost never identified high-quality work correctly.</li>
+          <li>Below Satisfactory accuracy was much higher (72.3%), suggesting models can identify clearly weak work but struggle to distinguish between adequate and excellent work.</li>
+        </ul>
+      </div>
+      <div class="note" style="margin-top: 1rem;">
+        <p><strong>Why such low accuracy?</strong> The ACARA achievement standards used as grading criteria may lack sufficient specificity for absolute classification. The standards describe what students should know and do at each level, but they may not provide enough detail about what distinguishes Above Satisfactory from Satisfactory work. Models might perform better with richer criteria that explicitly describe the characteristics of each grade level. This finding suggests a limitation in the task design, not only in the models. A structured reasoning pilot (requiring models to reason step-by-step before classifying) made performance worse, not better.</p>
+      </div>
+    </section>
+
     <!-- Cost and Token Usage -->
-    <div style="padding: 2.5rem 0 0.5rem; border-top: 3px solid var(--primary); margin-top: 1rem;">
-      <h2 style="font-size: 1.4rem; font-weight: 700; color: var(--text); margin-bottom: 0.25rem;">Cost and Efficiency</h2>
-      <p style="font-size: 0.95rem; color: var(--text-muted); max-width: 800px;">How many tokens does each model use to complete the survey and scenarios? Thinking models generate internal reasoning tokens that increase cost substantially, even when the final answer is the same length.</p>
+    <div class="section-divider">
+      <h2>Cost and Efficiency</h2>
+      <p>How many tokens does each model use to complete the neuromyths survey and diagnostic scenarios? Thinking models generate internal reasoning tokens that increase cost substantially, even when the final answer is the same length.</p>
     </div>
 
     <section class="chart-section">
       <div class="chart-header">
         <h2 class="chart-title">Token Usage: Survey + Scenarios</h2>
-        <p class="chart-subtitle">Total tokens (prompt + completion + reasoning) for 32 educational neuroscience items and 12 classroom scenarios. 18 models with available data.</p>
+        <p class="chart-subtitle">Total tokens for neuromyths + scenarios. Thinking models use ~3x more tokens.</p>
       </div>
       <div class="chart-container" style="height: 450px;">
         <canvas id="tokenChart"></canvas>
@@ -347,7 +407,7 @@
         <strong>Key observations:</strong>
         <ul style="margin-top: 0.5rem; padding-left: 1.25rem; color: var(--text-muted);">
           <li>Thinking models average ~20,000 tokens versus ~6,000 for standard models, roughly 3&times; more.</li>
-          <li>Gemini 2.5 Pro uses the most tokens (38,069) due to extensive internal reasoning, despite moderate accuracy.</li>
+          <li>Gemini 2.5 Pro uses the most tokens (38,069) due to extensive internal reasoning.</li>
           <li>Standard Claude and GPT-4o models cluster tightly around 5,300&ndash;6,700 tokens.</li>
           <li>Token counts here cover only the survey and scenarios. The full evaluation (including 1,143 pedagogy items) costs significantly more.</li>
         </ul>
@@ -358,7 +418,7 @@
     <section class="chart-section">
       <div class="chart-header">
         <h2 class="chart-title">Model Release Timeline</h2>
-        <p class="chart-subtitle">When each model was released and how it scored. Later models tend to score higher, but the relationship is not linear. Architecture and training choices matter as much as release date.</p>
+        <p class="chart-subtitle">Release date vs teacher certification knowledge score. 23 models with data.</p>
       </div>
       <div class="chart-container" style="height: 380px;">
         <canvas id="timelineChart"></canvas>
@@ -367,8 +427,8 @@
         <strong>Key observations:</strong>
         <ul style="margin-top: 0.5rem; padding-left: 1.25rem; color: var(--text-muted);">
           <li>Models from late 2025 generally outperform those from early 2024, but there is wide variation within each period.</li>
-          <li>Claude 3 Haiku (March 2024) scores 60.3% while Claude 4.5 Opus (November 2025) scores 89.8%, a 29.5-point improvement in 20 months from the same provider.</li>
-          <li>GPT-4 Turbo (November 2023) and GPT-4o (May 2024) score similarly (~73%), while GPT-5 (August 2025) jumps to 91.7%.</li>
+          <li>Claude 3 Haiku (March 2024) scores 54.8% while Claude 4.5 Opus (November 2025) scores 88.1%, a 33-point improvement in 20 months from the same provider.</li>
+          <li>Architecture and training choices matter as much as release date. Gemini 2.5 Pro (March 2025) leads at 88.5% while models released later score lower.</li>
         </ul>
       </div>
     </section>
@@ -380,17 +440,38 @@
     <!-- What do these results tell us? -->
     <section class="chart-section" style="border-bottom: none;">
       <h2 style="font-size: 1.4rem; font-weight: 700; color: var(--text); margin-bottom: 1rem;">What do these results tell us?</h2>
-      <p style="font-size: 0.95rem; color: var(--text); line-height: 1.8; max-width: 800px;">The best models exceed 90% on the composite, well above the ~50% human teacher baseline on the neuromyths survey specifically. But high performance on one benchmark does not predict high performance on another. Gemini 2.5 Pro scores highest on pedagogical knowledge (#1 on CDPK) yet ranks #14 overall. ACARA rankings do not predict EAI rankings either, which is why they are reported separately.</p>
-      <p style="font-size: 0.95rem; color: var(--text); line-height: 1.8; max-width: 800px; margin-top: 1rem;">Reasoning-focused models (o3, thinking variants) excel at diagnostic scenarios but don't consistently lead on factual knowledge. Model size matters: smaller and cheaper models consistently score lowest across all benchmarks. And thinking models use roughly 3&times; more tokens without always scoring higher, which has cost implications for deployment.</p>
+      <p style="font-size: 0.95rem; color: var(--text); line-height: 1.8; max-width: 800px;">High performance on one benchmark does not predict high performance on another. Gemini 2.5 Pro leads on pedagogical knowledge but scores below several smaller models on neuromyth identification. ACARA comparative judgement rankings do not correlate with knowledge benchmarks either. This is why we report each evaluation separately rather than combining them into a single score.</p>
+      <p style="font-size: 0.95rem; color: var(--text); line-height: 1.8; max-width: 800px; margin-top: 1rem;">Model size matters: smaller and cheaper models consistently score lowest across all benchmarks. Thinking models use roughly 3&times; more tokens without always scoring higher, which has cost implications for deployment. And the standards-based grading pilot shows that even frontier models struggle with absolute classification when the grading criteria lack specificity.</p>
     </section>
   </div>
 
   <!-- Footer -->
   <footer>
     <div class="container">
-      <div class="footer-bottom">
-        &copy; 2026 AlignED. Data hosted on OSF. <a href="index.html">Back to Home</a>
+      <div class="footer-content">
+        <div class="footer-brand">
+          <a href="index.html" class="logo" style="color: white;">AlignED</a>
+          <p>Benchmarking AI performance on professional teaching tasks.</p>
+        </div>
+        <div class="footer-links">
+          <h4>Navigation</h4>
+          <ul>
+            <li><a href="about.html">About</a></li>
+            <li><a href="methodology/">Methodology</a></li>
+            <li><a href="results.html">Results</a></li>
+            <li><a href="benchmark-items.html">Benchmark Items</a></li>
+            <li><a href="data-access.html">Data & Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h4>Resources</h4>
+          <ul>
+            <li><a href="https://github.com/trgallagher-research/AlignED-site" target="_blank">GitHub</a></li>
+          </ul>
+        </div>
       </div>
+      <p class="copyright">&copy; 2026 AlignED. All rights reserved.</p>
+      <p class="copyright">Last updated: February 2026</p>
     </div>
   </footer>
 

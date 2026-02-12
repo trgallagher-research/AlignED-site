@@ -16,7 +16,9 @@ AlignED is an independent benchmarking platform that evaluates AI model performa
 - Methodology sub-pages: methodology/neuromyths.html, scenarios.html, pedagogy.html, acara.html, dimensions.html, scoring.html
 - Shared styles: css/style.css (used by all pages except index.html and results.html)
 - Charts: js/charts.js
-- Data: data/composite_scores.json, data/acara_scores.json, data/model_metadata.json
+- Methodology sub-page: methodology/scoring.html is now "Why No Composite Score?"
+- Data: data/neuromyths_scores.json, data/scenarios_scores.json, data/pedagogy_scores.json, data/acara_scores.json, data/acara_standards_grading_scores.json, data/model_metadata.json
+- Legacy: data/composite_scores.json (no longer referenced; retained for historical reference)
 
 ## Writing Rules (MUST follow for all copy changes)
 

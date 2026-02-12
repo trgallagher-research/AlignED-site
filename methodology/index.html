@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Methodology - AlignED</title>
-  <meta name="description" content="How AlignED benchmarks are constructed, scored, and validated. Transparent methodology for evaluating AI alignment with educational research.">
+  <meta name="description" content="How AlignED benchmarks are constructed, scored, and validated. Four evaluation areas covering six benchmarks of professional teaching knowledge.">
   <link rel="stylesheet" href="../css/style.css">
   <!-- Mermaid.js for validation protocol diagram -->
   <script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
@@ -25,8 +25,7 @@
         <a href="../methodology/" class="active">Methodology</a>
         <a href="../results.html">Results</a>
         <a href="../benchmark-items.html">Benchmark Items</a>
-        <a href="../data-access.html">Data</a>
-        <a href="../contact.html">Contact</a>
+        <a href="../data-access.html">Data & Contact</a>
       </nav>
     </div>
   </header>
@@ -42,41 +41,10 @@
     <section class="content-section">
       <div class="container">
         <div class="prose">
-          <p>This section covers the technical details of how AlignED works. For a general overview, see <a href="../about.html">About</a>. To see the actual items used, visit <a href="../benchmark-items.html">Benchmark Items</a>.</p>
-
-          <h2>What AlignED measures</h2>
-          <p>AlignED reports two things: a composite index covering three benchmarks, and a separate evaluation of applied assessment judgement.</p>
-
-          <p><strong>EAI Composite (21 models)</strong></p>
-
-          <ul class="benchmark-list">
-            <li>
-              <a href="neuromyths.html">Educational Neuroscience (25%)</a>
-              <p class="description">32 items testing identification of myths and facts about the brain and learning. 15 widely-believed myths + 17 verified facts.</p>
-            </li>
-            <li>
-              <a href="scenarios.html">Classroom Reasoning (25%)</a>
-              <p class="description">12 real-world scenarios scored 0&ndash;3 by an LLM judge (Claude 4.5 Sonnet). Models must diagnose why an evidence-based strategy is failing.</p>
-            </li>
-            <li>
-              <a href="pedagogy.html">Pedagogical Knowledge (50%)</a>
-              <p class="description">1,143 items from teacher certification assessments. General pedagogy (920 items, weighted 40%) and inclusive education (223 items, weighted 10%).</p>
-            </li>
-          </ul>
-
-          <p>EAI = (0.25 &times; Neuroscience) + (0.25 &times; Scenarios) + (0.40 &times; CDPK) + (0.10 &times; SEND)</p>
-
-          <p><strong>Reported separately</strong></p>
-
-          <ul class="benchmark-list">
-            <li>
-              <a href="acara.html">Student Work Judgement / ACARA</a>
-              <p class="description">79 verified pairs of student work compared against Australian curriculum standards. 12 models evaluated. Scored for accuracy and consistency. Reported separately because it tests applied assessment judgement rather than knowledge recall or reasoning. See <a href="acara.html">ACARA methodology</a> for details.</p>
-            </li>
-          </ul>
+          <p>This section describes how each AlignED benchmark is constructed, validated, and scored. This is a living document updated as the methodology evolves. For a general overview, see <a href="../about.html">About</a>. To see the actual items used, visit <a href="../benchmark-items.html">Benchmark Items</a>.</p>
 
           <h2>Validation protocol</h2>
-          <p>Each benchmark passes through a structured validation pipeline before results are reported:</p>
+          <p>This is the validation framework AlignED is working towards. Not all tiers are complete for all benchmarks. Current status is noted below.</p>
 
           <div class="mermaid" style="margin: 2rem 0; text-align: center;">
 graph LR
@@ -86,7 +54,7 @@ graph LR
     D --> E[Tier 1: Baseline Reliability]
     E --> F[Tier 2: Robustness Probes]
     F --> G[Tier 3: Judge Validation]
-    G --> H[Composite Calculation]
+    G --> H[Results Reported]
 
     style A fill:#EBF4FF,stroke:#3B6B9A
     style B fill:#EBF4FF,stroke:#3B6B9A
@@ -99,13 +67,70 @@ graph LR
           </div>
 
           <ul>
-            <li><strong>Tier 1, Baseline Reliability:</strong> Each model is run 5 times at T=0 to establish stable scores. Reported scores are means across iterations.</li>
-            <li><strong>Tier 2, Robustness Probes:</strong> Temperature variation (T=0, 0.5, 1.0), prompt sensitivity (4 framings), and confidence calibration probes.</li>
-            <li><strong>Tier 3, Judge Validation:</strong> For scenario scoring, a sample of LLM-judge scores is manually verified against the rubric.</li>
+            <li><strong>Tier 1, Baseline Reliability:</strong> Multiple runs at T=0 to establish stable scores. <em>Status: Complete for neuromyths and scenarios. Partial for pedagogy and ACARA (single-run baselines reported).</em></li>
+            <li><strong>Tier 2, Robustness Probes:</strong> Temperature variation (T=0, 0.5, 1.0), prompt sensitivity (4 framings), and confidence calibration probes. <em>Status: Complete for neuromyths. Not yet run for other benchmarks.</em></li>
+            <li><strong>Tier 3, Judge Validation:</strong> For LLM-judged evaluations, a sample of scores is manually verified against the rubric. <em>Status: A sample of diagnostic reasoning scores has been manually verified. Systematic multi-judge validation is planned.</em></li>
           </ul>
 
+          <h2>Benchmarks</h2>
+          <p>AlignED covers four evaluation areas across six benchmarks. Each has its own methodology page with full details.</p>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Evaluation area</th>
+                <th>Benchmark</th>
+                <th>Items</th>
+                <th>Models</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><a href="neuromyths.html">Neuromyth Identification</a></td>
+                <td>Myth/fact classification</td>
+                <td>32</td>
+                <td>31</td>
+                <td>Complete</td>
+              </tr>
+              <tr>
+                <td><a href="scenarios.html">Diagnostic Reasoning</a></td>
+                <td>Implementation failure diagnosis</td>
+                <td>12</td>
+                <td>30</td>
+                <td>Complete</td>
+              </tr>
+              <tr>
+                <td rowspan="2"><a href="pedagogy.html">Teacher Certification Knowledge</a></td>
+                <td>General pedagogy (CDPK)</td>
+                <td>920</td>
+                <td>23</td>
+                <td>Complete</td>
+              </tr>
+              <tr>
+                <td>Inclusive education (SEND)</td>
+                <td>223</td>
+                <td>23</td>
+                <td>Complete</td>
+              </tr>
+              <tr>
+                <td rowspan="2"><a href="acara.html">Student Work Judgement</a></td>
+                <td>Comparative judgement (CJ)</td>
+                <td>79 pairs</td>
+                <td>12</td>
+                <td>Complete</td>
+              </tr>
+              <tr>
+                <td>Standards-based grading (SG)</td>
+                <td>79 samples</td>
+                <td>7</td>
+                <td>Pilot</td>
+              </tr>
+            </tbody>
+          </table>
+
           <h2>Evaluation dimensions</h2>
-          <p>Beyond baseline accuracy, we assess multiple dimensions of model performance.</p>
+          <p>Beyond baseline accuracy, we assess multiple dimensions of model performance. These probes are currently complete for neuromyth identification only.</p>
 
           <ul class="benchmark-list">
             <li>
@@ -126,16 +151,68 @@ graph LR
             </li>
           </ul>
 
-          <h2>Composite scoring</h2>
+          <h2>Evaluation framework</h2>
+          <p>AlignED follows a structured evaluation framework covering nine components. Each benchmark is audited against this framework. The table below shows the current status:</p>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Component</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Item preparation</td>
+                <td>Complete for all benchmarks</td>
+              </tr>
+              <tr>
+                <td>Per-run configuration</td>
+                <td>Complete for all benchmarks</td>
+              </tr>
+              <tr>
+                <td>Validation (Tier 1)</td>
+                <td>Partial (see above)</td>
+              </tr>
+              <tr>
+                <td>Validation (Tier 2)</td>
+                <td>Neuromyths only</td>
+              </tr>
+              <tr>
+                <td>Validation (Tier 3)</td>
+                <td>Sample-based for diagnostic reasoning</td>
+              </tr>
+              <tr>
+                <td>Scoring pipeline</td>
+                <td>Complete for all benchmarks</td>
+              </tr>
+              <tr>
+                <td>Prompt templates</td>
+                <td>Published on each methodology sub-page</td>
+              </tr>
+              <tr>
+                <td>Shareable dataset</td>
+                <td>In preparation (OSF)</td>
+              </tr>
+              <tr>
+                <td>Human correlation studies</td>
+                <td>Planned</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <p>The full framework specification is available on <a href="https://github.com/trgallagher-research/AlignED-site" target="_blank">GitHub</a>.</p>
+
+          <h2>Scoring and reporting</h2>
           <ul class="benchmark-list">
             <li>
-              <a href="scoring.html">Educational Alignment Index (EAI)</a>
-              <p class="description">How we combine benchmark scores into a single composite metric. See <a href="scoring.html">EAI Scoring</a> for the full methodology.</p>
+              <a href="scoring.html">Scoring and Reporting</a>
+              <p class="description">How each benchmark is scored, what model pools are used, and why results are reported separately rather than combined into a composite.</p>
             </li>
           </ul>
 
           <h2>Models evaluated</h2>
-          <p>21 models from three providers have complete EAI composite scores. 12 models (including 4 ACARA-only) were evaluated separately on student work judgement (ACARA).</p>
+          <p>32 models from five providers have been tested across one or more benchmarks. Each benchmark has its own model pool (7&ndash;31 models).</p>
 
           <div class="grid grid-3 mt-3">
             <div class="card">
@@ -147,23 +224,21 @@ graph LR
               <p>GPT-4 Turbo, GPT-4o, GPT-5 family, o3 and o4-mini</p>
             </div>
             <div class="card">
-              <h4>Google</h4>
-              <p>Gemini 2.0 Flash, 2.5 Pro, 3 Flash</p>
+              <h4>Google, Meta, DeepSeek</h4>
+              <p>Gemini 2.0&ndash;3, Llama 3.1&ndash;3.3, DeepSeek V3/R1</p>
             </div>
           </div>
-
-          <p class="mt-3">See the <a href="../results.html">Results page</a> for the full list of evaluated models and their scores.</p>
 
           <h2>Reproducibility</h2>
           <p>All evaluation parameters are documented and fixed:</p>
           <ul>
             <li>Pinned model versions (specific API model strings)</li>
             <li>Fixed random seeds where applicable</li>
-            <li>Standardised prompt templates</li>
+            <li>Standardised prompt templates (published on each methodology sub-page)</li>
             <li>Documented scoring rubrics with examples</li>
           </ul>
 
-          <p>Raw data and scoring details are available through our <a href="../data-access.html">Data Access</a> page.</p>
+          <p>Raw data and scoring details are available through <a href="../data-access.html">Data & Contact</a>.</p>
         </div>
       </div>
     </section>
@@ -174,7 +249,7 @@ graph LR
       <div class="footer-content">
         <div class="footer-brand">
           <a href="../index.html" class="logo">AlignED</a>
-          <p>Transparent benchmarks for AI in education</p>
+          <p>Benchmarking AI performance on professional teaching tasks.</p>
         </div>
         <div class="footer-links">
           <h4>Navigation</h4>
@@ -183,18 +258,18 @@ graph LR
             <li><a href="../methodology/">Methodology</a></li>
             <li><a href="../results.html">Results</a></li>
             <li><a href="../benchmark-items.html">Benchmark Items</a></li>
-            <li><a href="../data-access.html">Data</a></li>
+            <li><a href="../data-access.html">Data & Contact</a></li>
           </ul>
         </div>
         <div class="footer-links">
           <h4>Resources</h4>
           <ul>
-            <li><a href="../contact.html">Contact</a></li>
             <li><a href="https://github.com/trgallagher-research/AlignED-site" target="_blank">GitHub</a></li>
           </ul>
         </div>
       </div>
       <p class="copyright">&copy; 2026 AlignED. All rights reserved.</p>
+      <p class="copyright">Last updated: February 2026</p>
     </div>
   </footer>
 

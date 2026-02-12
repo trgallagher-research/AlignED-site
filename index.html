@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AlignED - Transparent benchmarks for AI in education</title>
-  <meta name="description" content="AlignED tests whether AI responses align with evidence-based educational research. Educational Alignment Index rankings for 21 AI models.">
+  <title>AlignED - Benchmarking AI on professional teaching tasks</title>
+  <meta name="description" content="Benchmark results for AI models on professional teaching tasks: neuromyth identification, diagnostic reasoning, teacher certification knowledge, and student work judgement.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -390,8 +390,7 @@
         <a href="methodology/">Methodology</a>
         <a href="results.html">Results</a>
         <a href="benchmark-items.html">Benchmark Items</a>
-        <a href="data-access.html">Data</a>
-        <a href="contact.html">Contact</a>
+        <a href="data-access.html">Data & Contact</a>
       </div>
     </div>
   </nav>
@@ -401,49 +400,34 @@
     <div class="container">
       <div class="hero-content">
         <h1>How do AI models perform on <span class="highlight">professional teaching tasks</span>?</h1>
-        <p>We benchmarked 21 models on neuromyth identification, diagnostic classroom reasoning, and teacher certification knowledge. The results vary more than you'd expect.</p>
-      </div>
-      <div class="hero-cards">
-        <div class="promo-card">
-          <h3>Methodology</h3>
-          <p>How we construct, administer, and score each benchmark.</p>
-          <a href="methodology/" class="btn">Learn More</a>
-        </div>
+        <p>Four evaluation areas, six benchmarks, up to 31 models tested per area. Neuromyth identification, diagnostic reasoning, teacher certification knowledge, and student work judgement. Performance on one benchmark does not predict performance on another.</p>
+        <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.75rem;">Current data: February 2026 &middot; 32 models across 6 benchmarks &middot; <a href="about.html" style="color: var(--text-muted); text-decoration: underline;">About this project</a></p>
       </div>
     </div>
   </section>
 
-  <!-- What is educational alignment? -->
+  <!-- About this project -->
   <section style="padding: 2.5rem 0; border-bottom: 1px solid var(--border);">
     <div class="container">
+      <div style="background: var(--bg-muted, #f8f9fa); border-left: 3px solid var(--primary, #2563eb); padding: 1rem 1.25rem; margin-bottom: 1.5rem; font-size: 0.9rem; color: var(--text-muted); max-width: 800px;">
+        AlignED is an active research project. Benchmarks, model pools, and results are updated as new evaluations are completed. This site is a living document.
+      </div>
       <h2 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 0.75rem;">What does AlignED measure?</h2>
-      <p style="font-size: 1.05rem; color: var(--text); max-width: 800px; margin-bottom: 0.75rem;">There is no standard way to evaluate whether an AI model handles professional teaching tasks well. AlignED is building one.</p>
-      <p style="font-size: 1.05rem; color: var(--text); max-width: 800px; margin-bottom: 0.75rem;">AlignED tests three areas related to professional teaching: educational neuroscience (can the model identify common myths about the brain and learning?), classroom reasoning (can it diagnose why an evidence-based strategy isn't working?), and pedagogical knowledge (how does it perform on teacher certification items?). A separate module evaluates student work judgement against Australian curriculum standards.</p>
-      <p style="font-size: 0.95rem; color: var(--text-muted); max-width: 800px;">Teachers evaluating AI tools. Leaders making procurement decisions. Developers choosing which model to build on. Policymakers setting the standards.</p>
+      <p style="font-size: 1.05rem; color: var(--text); max-width: 800px; margin-bottom: 0.75rem;">Most benchmarks test what students should know. AlignED tests how models handle what teachers need to know.</p>
+      <p style="font-size: 1.05rem; color: var(--text); max-width: 800px; margin-bottom: 0.75rem;">Four evaluation areas cover different aspects of professional teaching knowledge: identifying neuromyths about the brain and learning, diagnosing why evidence-based strategies fail in practice, answering teacher certification exam items, and comparing student work against curriculum standards. Each benchmark has its own model pool and scoring method. Results are reported separately.</p>
     </div>
   </section>
 
-  <!-- Rankings -->
-  <section id="rankings">
+  <!-- Benchmark Results -->
+  <section id="results">
     <div class="container">
-      <div class="section-label">Rankings</div>
-
-      <!-- Overall Ranking -->
-      <section class="chart-section">
-        <div class="chart-header">
-          <h2 class="chart-title">Overall Ranking</h2>
-          <p class="chart-subtitle">Composite score across all benchmark modules</p>
-        </div>
-        <div class="chart-container">
-          <canvas id="eaiChart"></canvas>
-        </div>
-      </section>
+      <div class="section-label">Benchmark Results</div>
 
       <!-- Neuromyth Identification -->
       <section class="chart-section">
         <div class="chart-header">
           <h2 class="chart-title">Neuromyth Identification</h2>
-          <p class="chart-subtitle">32 items adapted from Dekker et al. (2012). Average teacher accuracy: ~50%.</p>
+          <p class="chart-subtitle">32 items adapted from Dekker et al. (2012). 31 models tested. Average teacher accuracy: ~50%.</p>
         </div>
         <div class="chart-container">
           <canvas id="neuromythsChart"></canvas>
@@ -454,7 +438,7 @@
       <section class="chart-section">
         <div class="chart-header">
           <h2 class="chart-title">Diagnostic Reasoning</h2>
-          <p class="chart-subtitle">12 scenarios scored 0&ndash;3 by an LLM judge. Models must diagnose why an evidence-based strategy is failing.</p>
+          <p class="chart-subtitle">12 scenarios scored 0&ndash;3 by an LLM judge (Claude 4.5 Sonnet). 30 models tested.</p>
         </div>
         <div class="chart-container">
           <canvas id="scenariosChart"></canvas>
@@ -465,7 +449,7 @@
       <section class="chart-section">
         <div class="chart-header">
           <h2 class="chart-title">General Pedagogical Knowledge</h2>
-          <p class="chart-subtitle">920 items covering cross-domain pedagogical knowledge from teacher certification exams</p>
+          <p class="chart-subtitle">920 items covering cross-domain pedagogical knowledge from teacher certification exams. 23 models tested.</p>
         </div>
         <div class="chart-container">
           <canvas id="cdpkChart"></canvas>
@@ -476,7 +460,7 @@
       <section class="chart-section">
         <div class="chart-header">
           <h2 class="chart-title">Inclusive Education</h2>
-          <p class="chart-subtitle">223 items on special education needs and disability (SEND) from teacher certification exams</p>
+          <p class="chart-subtitle">223 items on special education needs and disability (SEND) from teacher certification exams. 23 models tested.</p>
         </div>
         <div class="chart-container">
           <canvas id="sendChart"></canvas>
@@ -487,7 +471,7 @@
       <section class="chart-section" style="border-bottom: none;">
         <div class="chart-header">
           <h2 class="chart-title">Student Work Judgement (ACARA)</h2>
-          <p class="chart-subtitle">79 pairs of Australian student work samples. Accuracy and consistency across 12 models.</p>
+          <p class="chart-subtitle">79 pairs of Australian student work. Accuracy and reliability. 12 models tested.</p>
         </div>
         <div class="chart-container">
           <canvas id="acaraChart"></canvas>
@@ -502,14 +486,14 @@
         <div class="legend-item"><div class="legend-dot" style="background: #536DFE;"></div> DeepSeek</div>
       </div>
 
-      <p style="margin-top: 1.25rem; font-size: 0.95rem; color: var(--text); max-width: 800px;">Top models score above 90%. The gap between best and worst exceeds 30 percentage points. Provider and model size both matter. <a href="results.html">See full results &rarr;</a></p>
+      <p style="margin-top: 1.25rem; font-size: 0.95rem; color: var(--text); max-width: 800px;">Performance varies widely across benchmarks and models. High scores on one evaluation do not predict high scores on another. <a href="results.html">See full results &rarr;</a></p>
     </div>
   </section>
 
   <!-- Quick Links -->
   <section class="quick-links">
     <div class="container">
-      <div class="section-label">Explore</div>
+      <div class="section-label">Further Reading</div>
       <div class="quick-links-grid" style="grid-template-columns: repeat(4, 1fr);">
         <div class="quick-link-card">
           <h4>No model ever expressed uncertainty, even when wrong. How do models handle neuromyths?</h4>
@@ -537,7 +521,7 @@
       <div class="footer-content">
         <div class="footer-brand">
           <div class="logo" style="color: white;">AlignED</div>
-          <p>Transparent benchmarks for AI in education. Benchmarking AI performance on professional teaching tasks.</p>
+          <p>Benchmarking AI performance on professional teaching tasks.</p>
         </div>
         <div class="footer-links">
           <h4>Navigation</h4>
@@ -549,21 +533,18 @@
           </ul>
         </div>
         <div class="footer-links">
-          <h4>Data</h4>
+          <h4>Resources</h4>
           <ul>
-            <li><a href="data-access.html">Access Data</a></li>
+            <li><a href="data-access.html">Data & Contact</a></li>
             <li><a href="https://github.com/trgallagher-research/AlignED-site" target="_blank">GitHub</a></li>
-          </ul>
-        </div>
-        <div class="footer-links">
-          <h4>Contact</h4>
-          <ul>
-            <li><a href="contact.html">Get in Touch</a></li>
           </ul>
         </div>
       </div>
       <div class="footer-bottom">
         &copy; 2026 AlignED. Data hosted on OSF.
+      </div>
+      <div class="footer-bottom" style="margin-top: 0.5rem;">
+        Last updated: February 2026
       </div>
     </div>
   </footer>

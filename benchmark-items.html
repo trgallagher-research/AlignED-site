@@ -22,8 +22,7 @@
         <a href="methodology/">Methodology</a>
         <a href="results.html">Results</a>
         <a href="benchmark-items.html" class="active">Benchmark Items</a>
-        <a href="data-access.html">Data</a>
-        <a href="contact.html">Contact</a>
+        <a href="data-access.html">Data & Contact</a>
       </nav>
     </div>
   </header>
@@ -42,11 +41,15 @@
 
           <p>AlignED evaluates AI across four benchmark areas. This page shows the actual items used, explains the scoring, and highlights patterns worth knowing about.</p>
 
+          <div class="note">
+            <p>AlignED is an active research project. The benchmark suite is under active development. Items, scoring methods, and model pools are updated as new evaluations are completed.</p>
+          </div>
+
           <!-- ============================================ -->
-          <!-- EDUCATIONAL NEUROSCIENCE SURVEY (32 items)   -->
+          <!-- NEUROMYTH IDENTIFICATION (32 items)          -->
           <!-- ============================================ -->
 
-          <h2 id="neuroscience">Educational Neuroscience Survey</h2>
+          <h2 id="neuroscience">Neuromyth Identification</h2>
           <p>32 true/false statements about the brain and learning, adapted from <a href="https://doi.org/10.3389/fpsyg.2012.00429" target="_blank">Dekker et al. (2012)</a>. 15 are widely-believed myths (correct answer: False). 17 are verified neuroscience facts or established findings (correct answer: True, with two exceptions). The average teacher gets about 50% right.</p>
 
           <p>Eight items marked with <strong>*</strong> are high-prevalence myths that also receive a confidence probe. After answering, the model is asked how confident it is. Every model tested selected "Very Confident" or "Somewhat Confident" on every item. No model ever expressed uncertainty.</p>
@@ -138,10 +141,10 @@
           </div>
 
           <!-- ============================================ -->
-          <!-- CLASSROOM REASONING SCENARIOS (12 items)     -->
+          <!-- DIAGNOSTIC REASONING (12 items)              -->
           <!-- ============================================ -->
 
-          <h2 id="scenarios">Classroom Reasoning Scenarios</h2>
+          <h2 id="scenarios">Diagnostic Reasoning</h2>
           <p>12 realistic situations where an evidence-based teaching strategy isn't working. Models must explain <em>why</em> the strategy is failing, not just describe what the strategy is. Each response is scored 0&ndash;3 by an LLM judge (Claude 4.5 Sonnet).</p>
 
           <h3>All 12 Scenarios</h3>
@@ -211,7 +214,7 @@ What is actually going wrong with how retrieval practice is being implemented he
           </table>
 
           <div class="note">
-            <p><strong>GPT-5 and o3 achieve perfect scores (36/36).</strong> These are the only two models to get every scenario completely right. Diagnostic reasoning about <em>why</em> strategies fail appears to be a strength of frontier reasoning models, while smaller models tend to give generic advice rather than specific diagnoses.</p>
+            <p><strong>Three models achieve perfect scores (36/36): Claude 4.5 Sonnet, GPT-5, and GPT-5.2.</strong> Diagnostic reasoning about <em>why</em> strategies fail appears to be a strength of frontier models, while smaller models tend to give generic advice rather than specific diagnoses.</p>
           </div>
 
           <!-- ============================================ -->
@@ -246,7 +249,7 @@ What is actually going wrong with how retrieval practice is being implemented he
           <p>All items are multiple-choice with four options (A&ndash;D). Scoring is binary: correct (1) or incorrect (0).</p>
 
           <div class="note">
-            <p><strong>Gemini 2.5 Pro is #1 on pedagogical knowledge but #14 overall.</strong> With 89.3% on CDPK, it outperforms every other model on this benchmark, but its weaker scenario reasoning (69.4%) and educational neuroscience (75.9%) pull its composite score down. Performance on one benchmark does not predict performance on others.</p>
+            <p><strong>Performance on one benchmark does not predict performance on another.</strong> Gemini 2.5 Pro leads on pedagogical knowledge (89.3% CDPK) but scores 75.9% on neuromyth identification. Each evaluation is reported separately.</p>
           </div>
 
           <!-- ============================================ -->
@@ -254,7 +257,7 @@ What is actually going wrong with how retrieval practice is being implemented he
           <!-- ============================================ -->
 
           <h2 id="acara">Student Work Judgement (ACARA)</h2>
-          <p>79 verified pairs of student work samples from the Australian Curriculum, Assessment and Reporting Authority (ACARA) work sample portfolios. 12 models evaluated (4 ACARA-only models not in the main composite).</p>
+          <p>79 verified pairs of student work samples from the Australian Curriculum, Assessment and Reporting Authority (ACARA) work sample portfolios. 12 models evaluated.</p>
 
           <h3>Task Structure</h3>
           <p>Each pair presents two student work samples at different achievement levels for the same curriculum area. The model must choose which sample better meets the curriculum standard. Example structure:</p>
@@ -275,13 +278,13 @@ Which sample better demonstrates achievement of the Year 4 English standard?
           <h3>Scoring</h3>
           <ul>
             <li><strong>Accuracy:</strong> Percentage of pairs where the model chose the correct (higher-achieving) sample</li>
-            <li><strong>Consistency:</strong> Percentage of pairs where the model gave the same answer in both orientations</li>
+            <li><strong>Reliability:</strong> Percentage of pairs where the model gave the same answer regardless of presentation order (a test-retest reliability measure)</li>
           </ul>
 
-          <p>High accuracy + low consistency suggests the model is guessing correctly some of the time. High consistency + low accuracy would mean systematically wrong. The ideal is high on both.</p>
+          <p>High accuracy + low reliability suggests the model is guessing correctly some of the time. High reliability + low accuracy would mean systematically wrong. The ideal is high on both.</p>
 
           <div class="note">
-            <p><strong>ACARA results are reported separately from the EAI</strong> because it tests a different capability (applied assessment judgement rather than knowledge recall or reasoning) and uses a partially different pool of models. See <a href="results.html">Results</a> for the full ranking.</p>
+            <p><strong>Each evaluation is reported separately</strong> with its own model pool and scoring method. See <a href="results.html">Results</a> for all benchmarks.</p>
           </div>
 
           <div class="btn-group mt-4">
@@ -298,7 +301,7 @@ Which sample better demonstrates achievement of the Year 4 English standard?
       <div class="footer-content">
         <div class="footer-brand">
           <a href="index.html" class="logo">AlignED</a>
-          <p>Transparent benchmarks for AI in education</p>
+          <p>Benchmarking AI performance on professional teaching tasks.</p>
         </div>
         <div class="footer-links">
           <h4>Navigation</h4>
@@ -307,18 +310,18 @@ Which sample better demonstrates achievement of the Year 4 English standard?
             <li><a href="methodology/">Methodology</a></li>
             <li><a href="results.html">Results</a></li>
             <li><a href="benchmark-items.html">Benchmark Items</a></li>
-            <li><a href="data-access.html">Data</a></li>
+            <li><a href="data-access.html">Data & Contact</a></li>
           </ul>
         </div>
         <div class="footer-links">
           <h4>Resources</h4>
           <ul>
-            <li><a href="contact.html">Contact</a></li>
             <li><a href="https://github.com/trgallagher-research/AlignED-site" target="_blank">GitHub</a></li>
           </ul>
         </div>
       </div>
       <p class="copyright">&copy; 2026 AlignED. All rights reserved.</p>
+      <p class="copyright">Last updated: February 2026</p>
     </div>
   </footer>
 
