@@ -9,3 +9,9 @@ desktop.ini
 *.swp
 *.swo
 *~
+
+# Claude Code
+.claude/
+
+# Windows artefacts
+nul
